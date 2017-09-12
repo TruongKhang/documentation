@@ -1,0 +1,324 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>tmlib.preprocessing.preprocessing &mdash; topicmodel-lib 0.3.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="topicmodel-lib 0.3.1 documentation" href="../index.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> topicmodel-lib
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.3.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">tmlib.preprocessing.preprocessing</a><ul>
+<li><a class="reference internal" href="#class-tmlib-preprocessing-preprocessing-preprocessing">class tmlib.preprocessing.preprocessing.PreProcessing</a><ul>
+<li><a class="reference internal" href="#parameters">Parameters</a></li>
+<li><a class="reference internal" href="#attributes">Attributes</a></li>
+<li><a class="reference internal" href="#methods">Methods</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">topicmodel-lib</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>tmlib.preprocessing.preprocessing</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/api/api_preprocessing.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="tmlib-preprocessing-preprocessing">
+<h1><a class="toc-backref" href="#id3">tmlib.preprocessing.preprocessing</a><a class="headerlink" href="#tmlib-preprocessing-preprocessing" title="Permalink to this headline">¶</a></h1>
+<p>This is module work with text data which needed to preprocess.</p>
+<p>Please refer <a class="footnote-reference" href="#id2" id="id1">[1]</a> to know more detail about preprocessing technique</p>
+<div class="contents topic" id="contents">
+<p class="topic-title first">Contents</p>
+<ul class="simple">
+<li><a class="reference internal" href="#tmlib-preprocessing-preprocessing" id="id3">tmlib.preprocessing.preprocessing</a><ul>
+<li><a class="reference internal" href="#class-tmlib-preprocessing-preprocessing-preprocessing" id="id4">class tmlib.preprocessing.preprocessing.PreProcessing</a><ul>
+<li><a class="reference internal" href="#parameters" id="id5">Parameters</a></li>
+<li><a class="reference internal" href="#attributes" id="id6">Attributes</a></li>
+<li><a class="reference internal" href="#methods" id="id7">Methods</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="class-tmlib-preprocessing-preprocessing-preprocessing">
+<h2><a class="toc-backref" href="#id4">class tmlib.preprocessing.preprocessing.PreProcessing</a><a class="headerlink" href="#class-tmlib-preprocessing-preprocessing-preprocessing" title="Permalink to this headline">¶</a></h2>
+<p>tmlib.preprocessing.preprocessing.PreProcessing(<em>file_path, stemmed=False, remove_rare_word=3, remove_common_word=None</em>)</p>
+<div class="section" id="parameters">
+<h3><a class="toc-backref" href="#id5">Parameters</a><a class="headerlink" href="#parameters" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p class="first"><strong>file_path</strong>: string, not default</p>
+<p>Path of file corpus which has raw text format.</p>
+</li>
+<li><p class="first"><strong>stemmed</strong>: boolean, default: False</p>
+<p>Appply the stemming algorithm (Porter, 1980) to preprocess text data. The algorithm is applied when parameter is set value <em>True</em></p>
+</li>
+<li><p class="first"><strong>remove_rare_word</strong>: int, default: 3</p>
+<p>Removing rarely words in the documents. Default, words which appeared in less 3 documents will be removed</p>
+</li>
+<li><p class="first"><strong>remove_common_word</strong>: int, default: None</p>
+<p>Removing common words (which appeared in many documents). Default, words which appeared in greater a half documents of corpus will be removed.</p>
+</li>
+</ul>
+</div>
+<div class="section" id="attributes">
+<h3><a class="toc-backref" href="#id6">Attributes</a><a class="headerlink" href="#attributes" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p class="first"><strong>path_file_vocab</strong>: string,</p>
+<p>path of the vocabulary file which created after calling method <em>extract_vocab()</em></p>
+</li>
+<li><p class="first"><strong>path_file_tf</strong>: string,</p>
+<p>path of file corpus with term-frequency format. This file is created after calling method <em>save_format_tf()</em></p>
+</li>
+<li><p class="first"><strong>path_file_sq</strong>: string,</p>
+<p>path of file corpus with term-sequence format. This file is created after calling method <em>save_format_sq()</em></p>
+</li>
+</ul>
+</div>
+<div class="section" id="methods">
+<h3><a class="toc-backref" href="#id7">Methods</a><a class="headerlink" href="#methods" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p class="first">__init__(<em>file_path, stemmed=False, remove_rare_word=3, remove_common_word=None</em>)</p>
+</li>
+<li><p class="first"><strong>process()</strong></p>
+<p>run the preprocessing algorithms</p>
+</li>
+<li><p class="first"><strong>extract_vocab</strong> (folder=None)</p>
+<p>Extracting to the file vocabulary of corpus after preprocessing</p>
+<ul>
+<li><p class="first"><strong>Parameters</strong>: folder (string, default: None)</p>
+<p>The position which file vocabulary is saved. By default, file is saved in a folder with path  <em>&lt;user home folder&gt; + “tmlib_data/” + &lt;name of file input&gt;</em></p>
+</li>
+</ul>
+</li>
+<li><p class="first"><strong>save_format_sq</strong> (folder=None)</p>
+<p>Extracting to the file corpus with term-sequence format</p>
+<ul>
+<li><p class="first"><strong>Parameters</strong>: folder (string, default: None)</p>
+<p>The position which file term-sequence is saved. By default, file is saved in a same folder with file vocablary created above</p>
+</li>
+</ul>
+</li>
+<li><p class="first"><strong>save_format_tf</strong> (folder=None)</p>
+<p>Extracting to the file corpus with term-frequency format</p>
+<ul>
+<li><p class="first"><strong>Parameters</strong>: folder (string, default: None)</p>
+<p>The position which file term-frequency is saved. By default, file is saved in a same folder with file vocablary created above</p>
+</li>
+</ul>
+</li>
+</ul>
+<table class="docutils footnote" frame="void" id="id2" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>Care and Feeding of Topic Models: Problems, Diagnostics, and Improvements. Jordan Boyd Graber, David Mimno, and David Newman. In Handbook of Mixed Membership Models and Their Applications, CRC/Chapman Hall, 2014.</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, DSLab.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.3.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

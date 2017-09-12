@@ -1,0 +1,448 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Learning LDA and inference with stream data from wikipedia &mdash; topicmodel-lib 0.3.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="topicmodel-lib 0.3.1 documentation" href="../index.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> topicmodel-lib
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.3.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">Learning LDA and inference with stream data from wikipedia</a><ul>
+<li><a class="reference internal" href="#data">Data</a></li>
+<li><a class="reference internal" href="#learning">Learning</a></li>
+<li><a class="reference internal" href="#inference-for-new-stream-data">Inference for new stream data</a></li>
+</ul>
+</li>
+</ul>
+</div>
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">topicmodel-lib</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>Learning LDA and inference with stream data from wikipedia</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/tutorials/wiki_tutorial.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="learning-lda-and-inference-with-stream-data-from-wikipedia">
+<h1><a class="toc-backref" href="#id1">Learning LDA and inference with stream data from wikipedia</a><a class="headerlink" href="#learning-lda-and-inference-with-stream-data-from-wikipedia" title="Permalink to this headline">¶</a></h1>
+<p>The purpose of this tutorial is to show you how to train the LDA model based on a specific data - stream data (inlude articles from wikipedia website) and after that, use this model to infer a new data. In this part, we’ll work with stream data, so I’ll use the learning method by stream scheme. Of course, the online or regularized methods are also used for this case. We will select a detailed method to guide all of you. If you want to go into detail , you can find out more these methods in <a class="reference external" href="../user_guide.rst">user guide</a> document.</p>
+<div class="contents topic" id="contents">
+<p class="topic-title first">Contents</p>
+<ul class="simple">
+<li><a class="reference internal" href="#learning-lda-and-inference-with-stream-data-from-wikipedia" id="id1">Learning LDA and inference with stream data from wikipedia</a><ul>
+<li><a class="reference internal" href="#data" id="id2">Data</a></li>
+<li><a class="reference internal" href="#learning" id="id3">Learning</a></li>
+<li><a class="reference internal" href="#inference-for-new-stream-data" id="id4">Inference for new stream data</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="data">
+<h2><a class="toc-backref" href="#id2">Data</a><a class="headerlink" href="#data" title="Permalink to this headline">¶</a></h2>
+<p>To design and implement for this part, we refered <a class="reference external" href="https://github.com/blei-lab/onlineldavb/blob/master/onlinewikipedia.py">source code</a> Online-VB (Hoffman, 2010). Authors fit the LDA model to 3.3 million articles from Wikipedia (actually is a large corpora), and a <a class="reference external" href="../../tmlib/datasets/data/wikipedia/vocab.txt">vocabulary</a> is extracted from this corpus. In each training iteration, we’ll crawl randomly a mini-batch articles from Wikipedia and analyze it for training. To understand more detail, you can infer <a class="reference external" href="../user_guides/work_data_input.rst#loading-a-minibatch-from-wikipedia-website">how to load a mini-batch from wikipedia</a></p>
+</div>
+<div class="section" id="learning">
+<h2><a class="toc-backref" href="#id3">Learning</a><a class="headerlink" href="#learning" title="Permalink to this headline">¶</a></h2>
+<p>We will demo with the learning method <a class="reference external" href="../user_guides/streaming_vb.rst">Streaming VB</a></p>
+<p>First, we’ll create a object used for load data</p>
+<p><strong>In[1]</strong>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tmlib.datasets.wiki_stream</span> <span class="k">import</span> <span class="n">WikiStream</span>
+
+<span class="c1"># Create object to load mini-batch from website</span>
+<span class="n">training_data</span> <span class="o">=</span> <span class="n">WikiStream</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>In setting above, size of a mini-batch is 64, and number of mini-batches used for traning (or number of interations to run the learning algorithm) is 100</p>
+<p>After create object to load data, we need set value for <a class="reference external" href="../api/api_lda.rst#class-tmlib-lda-online-vb-onlinevb">parameters</a> . By <a class="reference external" href="../user_guide.rst#stochastic-methods-for-learning-lda-from-large-corpora">default</a>, number of topics is 100, alpha=0.01, eta=0.01, tau0=0.9, kappa=1.0, conv_infer=50, iter_infer=50</p>
+<p><strong>In[2]</strong>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tmlib.lda.Streaming_VB</span> <span class="k">import</span> <span class="n">StreamingVB</span>
+
+<span class="c1"># get number of unique terms</span>
+<span class="n">num_terms</span> <span class="o">=</span> <span class="n">training_data</span><span class="o">.</span><span class="n">get_num_terms</span><span class="p">()</span>
+<span class="c1">#create object and setting parameters in default</span>
+<span class="n">obj_strvb</span> <span class="o">=</span> <span class="n">StreamingVB</span><span class="p">(</span><span class="n">num_terms</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>After that, we learn model as follow:</p>
+<p><strong>In[3]</strong>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1"># learn model, model and statistics are saved in folder model_vb</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">obj_strvb</span><span class="o">.</span><span class="n">learn_model</span><span class="p">(</span><span class="n">training_data</span><span class="p">,</span> <span class="n">save_model_every</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">compute_sparsity_every</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+                              <span class="n">save_statistic</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">save_top_words_every</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">num_top_words</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+                              <span class="n">model_folder</span><span class="o">=</span><span class="s1">&#39;model_stream_vb&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>See class <a class="reference external" href="../api/api_lda.rst#class-tmlib-lda-ldalearning-ldalearning">LdaLearning</a> to know what the above parameters mean. The algorithm will be stopped after 100 iterations. At the 4th, 9th, 14th, …, 99th loop, the value of <span class="math">\(\lambda\)</span>, sparsity document, time and top words of each topic are saved. The folder <strong>model_stream_vb</strong> inludes these files:</p>
+<ul class="simple">
+<li>model_batch4.npy, model_batch9.npy, model_batch14.npy, … , model_batch99.npy. These files save value of <span class="math">\(\lambda\)</span></li>
+<li>top_words_batch4.txt, top_words_batch9.txt, …, top_words_batch99.txt to save top 10 words of topics</li>
+<li>file sparsity100.csv and time100.csv save respectly document sparsity and time (time of E-step, time M-step in each iteration)</li>
+</ul>
+<p>Finally, we save the value of <span class="math">\(\lambda\)</span>, display top 10 words of topics as follow:</p>
+<p><strong>In[4]</strong>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1"># save lambda to a file text</span>
+<span class="n">model</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s1">&#39;model_stream_vb/lambda_final.txt&#39;</span><span class="p">,</span> <span class="n">file_type</span><span class="o">=</span><span class="s1">&#39;text&#39;</span><span class="p">)</span>
+<span class="c1"># Estimating beta by normalize lambda</span>
+<span class="n">model</span><span class="o">.</span><span class="n">normalize</span><span class="p">()</span>
+<span class="c1"># Display top 10 words of 10 topic</span>
+<span class="n">model</span><span class="o">.</span><span class="n">print_top_words</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">training_data</span><span class="o">.</span><span class="n">vocab_file</span><span class="p">,</span> <span class="n">show_topics</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="c1"># or you can show all of topics by</span>
+<span class="c1"># model.print_top_words(10, training_data.vocab_file)</span>
+<span class="c1"># or you can save to a file named top_words_final.txt</span>
+<span class="c1"># model.print_top_words(10, training_data.vocab_file, result_file=&#39;model_stream_vb/top_words_final.txt&#39;)</span>
+</pre></div>
+</div>
+<p><strong>Output</strong>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">topic</span> <span class="mi">000</span>
+    <span class="n">new</span>                <span class="mf">0.008113</span>
+    <span class="n">first</span>              <span class="mf">0.004547</span>
+    <span class="n">time</span>               <span class="mf">0.003746</span>
+    <span class="n">two</span>                <span class="mf">0.003542</span>
+    <span class="n">york</span>               <span class="mf">0.002589</span>
+    <span class="n">university</span>                 <span class="mf">0.002514</span>
+    <span class="n">school</span>             <span class="mf">0.002432</span>
+    <span class="n">world</span>              <span class="mf">0.002413</span>
+    <span class="n">three</span>              <span class="mf">0.002332</span>
+    <span class="n">october</span>            <span class="mf">0.002200</span>
+
+<span class="n">topic</span> <span class="mi">001</span>
+    <span class="n">first</span>              <span class="mf">0.001946</span>
+    <span class="n">two</span>                <span class="mf">0.001712</span>
+    <span class="n">new</span>                <span class="mf">0.001666</span>
+    <span class="n">time</span>               <span class="mf">0.001343</span>
+    <span class="n">years</span>              <span class="mf">0.001296</span>
+    <span class="n">university</span>                 <span class="mf">0.001249</span>
+    <span class="n">three</span>              <span class="mf">0.001050</span>
+    <span class="n">states</span>             <span class="mf">0.001046</span>
+    <span class="n">number</span>             <span class="mf">0.001033</span>
+    <span class="n">world</span>              <span class="mf">0.001029</span>
+
+<span class="n">topic</span> <span class="mi">002</span>
+    <span class="n">first</span>              <span class="mf">0.001967</span>
+    <span class="n">two</span>                <span class="mf">0.001936</span>
+    <span class="n">time</span>               <span class="mf">0.001618</span>
+    <span class="n">new</span>                <span class="mf">0.001458</span>
+    <span class="n">city</span>               <span class="mf">0.001394</span>
+    <span class="n">years</span>              <span class="mf">0.001256</span>
+    <span class="n">university</span>                 <span class="mf">0.001232</span>
+    <span class="n">duke</span>               <span class="mf">0.001223</span>
+    <span class="n">war</span>                <span class="mf">0.001202</span>
+    <span class="n">world</span>              <span class="mf">0.001189</span>
+
+<span class="n">topic</span> <span class="mi">003</span>
+    <span class="n">score</span>              <span class="mf">0.186668</span>
+    <span class="n">team</span>               <span class="mf">0.108287</span>
+    <span class="n">seed</span>               <span class="mf">0.026724</span>
+    <span class="nb">round</span>              <span class="mf">0.009304</span>
+    <span class="n">mens</span>               <span class="mf">0.006177</span>
+    <span class="n">first</span>              <span class="mf">0.005672</span>
+    <span class="n">time</span>               <span class="mf">0.005346</span>
+    <span class="n">final</span>              <span class="mf">0.005298</span>
+    <span class="n">report</span>             <span class="mf">0.005259</span>
+    <span class="n">event</span>              <span class="mf">0.004698</span>
+
+<span class="n">topic</span> <span class="mi">004</span>
+    <span class="n">first</span>              <span class="mf">0.002050</span>
+    <span class="n">art</span>                <span class="mf">0.001949</span>
+    <span class="n">new</span>                <span class="mf">0.001816</span>
+    <span class="n">two</span>                <span class="mf">0.001546</span>
+    <span class="n">time</span>               <span class="mf">0.001318</span>
+    <span class="n">university</span>                 <span class="mf">0.001036</span>
+    <span class="n">united</span>             <span class="mf">0.001015</span>
+    <span class="n">city</span>               <span class="mf">0.000984</span>
+    <span class="n">series</span>             <span class="mf">0.000980</span>
+    <span class="n">day</span>                <span class="mf">0.000946</span>
+
+<span class="n">topic</span> <span class="mi">005</span>
+    <span class="n">first</span>              <span class="mf">0.004525</span>
+    <span class="n">new</span>                <span class="mf">0.003888</span>
+    <span class="n">two</span>                <span class="mf">0.002278</span>
+    <span class="n">time</span>               <span class="mf">0.002250</span>
+    <span class="n">united</span>             <span class="mf">0.001957</span>
+    <span class="n">named</span>              <span class="mf">0.001742</span>
+    <span class="n">war</span>                <span class="mf">0.001675</span>
+    <span class="n">years</span>              <span class="mf">0.001493</span>
+    <span class="n">john</span>               <span class="mf">0.001473</span>
+    <span class="n">year</span>               <span class="mf">0.001444</span>
+
+<span class="n">topic</span> <span class="mi">006</span>
+    <span class="n">first</span>              <span class="mf">0.001904</span>
+    <span class="n">new</span>                <span class="mf">0.001838</span>
+    <span class="n">two</span>                <span class="mf">0.001798</span>
+    <span class="n">time</span>               <span class="mf">0.001594</span>
+    <span class="n">university</span>                 <span class="mf">0.001481</span>
+    <span class="n">ship</span>               <span class="mf">0.001445</span>
+    <span class="n">group</span>              <span class="mf">0.001380</span>
+    <span class="n">number</span>             <span class="mf">0.001303</span>
+    <span class="n">united</span>             <span class="mf">0.001280</span>
+    <span class="n">member</span>             <span class="mf">0.001171</span>
+
+<span class="n">topic</span> <span class="mi">007</span>
+    <span class="n">first</span>              <span class="mf">0.003349</span>
+    <span class="n">new</span>                <span class="mf">0.002382</span>
+    <span class="n">two</span>                <span class="mf">0.002283</span>
+    <span class="n">time</span>               <span class="mf">0.001614</span>
+    <span class="n">three</span>              <span class="mf">0.001502</span>
+    <span class="n">art</span>                <span class="mf">0.001463</span>
+    <span class="n">number</span>             <span class="mf">0.001443</span>
+    <span class="n">life</span>               <span class="mf">0.001332</span>
+    <span class="n">field</span>              <span class="mf">0.001295</span>
+    <span class="n">known</span>              <span class="mf">0.001275</span>
+
+<span class="n">topic</span> <span class="mi">008</span>
+    <span class="n">new</span>                <span class="mf">0.002254</span>
+    <span class="n">first</span>              <span class="mf">0.002059</span>
+    <span class="n">two</span>                <span class="mf">0.001728</span>
+    <span class="n">time</span>               <span class="mf">0.001414</span>
+    <span class="n">world</span>              <span class="mf">0.001260</span>
+    <span class="n">states</span>             <span class="mf">0.001254</span>
+    <span class="n">air</span>                <span class="mf">0.001119</span>
+    <span class="n">army</span>               <span class="mf">0.001067</span>
+    <span class="n">city</span>               <span class="mf">0.001044</span>
+    <span class="n">art</span>                <span class="mf">0.001039</span>
+
+<span class="n">topic</span> <span class="mi">009</span>
+    <span class="n">two</span>                <span class="mf">0.003724</span>
+    <span class="n">first</span>              <span class="mf">0.003343</span>
+    <span class="n">time</span>               <span class="mf">0.002620</span>
+    <span class="n">new</span>                <span class="mf">0.002562</span>
+    <span class="n">city</span>               <span class="mf">0.002016</span>
+    <span class="n">august</span>             <span class="mf">0.001570</span>
+    <span class="n">october</span>            <span class="mf">0.001520</span>
+    <span class="n">game</span>               <span class="mf">0.001482</span>
+    <span class="n">year</span>               <span class="mf">0.001446</span>
+    <span class="n">january</span>            <span class="mf">0.001401</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="inference-for-new-stream-data">
+<h2><a class="toc-backref" href="#id4">Inference for new stream data</a><a class="headerlink" href="#inference-for-new-stream-data" title="Permalink to this headline">¶</a></h2>
+<p>Assume that a stream data arrives and we have to infer for all of documents in this block.
+First, we need load stream data and return a corpus with a specific format</p>
+<p><strong>In[5]</strong>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tmlib.datasets</span> <span class="k">import</span> <span class="n">base</span>
+
+<span class="c1"># size of data is 10 documents</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">WikiStream</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="c1"># return corpus of 10 documents with term-frequency format</span>
+<span class="n">new_corpus</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">load_mini_batch</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>After that, execute inference for new corpus</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tmlib.lda.ldamodel</span> <span class="k">import</span> <span class="n">LdaModel</span>
+
+<span class="c1"># create object model</span>
+<span class="n">learned_model</span> <span class="o">=</span> <span class="n">LdaModel</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+<span class="c1"># load value of lambda from file saved above</span>
+<span class="n">learned_model</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;model_stream_vb/lambda_final.txt&#39;</span><span class="p">)</span>
+<span class="c1"># inference by create new object for OnlineVB</span>
+<span class="nb">object</span> <span class="o">=</span> <span class="n">StreamingVB</span><span class="p">(</span><span class="n">num_terms</span><span class="p">,</span> <span class="n">lda_model</span><span class="o">=</span><span class="n">learned_model</span><span class="p">)</span>
+<span class="n">theta</span> <span class="o">=</span> <span class="nb">object</span><span class="o">.</span><span class="n">infer_new_docs</span><span class="p">(</span><span class="n">new_corpus</span><span class="p">)</span>
+<span class="c1"># or you can infer by using object in learning phase</span>
+<span class="c1"># theta = obj_strvb.infer_new_docs(new_corpus)</span>
+<span class="n">base</span><span class="o">.</span><span class="n">write_topic_mixtures</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="s1">&#39;model_stream_vb/topic_mixtures.txt&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, DSLab.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.3.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

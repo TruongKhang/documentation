@@ -1,0 +1,264 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>2.9. ML-CGS &mdash; topicmodel-lib 0.3.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="topicmodel-lib 0.3.1 documentation" href="../index.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> topicmodel-lib
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.3.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">2.9. ML-CGS</a><ul>
+<li><a class="reference internal" href="#learning">Learning</a></li>
+<li><a class="reference internal" href="#inference-for-new-corpus">Inference for new corpus</a></li>
+</ul>
+</li>
+</ul>
+</div>
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">topicmodel-lib</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>2.9. ML-CGS</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/user_guides/ml_cgs.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="ml-cgs">
+<h1>2.9. ML-CGS<a class="headerlink" href="#ml-cgs" title="Permalink to this headline">¶</a></h1>
+<p>Refer to the detail guide of <a class="reference external" href="online_vb.rst">Online VB</a> or in tutorial <a class="reference external" href="../tutorials/ap_tutorial.rst#learning">here</a></p>
+<div class="section" id="learning">
+<h2>Learning<a class="headerlink" href="#learning" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tmlib.lda.ML_CGS</span> <span class="k">import</span> <span class="n">MLCGS</span>
+<span class="kn">from</span> <span class="nn">tmlib.datasets.dataset</span> <span class="k">import</span> <span class="n">DataSet</span>
+
+<span class="c1"># Assume that file isn&#39;t raw text</span>
+<span class="n">training_data</span> <span class="o">=</span> <span class="n">DataSet</span><span class="p">(</span><span class="n">training_file_path</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">vocab_file</span><span class="o">=</span><span class="n">vocab_file_path</span><span class="p">)</span>
+<span class="n">num_terms</span> <span class="o">=</span> <span class="n">training_data</span><span class="o">.</span><span class="n">get_num_terms</span><span class="p">()</span>
+<span class="n">obj_mlcgs</span> <span class="o">=</span> <span class="n">MLCGS</span><span class="p">(</span><span class="n">num_terms</span><span class="p">)</span>
+<span class="n">obj_model</span> <span class="o">=</span> <span class="n">obj_mlcgs</span><span class="o">.</span><span class="n">learn_model</span><span class="p">(</span><span class="n">training_data</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>With ML-methods, model returned is <span class="math">\(\beta\)</span>.</p>
+</div>
+<div class="section" id="inference-for-new-corpus">
+<h2>Inference for new corpus<a class="headerlink" href="#inference-for-new-corpus" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tmlib.datasets</span> <span class="k">import</span> <span class="n">base</span>
+<span class="kn">from</span> <span class="nn">tmlib.lda.ML_CGS</span> <span class="k">import</span> <span class="n">MLCGS</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="n">input_format</span> <span class="o">=</span> <span class="n">base</span><span class="o">.</span><span class="n">check_input_format</span><span class="p">(</span><span class="n">new_file_path</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">input_format</span> <span class="o">==</span> <span class="n">base</span><span class="o">.</span><span class="n">DataFormat</span><span class="o">.</span><span class="n">RAW_TEXT</span><span class="p">:</span>
+    <span class="n">docs</span> <span class="o">=</span> <span class="n">base</span><span class="o">.</span><span class="n">load_batch_raw_text</span><span class="p">(</span><span class="n">new_file_path</span><span class="p">)</span>
+    <span class="n">vocab_dict_format</span> <span class="o">=</span> <span class="n">base</span><span class="o">.</span><span class="n">read_vocab</span><span class="p">(</span><span class="n">vocab_file_path</span><span class="p">)</span>
+    <span class="n">new_corpus</span> <span class="o">=</span> <span class="n">base</span><span class="o">.</span><span class="n">parse_doc_list</span><span class="p">(</span><span class="n">docs</span><span class="p">,</span> <span class="n">vocab_dict_format</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">new_corpus</span> <span class="o">=</span> <span class="n">base</span><span class="o">.</span><span class="n">load_batch_formatted_from_file</span><span class="p">(</span><span class="n">new_file_path</span><span class="p">)</span>
+<span class="c1"># learned_model is a object of class LdaModel</span>
+<span class="n">num_terms</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="n">vocab_file_path</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">readlines</span><span class="p">())</span>
+<span class="n">obj_mlcgs</span> <span class="o">=</span> <span class="n">MLCGS</span><span class="p">(</span><span class="n">num_terms</span><span class="p">,</span> <span class="n">lda_model</span><span class="o">=</span><span class="n">learned_model</span><span class="p">)</span>
+<span class="n">theta</span> <span class="o">=</span> <span class="n">obj_mlcgs</span><span class="o">.</span><span class="n">infer_new_docs</span><span class="p">(</span><span class="n">new_corpus</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, DSLab.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.3.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

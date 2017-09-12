@@ -1,0 +1,1540 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>tmlib.lda: Methods for learnning LDA &mdash; topicmodel-lib 0.3.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="topicmodel-lib 0.3.1 documentation" href="../index.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> topicmodel-lib
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.3.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">tmlib.lda: Methods for learnning LDA</a><ul>
+<li><a class="reference internal" href="#class-tmlib-lda-ldamodel-ldamodel">class tmlib.lda.ldamodel.LdaModel</a><ul>
+<li><a class="reference internal" href="#parameters">Parameters</a></li>
+<li><a class="reference internal" href="#attributes">Attributes</a></li>
+<li><a class="reference internal" href="#methods">Methods</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#class-tmlib-lda-ldalearning-ldastatistics">class tmlib.lda.ldalearning.LdaStatistics</a><ul>
+<li><a class="reference internal" href="#id1">Attributes</a></li>
+<li><a class="reference internal" href="#id2">Methods</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#class-tmlib-lda-ldalearning-ldalearning">class tmlib.lda.ldalearning.LdaLearning</a><ul>
+<li><a class="reference internal" href="#id3">Parameters</a></li>
+<li><a class="reference internal" href="#id4">Attributes</a></li>
+<li><a class="reference internal" href="#id5">Methods</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#class-tmlib-lda-online-vb-onlinevb">class tmlib.lda.Online_VB.OnlineVB</a><ul>
+<li><a class="reference internal" href="#id6">Parameters</a></li>
+<li><a class="reference internal" href="#id7">Attributes</a></li>
+<li><a class="reference internal" href="#id8">Methods</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#class-tmlib-lda-online-cvb0-onlinecvb0">class tmlib.lda.Online_CVB0.OnlineCVB0</a><ul>
+<li><a class="reference internal" href="#id9">Parameters</a></li>
+<li><a class="reference internal" href="#id10">Attributes</a></li>
+<li><a class="reference internal" href="#id11">Methods</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#class-tmlib-lda-online-cgs-onlinecgs">class tmlib.lda.Online_CGS.OnlineCGS</a><ul>
+<li><a class="reference internal" href="#id12">Parameters</a></li>
+<li><a class="reference internal" href="#id13">Attributes</a></li>
+<li><a class="reference internal" href="#id14">Methods</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#class-tmlib-lda-online-fw-onlinefw">class tmlib.lda.Online_FW.OnlineFW</a><ul>
+<li><a class="reference internal" href="#id15">Parameters</a></li>
+<li><a class="reference internal" href="#id16">Attributes</a></li>
+<li><a class="reference internal" href="#id17">Methods</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#class-tmlib-lda-online-ope-onlineope">class tmlib.lda.Online_OPE.OnlineOPE</a><ul>
+<li><a class="reference internal" href="#id18">Parameters</a></li>
+<li><a class="reference internal" href="#id19">Attributes</a></li>
+<li><a class="reference internal" href="#id20">Methods</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#class-tmlib-lda-streaming-vb-streamingvb">class tmlib.lda.Streaming_VB.StreamingVB</a><ul>
+<li><a class="reference internal" href="#id21">Parameters</a></li>
+<li><a class="reference internal" href="#id22">Attributes</a></li>
+<li><a class="reference internal" href="#id23">Methods</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#class-tmlib-lda-streaming-fw-streamingfw">class tmlib.lda.Streaming_FW.StreamingFW</a><ul>
+<li><a class="reference internal" href="#id24">Parameters</a></li>
+<li><a class="reference internal" href="#id25">Attributes</a></li>
+<li><a class="reference internal" href="#id26">Methods</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#class-tmlib-lda-streaming-ope-streamingope">class tmlib.lda.Streaming_OPE.StreamingOPE</a><ul>
+<li><a class="reference internal" href="#id27">Parameters</a></li>
+<li><a class="reference internal" href="#id28">Attributes</a></li>
+<li><a class="reference internal" href="#id29">Methods</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#class-tmlib-lda-ml-cgs-mlcgs">class tmlib.lda.ML_CGS.MLCGS</a><ul>
+<li><a class="reference internal" href="#id30">Parameters</a></li>
+<li><a class="reference internal" href="#id31">Attributes</a></li>
+<li><a class="reference internal" href="#id32">Methods</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#class-tmlib-lda-ml-fw-mlfw">class tmlib.lda.ML_FW.MLFW</a><ul>
+<li><a class="reference internal" href="#id33">Parameters</a></li>
+<li><a class="reference internal" href="#id34">Attributes</a></li>
+<li><a class="reference internal" href="#id35">Methods</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#class-tmlib-lda-ml-ope-mlope">class tmlib.lda.ML_OPE.MLOPE</a><ul>
+<li><a class="reference internal" href="#id36">Parameters</a></li>
+<li><a class="reference internal" href="#id37">Attributes</a></li>
+<li><a class="reference internal" href="#id38">Methods</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">topicmodel-lib</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>tmlib.lda: Methods for learnning LDA</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/api/api_lda.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="tmlib-lda-methods-for-learnning-lda">
+<h1><a class="toc-backref" href="#id39">tmlib.lda: Methods for learnning LDA</a><a class="headerlink" href="#tmlib-lda-methods-for-learnning-lda" title="Permalink to this headline">¶</a></h1>
+<div class="contents topic" id="contents">
+<p class="topic-title first">Contents</p>
+<ul class="simple">
+<li><a class="reference internal" href="#tmlib-lda-methods-for-learnning-lda" id="id39">tmlib.lda: Methods for learnning LDA</a><ul>
+<li><a class="reference internal" href="#class-tmlib-lda-ldamodel-ldamodel" id="id40">class tmlib.lda.ldamodel.LdaModel</a><ul>
+<li><a class="reference internal" href="#parameters" id="id41">Parameters</a></li>
+<li><a class="reference internal" href="#attributes" id="id42">Attributes</a></li>
+<li><a class="reference internal" href="#methods" id="id43">Methods</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#class-tmlib-lda-ldalearning-ldastatistics" id="id44">class tmlib.lda.ldalearning.LdaStatistics</a><ul>
+<li><a class="reference internal" href="#id1" id="id45">Attributes</a></li>
+<li><a class="reference internal" href="#id2" id="id46">Methods</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#class-tmlib-lda-ldalearning-ldalearning" id="id47">class tmlib.lda.ldalearning.LdaLearning</a><ul>
+<li><a class="reference internal" href="#id3" id="id48">Parameters</a></li>
+<li><a class="reference internal" href="#id4" id="id49">Attributes</a></li>
+<li><a class="reference internal" href="#id5" id="id50">Methods</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#class-tmlib-lda-online-vb-onlinevb" id="id51">class tmlib.lda.Online_VB.OnlineVB</a><ul>
+<li><a class="reference internal" href="#id6" id="id52">Parameters</a></li>
+<li><a class="reference internal" href="#id7" id="id53">Attributes</a></li>
+<li><a class="reference internal" href="#id8" id="id54">Methods</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#class-tmlib-lda-online-cvb0-onlinecvb0" id="id55">class tmlib.lda.Online_CVB0.OnlineCVB0</a><ul>
+<li><a class="reference internal" href="#id9" id="id56">Parameters</a></li>
+<li><a class="reference internal" href="#id10" id="id57">Attributes</a></li>
+<li><a class="reference internal" href="#id11" id="id58">Methods</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#class-tmlib-lda-online-cgs-onlinecgs" id="id59">class tmlib.lda.Online_CGS.OnlineCGS</a><ul>
+<li><a class="reference internal" href="#id12" id="id60">Parameters</a></li>
+<li><a class="reference internal" href="#id13" id="id61">Attributes</a></li>
+<li><a class="reference internal" href="#id14" id="id62">Methods</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#class-tmlib-lda-online-fw-onlinefw" id="id63">class tmlib.lda.Online_FW.OnlineFW</a><ul>
+<li><a class="reference internal" href="#id15" id="id64">Parameters</a></li>
+<li><a class="reference internal" href="#id16" id="id65">Attributes</a></li>
+<li><a class="reference internal" href="#id17" id="id66">Methods</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#class-tmlib-lda-online-ope-onlineope" id="id67">class tmlib.lda.Online_OPE.OnlineOPE</a><ul>
+<li><a class="reference internal" href="#id18" id="id68">Parameters</a></li>
+<li><a class="reference internal" href="#id19" id="id69">Attributes</a></li>
+<li><a class="reference internal" href="#id20" id="id70">Methods</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#class-tmlib-lda-streaming-vb-streamingvb" id="id71">class tmlib.lda.Streaming_VB.StreamingVB</a><ul>
+<li><a class="reference internal" href="#id21" id="id72">Parameters</a></li>
+<li><a class="reference internal" href="#id22" id="id73">Attributes</a></li>
+<li><a class="reference internal" href="#id23" id="id74">Methods</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#class-tmlib-lda-streaming-fw-streamingfw" id="id75">class tmlib.lda.Streaming_FW.StreamingFW</a><ul>
+<li><a class="reference internal" href="#id24" id="id76">Parameters</a></li>
+<li><a class="reference internal" href="#id25" id="id77">Attributes</a></li>
+<li><a class="reference internal" href="#id26" id="id78">Methods</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#class-tmlib-lda-streaming-ope-streamingope" id="id79">class tmlib.lda.Streaming_OPE.StreamingOPE</a><ul>
+<li><a class="reference internal" href="#id27" id="id80">Parameters</a></li>
+<li><a class="reference internal" href="#id28" id="id81">Attributes</a></li>
+<li><a class="reference internal" href="#id29" id="id82">Methods</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#class-tmlib-lda-ml-cgs-mlcgs" id="id83">class tmlib.lda.ML_CGS.MLCGS</a><ul>
+<li><a class="reference internal" href="#id30" id="id84">Parameters</a></li>
+<li><a class="reference internal" href="#id31" id="id85">Attributes</a></li>
+<li><a class="reference internal" href="#id32" id="id86">Methods</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#class-tmlib-lda-ml-fw-mlfw" id="id87">class tmlib.lda.ML_FW.MLFW</a><ul>
+<li><a class="reference internal" href="#id33" id="id88">Parameters</a></li>
+<li><a class="reference internal" href="#id34" id="id89">Attributes</a></li>
+<li><a class="reference internal" href="#id35" id="id90">Methods</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#class-tmlib-lda-ml-ope-mlope" id="id91">class tmlib.lda.ML_OPE.MLOPE</a><ul>
+<li><a class="reference internal" href="#id36" id="id92">Parameters</a></li>
+<li><a class="reference internal" href="#id37" id="id93">Attributes</a></li>
+<li><a class="reference internal" href="#id38" id="id94">Methods</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="class-tmlib-lda-ldamodel-ldamodel">
+<h2><a class="toc-backref" href="#id40">class tmlib.lda.ldamodel.LdaModel</a><a class="headerlink" href="#class-tmlib-lda-ldamodel-ldamodel" title="Permalink to this headline">¶</a></h2>
+<p>tmlib.lda.ldamodel.LdaModel(<em>num_terms, num_topics, random_type=0</em>)</p>
+<p>This class works with model (<span class="math">\(\lambda\)</span> or <span class="math">\(\beta\)</span>): save, load, display words of topics…</p>
+<div class="section" id="parameters">
+<h3><a class="toc-backref" href="#id41">Parameters</a><a class="headerlink" href="#parameters" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p class="first"><strong>num_terms</strong>: int</p>
+<p>number of words in vocabulary file</p>
+</li>
+<li><p class="first"><strong>num_topics</strong>: int,</p>
+<p>number of topics</p>
+</li>
+<li><p class="first"><strong>random_type</strong>: int, default: 0</p>
+<p>Initialize randomly array of <span class="math">\(\lambda\)</span> (or <span class="math">\(\beta\)</span>) (size num_topics x num_terms). If random_type = 0, model is initialized with uniform distribution. Otherwise, initialized with gamma distribution</p>
+</li>
+</ul>
+</div>
+<div class="section" id="attributes">
+<h3><a class="toc-backref" href="#id42">Attributes</a><a class="headerlink" href="#attributes" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p class="first"><strong>num_terms</strong>: int</p>
+</li>
+<li><p class="first"><strong>num_topics</strong>: int</p>
+</li>
+<li><p class="first"><strong>model</strong>: array 2 dimentions (num_topics x num_terms)</p>
+<p><span class="math">\(\lambda\)</span> or <span class="math">\(\beta\)</span></p>
+</li>
+</ul>
+</div>
+<div class="section" id="methods">
+<h3><a class="toc-backref" href="#id43">Methods</a><a class="headerlink" href="#methods" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p class="first">__init__(<em>num_terms, num_topics, random_type=0</em>)</p>
+</li>
+<li><p class="first"><strong>normalize</strong> ()</p>
+<p>Used for estimating <span class="math">\(\beta\)</span> from <span class="math">\(\lambda\)</span>. This function is usually used for regularized methods</p>
+</li>
+<li><p class="first"><strong>print_top_words</strong> (self, num_words, vocab_file, show_topics=None, result_file=None)</p>
+<p>Display words of topics on the screen or save into file</p>
+<ul>
+<li><p class="first"><strong>Parameters</strong>:</p>
+<ul>
+<li><p class="first"><strong>num_words</strong>: int,</p>
+<p>number of words of each topic is displayed</p>
+</li>
+<li><p class="first"><strong>vocab_file</strong>: string,</p>
+<p>path of file vocabulary</p>
+</li>
+<li><p class="first"><strong>show_topics</strong>: int, default: None</p>
+<p>number of topics is displayed. By default, all of topics are displayed</p>
+</li>
+<li><p class="first"><strong>result_file</strong>: string, default: None</p>
+<p>path of file to save words into. By default, if result_file=None, words of topics are displayed on screen</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p class="first"><strong>load</strong> (model_file)</p>
+<p>loading the learned model (<span class="math">\(\lambda\)</span> or <span class="math">\(\beta\)</span>) from file named <em>model_file</em></p>
+</li>
+<li><p class="first"><strong>save</strong> (model_file, file_type=’binary’)</p>
+<p>saving model into a file named model_file. By default, the type of file is binary. We can change type of file to text by set file_type=’txt’</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="class-tmlib-lda-ldalearning-ldastatistics">
+<h2><a class="toc-backref" href="#id44">class tmlib.lda.ldalearning.LdaStatistics</a><a class="headerlink" href="#class-tmlib-lda-ldalearning-ldastatistics" title="Permalink to this headline">¶</a></h2>
+<p>tmlib.lda.ldalearning.LdaStatistics()</p>
+<p>This class is used for saving statistics of model such as: time of E-step, time of M-step, time of inference, or sparsity document in each iteration</p>
+<div class="section" id="id1">
+<h3><a class="toc-backref" href="#id45">Attributes</a><a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p class="first"><strong>e_step_time</strong>: list,</p>
+<p>list of time of E-step</p>
+</li>
+<li><p class="first"><strong>m_step_time</strong>: list,</p>
+<p>list of time of M-step</p>
+</li>
+<li><p class="first"><strong>iter_time</strong>: list,</p>
+<p>list of time of each iteration. Time of each iteration = time E-step + time M-step in each iteration</p>
+</li>
+<li><p class="first"><strong>sparsity_record</strong>: list,</p>
+<p>store the computed sparsities in some iterations</p>
+</li>
+</ul>
+</div>
+<div class="section" id="id2">
+<h3><a class="toc-backref" href="#id46">Methods</a><a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p class="first">__init__()</p>
+</li>
+<li><p class="first"><strong>record_time</strong> (time_e, time_m)</p>
+<p>append a time record to lists: e_step_time, m_step_time, iter_time</p>
+<p><strong>time_e</strong>: time of E-step</p>
+<p><strong>time_m</strong>: time of M-step</p>
+</li>
+<li><p class="first"><strong>reset_time_record</strong> ()</p>
+<p>reset all of lists to empty</p>
+</li>
+<li><p class="first"><strong>record_sparsity</strong> (sparsity)</p>
+<p>append a sparsity record to list sparsity_record</p>
+</li>
+<li><p class="first"><strong>reset_sparsity_record</strong> ()</p>
+</li>
+<li><p class="first"><strong>save_time</strong> (file_name, reset=False)</p>
+<p>Save time records into a file</p>
+<p><em>file_name*</em>: name of the saved file</p>
+<p><strong>reset</strong>: if reset = True then reseting all list of time to empty</p>
+</li>
+<li><p class="first"><strong>save_sparsity</strong> (file_name, reset=False)</p>
+<p>Save sparsity records into a file named <em>file_name</em></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="class-tmlib-lda-ldalearning-ldalearning">
+<h2><a class="toc-backref" href="#id47">class tmlib.lda.ldalearning.LdaLearning</a><a class="headerlink" href="#class-tmlib-lda-ldalearning-ldalearning" title="Permalink to this headline">¶</a></h2>
+<p>tmlib.lda.ldalearning. <strong>LdaLearning</strong> (<em>num_terms, num_topics, lda_model=None</em>)</p>
+<p>This class is used for learning LDA. This is the super-class of all learning methods.</p>
+<div class="section" id="id3">
+<h3><a class="toc-backref" href="#id48">Parameters</a><a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p class="first"><strong>num_terms</strong>: int</p>
+<p>number of words in vocabulary file</p>
+</li>
+<li><p class="first"><strong>num_topics</strong>: int</p>
+<p>number of topics of model</p>
+</li>
+<li><p class="first"><strong>lda_model</strong>: object of class LdaModel, default: None</p>
+<p>This parameter is used for storing the learned model after each iteration. If it is set None value, sub-class of this class must initialize it. If it is the learned model, it can be updated in this learning time.</p>
+</li>
+</ul>
+</div>
+<div class="section" id="id4">
+<h3><a class="toc-backref" href="#id49">Attributes</a><a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p class="first"><strong>num_terms</strong>: int</p>
+</li>
+<li><p class="first"><strong>num_topics</strong>: int</p>
+</li>
+<li><p class="first"><strong>lda_model</strong>: object of class LdaModel</p>
+</li>
+<li><p class="first"><strong>statistics</strong>: object of class LearningStatistics</p>
+<p>Used for storing the statistics of model in learning process</p>
+</li>
+</ul>
+</div>
+<div class="section" id="id5">
+<h3><a class="toc-backref" href="#id50">Methods</a><a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p class="first">__init__ (<em>num_terms, num_topics, lda_model=None</em>)</p>
+</li>
+<li><p class="first"><strong>static_online</strong> (<em>word_ids_tks, cts_lens</em>)</p>
+<p>This function implements learning algorithms. It is a abstract method</p>
+<p><strong>word_ids_tks</strong> and <strong>cts_lens</strong>: see attributes of class <a class="reference external" href="./api_base.rst">Corpus</a></p>
+</li>
+</ul>
+<ul>
+<li><p class="first"><strong>infer_new_docs</strong> (<em>new_corpus</em>)</p>
+<p>This is also abstract method. This used for inference new documents.</p>
+<ul class="simple">
+<li><strong>new_corpus</strong>: object of class Corpus, store new documents used for inference</li>
+</ul>
+<p><strong>Return</strong>: topic proportions of documents (<span class="math">\(\theta\)</span>)</p>
+</li>
+<li><p class="first"><strong>learn_model</strong> (<em>data, save_model_every=0, compute_sparsity_every=0, save_statistic=False, save_top_words_every=0, num_top_words=20, model_folder=’model’</em>)</p>
+<p>This used for learning model and to save model, statistics of model.</p>
+<p><strong>Parameters</strong>:</p>
+<blockquote>
+<div><ul class="simple">
+<li><strong>data</strong>: object of class Dataset, used to supply minibatches data for learning</li>
+<li><strong>save_model_every</strong>: int, default: 0. If it is set to 2, it means at iterators: 0, 2, 4, 6, …, model will is save into a file. If setting default, model won’t be saved.</li>
+<li><strong>compute_sparsity_every</strong>: int, default: 0. Compute sparsity and store in attribute <strong>statistics</strong>. The word “every” here means as same as <strong>save_model_every</strong></li>
+<li><strong>save_statistic</strong>: boolean, default: False. Saving statistics or not</li>
+<li><strong>save_top_words_every</strong>: int, default: 0. Used for saving top words of topics (highest probability). Number words displayed is <strong>num_top_words</strong> parameter.</li>
+<li><strong>num_top_words</strong>: int, default: 20. By default, the number of words displayed is 20.</li>
+<li><strong>model_folder</strong>: string, default: “model”. The place which model file, statistics file are saved. By default, all of this values will be saved in folder “model”</li>
+</ul>
+</div></blockquote>
+<p><strong>Return</strong>: the learned model (object of class LdaModel)</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="class-tmlib-lda-online-vb-onlinevb">
+<h2><a class="toc-backref" href="#id51">class tmlib.lda.Online_VB.OnlineVB</a><a class="headerlink" href="#class-tmlib-lda-online-vb-onlinevb" title="Permalink to this headline">¶</a></h2>
+<p>tmlib.lda.Online_VB. <strong>OnlineVB</strong> (<em>num_terms, num_topics=100, alpha=0.01, eta=0.01, tau0=1.0, kappa=0.9, conv_infer=0.0001, iter_infer=50, lda_model=None</em>)</p>
+<p>This class inherits super-class LdaLearning. This used for learning LDA by Online-VB method.</p>
+<div class="section" id="id6">
+<h3><a class="toc-backref" href="#id52">Parameters</a><a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p class="first"><strong>num_terms</strong>: int,</p>
+<p>number words of vocabulary file</p>
+</li>
+<li><p class="first"><strong>num_topics</strong>: int, default: 100</p>
+<p>number of topics of model.</p>
+</li>
+<li><p class="first"><strong>alpha</strong>: float, default: 0.01</p>
+<p>parameter <span class="math">\(\alpha\)</span> of model LDA</p>
+</li>
+<li><p class="first"><strong>eta</strong> (<span class="math">\(\eta\)</span>): float, default: 0.01</p>
+</li>
+<li><p class="first"><strong>tau0</strong> (<span class="math">\(\tau_{0}\)</span>): float, default: 1.0</p>
+</li>
+<li><p class="first"><strong>kappa</strong> (<span class="math">\(\kappa\)</span>): float, default: 0.9</p>
+</li>
+<li><p class="first"><strong>conv_infer</strong>: float, default: 0.0001</p>
+<p>The relative improvement of the lower bound on likelihood of VB inference. If If bound hasn’t changed much, the inference will be stopped</p>
+</li>
+<li><p class="first"><strong>iter_infer</strong>: int, default: 50.</p>
+<p>number of iterations to do inference</p>
+</li>
+<li><p class="first"><strong>lda_model</strong>: object of class LdaModel, default: None.</p>
+<p>If this is None value, it will be initialized and become a new object. If not, it will be the model learned previously</p>
+</li>
+</ul>
+</div>
+<div class="section" id="id7">
+<h3><a class="toc-backref" href="#id53">Attributes</a><a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p class="first"><strong>num_terms</strong>: int,</p>
+</li>
+<li><p class="first"><strong>num_topics</strong>: int,</p>
+</li>
+<li><p class="first"><strong>alpha</strong>: float,</p>
+</li>
+<li><p class="first"><strong>eta</strong> (<span class="math">\(\eta\)</span>): float,</p>
+</li>
+<li><p class="first"><strong>tau0</strong> (<span class="math">\(\tau_{0}\)</span>): float,</p>
+</li>
+<li><p class="first"><strong>kappa</strong> (<span class="math">\(\kappa\)</span>): float,</p>
+</li>
+<li><p class="first"><strong>conv_infer</strong>: float,</p>
+</li>
+<li><p class="first"><strong>iter_infer</strong>: int,</p>
+</li>
+<li><p class="first"><strong>lda_model</strong>: object of class LdaModel</p>
+</li>
+<li><p class="first"><strong>_Elogbeta</strong>: float,</p>
+<p>This is expectation of random variable <span class="math">\(\beta\)</span> (topics of model).</p>
+</li>
+<li><p class="first"><strong>_expElogbeta</strong>: float, this is equal exp(<strong>_Elogbeta</strong>)</p>
+</li>
+</ul>
+</div>
+<div class="section" id="id8">
+<h3><a class="toc-backref" href="#id54">Methods</a><a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p class="first">__init__ (<em>num_terms, num_topics=100, alpha=0.01, eta=0.01, tau0=1.0, kappa=0.9, conv_infer=0.0001, iter_infer=50, lda_model=None</em>)</p>
+</li>
+<li><p class="first"><strong>static_online</strong> (<em>wordids, wordcts</em>)</p>
+<p>Excute the learning algorithm, includes: inference for individual document and update <span class="math">\(\lambda\)</span>. 2 parameters <em>wordids</em>, <em>wordcts</em> represent for term-frequency format of mini-batch</p>
+<p><strong>Return</strong>: tuple (time of E-step, time of M-step, gamma). gamma (<span class="math">\(\gamma\)</span>) is variational parameter of <span class="math">\(\theta\)</span></p>
+</li>
+<li><p class="first"><strong>e_step</strong> (<em>wordids, wordcts</em>)</p>
+<p>Do inference for indivial document (E-step)</p>
+<p><strong>Return</strong>: tuple (gamma, sstats), where, sstats is the sufficient statistics for the M-step</p>
+</li>
+<li><p class="first"><strong>update_lambda</strong> (<em>batch_size, sstats</em>)</p>
+<p>Update <span class="math">\(\lambda\)</span> by stochastic way.</p>
+</li>
+<li><p class="first"><strong>learn_model</strong> (<em>data, save_model_every=0, compute_sparsity_every=0, save_statistic=False, save_top_words_every=0, num_top_words=20, model_folder=’model’</em>)</p>
+<p>Inheritted method</p>
+<p>see class LdaLearning</p>
+</li>
+<li><p class="first"><strong>infer_new_docs</strong> (<em>new_corpus</em>)</p>
+<p>Inheritted method</p>
+<p>see class LdaLearning</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="class-tmlib-lda-online-cvb0-onlinecvb0">
+<h2><a class="toc-backref" href="#id55">class tmlib.lda.Online_CVB0.OnlineCVB0</a><a class="headerlink" href="#class-tmlib-lda-online-cvb0-onlinecvb0" title="Permalink to this headline">¶</a></h2>
+<p>tmlib.lda.Online_CVB0. <strong>OnlineCVB0</strong> (<em>num_tokens, num_terms, num_topics=100, alpha=0.01, eta=0.01, tau_phi=1.0, kappa_phi=0.9, s_phi=1.0, tau_theta=10.0, kappa_theta=0.9, s_theta=1.0, burn_in=25, lda_model=None</em>)</p>
+<p>This class inherits super-class LdaLearning. This used for learning LDA by Online-CVB0 method.</p>
+<div class="section" id="id9">
+<h3><a class="toc-backref" href="#id56">Parameters</a><a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p class="first"><strong>num_tokens</strong>: int,</p>
+<p>number tokens of corpus</p>
+</li>
+<li><p class="first"><strong>num_terms</strong>: int,</p>
+<p>number words of vocabulary file</p>
+</li>
+<li><p class="first"><strong>num_topics</strong>: int, default: 100</p>
+<p>number of topics of model.</p>
+</li>
+<li><p class="first"><strong>alpha</strong>: float, default: 0.01</p>
+<p>parameter <span class="math">\(\alpha\)</span> of model LDA</p>
+</li>
+<li><p class="first"><strong>eta</strong> (<span class="math">\(\eta\)</span>): float, default: 0.01</p>
+</li>
+<li><p class="first"><strong>tau_phi</strong> : float, default: 1.0</p>
+</li>
+<li><p class="first"><strong>kappa_phi</strong> : float, default: 0.9</p>
+</li>
+<li><p class="first"><strong>s_phi</strong>: float, default: 1.0</p>
+</li>
+<li><p class="first"><strong>tau_theta</strong>: float, default: 10.0</p>
+</li>
+<li><p class="first"><strong>kappa_theta</strong>: float, default: 0.9</p>
+</li>
+<li><p class="first"><strong>s_theta</strong>: float, default: 1.0</p>
+</li>
+<li><p class="first"><strong>burn_in</strong>: int, default: 25</p>
+</li>
+<li><p class="first"><strong>lda_model</strong>: object of class LdaModel, default: None.</p>
+<p>If this is None value, it will be initialized and become a new object. If not, it will be the model learned previously</p>
+</li>
+</ul>
+</div>
+<div class="section" id="id10">
+<h3><a class="toc-backref" href="#id57">Attributes</a><a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h3>
+<p>Same as parameters above</p>
+</div>
+<div class="section" id="id11">
+<h3><a class="toc-backref" href="#id58">Methods</a><a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p class="first">__init__ (<em>num_tokens, num_terms, num_topics=100, alpha=0.01, eta=0.01, tau_phi=1.0, kappa_phi=0.9, s_phi=1.0, tau_theta=10.0, kappa_theta=0.9, s_theta=1.0, burn_in=25, lda_model=None</em>)</p>
+</li>
+<li><p class="first"><strong>static_online</strong> (<em>wordtks, lengths</em>)</p>
+<p>Excute the learning algorithm, includes: inference for individual document and update <span class="math">\(\lambda\)</span>. 2 parameters <em>wordtks</em>, <em>lengths</em> represent for term-sequence format of mini-batch</p>
+<p><strong>Return</strong>: tuple (time of E-step, time of M-step, N_theta).</p>
+</li>
+<li><p class="first"><strong>e_step</strong> (<em>wordids, wordcts</em>)</p>
+<p>Do inference for indivial document (E-step)</p>
+<p><strong>Return</strong>: tuple (N_phi, N_Z, N_theta)</p>
+</li>
+<li><p class="first"><strong>m_step</strong> (<em>batch_size, N_phi, N_Z</em>)</p>
+<p>Update <span class="math">\(\lambda\)</span> by stochastic way.</p>
+</li>
+<li><p class="first"><strong>learn_model</strong> (<em>data, save_model_every=0, compute_sparsity_every=0, save_statistic=False, save_top_words_every=0, num_top_words=20, model_folder=’model’</em>)</p>
+<p>Inheritted method</p>
+<p>see class LdaLearning</p>
+</li>
+<li><p class="first"><strong>infer_new_docs</strong> (<em>new_corpus</em>)</p>
+<p>Inheritted method</p>
+<p>see class LdaLearning</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="class-tmlib-lda-online-cgs-onlinecgs">
+<h2><a class="toc-backref" href="#id59">class tmlib.lda.Online_CGS.OnlineCGS</a><a class="headerlink" href="#class-tmlib-lda-online-cgs-onlinecgs" title="Permalink to this headline">¶</a></h2>
+<p>tmlib.lda.Online_CGS. <strong>OnlineCGS</strong> (<em>num_terms, num_topics=100, alpha=0.01, eta=0.01, tau0=1.0, kappa=0.9, burn_in=25, samples=25, lda_model=None</em>)</p>
+<p>This class inherits super-class LdaLearning. This used for learning LDA by Online-CGS method.</p>
+<div class="section" id="id12">
+<h3><a class="toc-backref" href="#id60">Parameters</a><a class="headerlink" href="#id12" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p class="first"><strong>num_terms</strong>: int,</p>
+<p>number words of vocabulary file</p>
+</li>
+<li><p class="first"><strong>num_topics</strong>: int, default: 100</p>
+<p>number of topics of model.</p>
+</li>
+<li><p class="first"><strong>alpha</strong>: float, default: 0.01</p>
+<p>parameter <span class="math">\(\alpha\)</span> of model LDA</p>
+</li>
+<li><p class="first"><strong>eta</strong> (<span class="math">\(\eta\)</span>): float, default: 0.01</p>
+</li>
+<li><p class="first"><strong>tau0</strong> (<span class="math">\(\tau_{0}\)</span>): float, default: 1.0</p>
+</li>
+<li><p class="first"><strong>kappa</strong> (<span class="math">\(\kappa\)</span>): float, default: 0.9</p>
+</li>
+<li><p class="first"><strong>burn_in</strong>: int, default: 25</p>
+</li>
+<li><p class="first"><strong>samples</strong>: int, default: 25</p>
+<p>50 samples were used in CGS for which the first 25 (burn_in) were discarded and the remaining (samples) were used to approximate the posterior distribution</p>
+</li>
+<li><p class="first"><strong>lda_model</strong>: object of class LdaModel, default: None.</p>
+<p>If this is None value, it will be initialized and become a new object. If not, it will be the model learned previously</p>
+</li>
+</ul>
+</div>
+<div class="section" id="id13">
+<h3><a class="toc-backref" href="#id61">Attributes</a><a class="headerlink" href="#id13" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p class="first"><strong>num_terms</strong>: int,</p>
+</li>
+<li><p class="first"><strong>num_topics</strong>: int,</p>
+</li>
+<li><p class="first"><strong>alpha</strong>: float,</p>
+</li>
+<li><p class="first"><strong>eta</strong> (<span class="math">\(\eta\)</span>): float,</p>
+</li>
+<li><p class="first"><strong>tau0</strong> (<span class="math">\(\tau_{0}\)</span>): float,</p>
+</li>
+<li><p class="first"><strong>kappa</strong> (<span class="math">\(\kappa\)</span>): float,</p>
+</li>
+<li><p class="first"><strong>burn_in</strong>: int,</p>
+</li>
+<li><p class="first"><strong>samples</strong>: int,</p>
+</li>
+<li><p class="first"><strong>lda_model</strong>: object of class LdaModel</p>
+</li>
+<li><p class="first"><strong>_Elogbeta</strong>: float,</p>
+<p>This is expectation of random variable <span class="math">\(\beta\)</span> (topics of model).</p>
+</li>
+<li><p class="first"><strong>_expElogbeta</strong>: float, this is equal exp(<strong>_Elogbeta</strong>)</p>
+</li>
+</ul>
+</div>
+<div class="section" id="id14">
+<h3><a class="toc-backref" href="#id62">Methods</a><a class="headerlink" href="#id14" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p class="first">__init__ (<em>num_terms, num_topics=100, alpha=0.01, eta=0.01, tau0=1.0, kappa=0.9, burn_in=25, samples=25, lda_model=None</em>)</p>
+</li>
+<li><p class="first"><strong>static_online</strong> (<em>wordtks, lengths</em>)</p>
+<p>Excute the learning algorithm, includes: inference for individual document and update <span class="math">\(\lambda\)</span>. 2 parameters <em>wordtks</em>, <em>lengths</em> represent for term-sequence format of mini-batch</p>
+<p><strong>Return</strong>: tuple (time of E-step, time of M-step, theta).</p>
+</li>
+<li><p class="first"><strong>sample_z</strong> (<em>wordids, wordcts</em>)</p>
+<p>Do inference for indivial document (E-step) by sampling</p>
+<p><strong>Return</strong>: tuple (Nkw_mean, Ndk_mean, z)</p>
+</li>
+<li><p class="first"><strong>update_lambda</strong> (<em>batch_size, sstats</em>)</p>
+<p>Update <span class="math">\(\lambda\)</span> by stochastic way. Parameter sstats is Nkw_mean in ouput of function sample_z</p>
+</li>
+<li><p class="first"><strong>learn_model</strong> (<em>data, save_model_every=0, compute_sparsity_every=0, save_statistic=False, save_top_words_every=0, num_top_words=20, model_folder=’model’</em>)</p>
+<p>Inheritted method</p>
+<p>see class LdaLearning</p>
+</li>
+<li><p class="first"><strong>infer_new_docs</strong> (<em>new_corpus</em>)</p>
+<p>Inheritted method</p>
+<p>see class LdaLearning</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="class-tmlib-lda-online-fw-onlinefw">
+<h2><a class="toc-backref" href="#id63">class tmlib.lda.Online_FW.OnlineFW</a><a class="headerlink" href="#class-tmlib-lda-online-fw-onlinefw" title="Permalink to this headline">¶</a></h2>
+<p>tmlib.lda.Online_FW. <strong>OnlineFW</strong> (<em>num_terms, num_topics=100, eta=0.01, tau0=1.0, kappa=0.9, iter_infer=50, lda_model=None</em>)</p>
+<p>This class inherits super-class LdaLearning. This used for learning LDA by Online-FW method.</p>
+<div class="section" id="id15">
+<h3><a class="toc-backref" href="#id64">Parameters</a><a class="headerlink" href="#id15" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p class="first"><strong>num_terms</strong>: int,</p>
+<p>Number of unique terms in the corpus (length of the vocabulary)</p>
+</li>
+<li><p class="first"><strong>num_topics</strong>: int, default: 100</p>
+<p>Number of topics shared by the whole corpus.</p>
+</li>
+<li><p class="first"><strong>eta</strong> (<span class="math">\(\eta\)</span>): float, default: 0.01</p>
+<p>Hyperparameter for prior on topics beta.</p>
+</li>
+<li><p class="first"><strong>tau0</strong> (<span class="math">\(\tau_{0}\)</span>): float, default: 1.0</p>
+<p>A (positive) learning parameter that downweights early iterations.</p>
+</li>
+<li><p class="first"><strong>kappa</strong> (<span class="math">\(\kappa\)</span>): float, default: 0.9</p>
+<p>Learning rate: exponential decay rate should be between (0.5, 1.0] to guarantee asymptotic convergence.</p>
+</li>
+<li><p class="first"><strong>iter_infer</strong>: int, default: 50.</p>
+<p>Number of iterations of FW algorithm.</p>
+</li>
+<li><p class="first"><strong>lda_model</strong>: object of class LdaModel, default: None.</p>
+<p>If this is None value, it will be initialized and become a new object. If not, it will be the model learned previously</p>
+</li>
+</ul>
+</div>
+<div class="section" id="id16">
+<h3><a class="toc-backref" href="#id65">Attributes</a><a class="headerlink" href="#id16" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p class="first"><strong>num_docs</strong>: int,</p>
+<p>Number of documents in the corpus.</p>
+</li>
+<li><p class="first"><strong>num_terms</strong>: int,</p>
+</li>
+<li><p class="first"><strong>num_topics</strong>: int,</p>
+</li>
+<li><p class="first"><strong>eta</strong> (<span class="math">\(\eta\)</span>): float,</p>
+</li>
+<li><p class="first"><strong>tau0</strong> (<span class="math">\(\tau_{0}\)</span>): float,</p>
+</li>
+<li><p class="first"><strong>kappa</strong> (<span class="math">\(\kappa\)</span>): float,</p>
+</li>
+<li><p class="first"><strong>INF_MAX_ITER</strong>: int,</p>
+</li>
+<li><p class="first"><strong>lda_model</strong>: object of class LdaModel</p>
+</li>
+</ul>
+</div>
+<div class="section" id="id17">
+<h3><a class="toc-backref" href="#id66">Methods</a><a class="headerlink" href="#id17" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p class="first">__init__ (<em>num_terms, num_topics=100, alpha=0.01, eta=0.01, tau0=1.0, kappa=0.9, iter_infer=50, lda_model=None</em>)</p>
+</li>
+<li><p class="first"><strong>static_online</strong> (<em>wordids, wordcts</em>)</p>
+<p>First does an E step on the mini-batch given in wordids and wordcts, then uses the result of that E step to update the topics in M step.</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><strong>wordids</strong>: A list whose each element is an array (terms), corresponding to a document. Each element of the array is index of a unique term, which appears in the document, in the vocabulary.</li>
+<li><strong>wordcts</strong>: A list whose each element is an array (frequency), corresponding to a document. Each element of the array says how many time the corresponding term in wordids appears in the document.</li>
+</ul>
+<p><strong>Return</strong>: tuple (time of E-step, time of M-step, theta): time the E and M steps have taken and the list of topic mixtures of all documents in the mini-batch.</p>
+</li>
+<li><p class="first"><strong>e_step</strong> (<em>wordids, wordcts</em>)</p>
+<p>Does e step</p>
+<p>Note that, FW can provides sparse solution (theta:topic mixture) when doing inference for each documents. It means that the theta have few non-zero elements whose indexes are stored in list of lists ‘index’.</p>
+<p><strong>Return</strong>: tuple (theta, index): topic mixtures and their nonzero elements’ indexes of all documents in the mini-batch.</p>
+</li>
+<li><p class="first"><strong>infer_doc</strong> (<em>ids, cts</em>):</p>
+<p>Does inference for a document using Frank Wolfe algorithm.</p>
+<p><strong>Parameters</strong></p>
+<ul class="simple">
+<li>ids: an element of wordids, corresponding to a document.</li>
+<li>cts: an element of wordcts, corresponding to a document.</li>
+</ul>
+<p><strong>Returns</strong>: inferred theta and list of indexes of non-zero elements of the theta.</p>
+</li>
+<li><p class="first"><strong>m_step</strong> (<em>wordids, wordcts, theta, index</em>)</p>
+<p>Does M-step</p>
+</li>
+<li><p class="first"><strong>learn_model</strong> (<em>data, save_model_every=0, compute_sparsity_every=0, save_statistic=False, save_top_words_every=0, num_top_words=20, model_folder=’model’</em>)</p>
+<p>Inheritted method</p>
+<p>see class LdaLearning</p>
+</li>
+<li><p class="first"><strong>infer_new_docs</strong> (<em>new_corpus</em>)</p>
+<p>Inheritted method</p>
+<p>see class LdaLearning</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="class-tmlib-lda-online-ope-onlineope">
+<h2><a class="toc-backref" href="#id67">class tmlib.lda.Online_OPE.OnlineOPE</a><a class="headerlink" href="#class-tmlib-lda-online-ope-onlineope" title="Permalink to this headline">¶</a></h2>
+<p>tmlib.lda.Online_OPE. <strong>OnlineOPE</strong> (<em>num_terms, num_topics=100, alpha=0.01, eta=0.01, tau0=1.0, kappa=0.9, iter_infer=50, lda_model=None</em>)</p>
+<p>This class inherits super-class LdaLearning. This used for learning LDA by Online-OPE method.</p>
+<div class="section" id="id18">
+<h3><a class="toc-backref" href="#id68">Parameters</a><a class="headerlink" href="#id18" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p class="first"><strong>num_terms</strong>: int,</p>
+<p>Number of unique terms in the corpus (length of the vocabulary)</p>
+</li>
+<li><p class="first"><strong>num_topics</strong>: int, default: 100</p>
+<p>Number of topics shared by the whole corpus.</p>
+</li>
+<li><p class="first"><strong>alpha</strong>: float, default: 0.01</p>
+<blockquote>
+<div><p>Hyperparameter for prior on topic mixture theta.</p>
+</div></blockquote>
+</li>
+<li><p class="first"><strong>eta</strong> (<span class="math">\(\eta\)</span>): float, default: 0.01</p>
+<p>Hyperparameter for prior on topics beta.</p>
+</li>
+<li><p class="first"><strong>tau0</strong> (<span class="math">\(\tau_{0}\)</span>): float, default: 1.0</p>
+<p>A (positive) learning parameter that downweights early iterations.</p>
+</li>
+<li><p class="first"><strong>kappa</strong> (<span class="math">\(\kappa\)</span>): float, default: 0.9</p>
+<p>Learning rate: exponential decay rate should be between (0.5, 1.0] to guarantee asymptotic convergence.</p>
+</li>
+<li><p class="first"><strong>iter_infer</strong>: int, default: 50.</p>
+<p>Number of iterations of FW algorithm.</p>
+</li>
+<li><p class="first"><strong>lda_model</strong>: object of class LdaModel, default: None.</p>
+<p>If this is None value, it will be initialized and become a new object. If not, it will be the model learned previously</p>
+</li>
+</ul>
+</div>
+<div class="section" id="id19">
+<h3><a class="toc-backref" href="#id69">Attributes</a><a class="headerlink" href="#id19" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p class="first"><strong>num_docs</strong>: int,</p>
+<p>Number of documents in the corpus.</p>
+</li>
+<li><p class="first"><strong>num_terms</strong>: int,</p>
+</li>
+<li><p class="first"><strong>num_topics</strong>: int,</p>
+</li>
+<li><p class="first"><strong>alpha</strong>: float,</p>
+</li>
+<li><p class="first"><strong>eta</strong> (<span class="math">\(\eta\)</span>): float,</p>
+</li>
+<li><p class="first"><strong>tau0</strong> (<span class="math">\(\tau_{0}\)</span>): float,</p>
+</li>
+<li><p class="first"><strong>kappa</strong> (<span class="math">\(\kappa\)</span>): float,</p>
+</li>
+<li><p class="first"><strong>INF_MAX_ITER</strong>: int,</p>
+</li>
+<li><p class="first"><strong>lda_model</strong>: object of class LdaModel</p>
+</li>
+</ul>
+</div>
+<div class="section" id="id20">
+<h3><a class="toc-backref" href="#id70">Methods</a><a class="headerlink" href="#id20" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p class="first">__init__ (<em>num_terms, num_topics=100, alpha=0.01, eta=0.01, tau0=1.0, kappa=0.9, iter_infer=50, lda_model=None</em>)</p>
+</li>
+<li><p class="first"><strong>static_online</strong> (<em>wordids, wordcts</em>)</p>
+<p>First does an E step on the mini-batch given in wordids and wordcts, then uses the result of that E step to update the topics in M step.</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><strong>wordids</strong>: A list whose each element is an array (terms), corresponding to a document. Each element of the array is index of a unique term, which appears in the document, in the vocabulary.</li>
+<li><strong>wordcts</strong>: A list whose each element is an array (frequency), corresponding to a document. Each element of the array says how many time the corresponding term in wordids appears in the document.</li>
+</ul>
+<p><strong>Return</strong>: tuple (time of E-step, time of M-step, theta): time the E and M steps have taken and the list of topic mixtures of all documents in the mini-batch.</p>
+</li>
+<li><p class="first"><strong>e_step</strong> (<em>wordids, wordcts</em>)</p>
+<p>Does e step</p>
+<p><strong>Return</strong>: Returns topic mixtures theta.</p>
+</li>
+<li><p class="first"><strong>infer_doc</strong> (<em>ids, cts</em>):</p>
+<p>Does inference for a document using Online MAP Estimation algorithm.</p>
+<p><strong>Parameters</strong></p>
+<ul class="simple">
+<li>ids: an element of wordids, corresponding to a document.</li>
+<li>cts: an element of wordcts, corresponding to a document.</li>
+</ul>
+<p><strong>Returns</strong>: inferred theta</p>
+</li>
+<li><p class="first"><strong>m_step</strong> (<em>wordids, wordcts, theta</em>)</p>
+<p>Does M-step</p>
+</li>
+<li><p class="first"><strong>learn_model</strong> (<em>data, save_model_every=0, compute_sparsity_every=0, save_statistic=False, save_top_words_every=0, num_top_words=20, model_folder=’model’</em>)</p>
+<p>Inheritted method</p>
+<p>see class LdaLearning</p>
+</li>
+<li><p class="first"><strong>infer_new_docs</strong> (<em>new_corpus</em>)</p>
+<p>Inheritted method</p>
+<p>see class LdaLearning</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="class-tmlib-lda-streaming-vb-streamingvb">
+<h2><a class="toc-backref" href="#id71">class tmlib.lda.Streaming_VB.StreamingVB</a><a class="headerlink" href="#class-tmlib-lda-streaming-vb-streamingvb" title="Permalink to this headline">¶</a></h2>
+<p>tmlib.lda.Streaming_VB. <strong>StreamingVB</strong> (<em>num_terms, num_topics=100, alpha=0.01, eta=0.01, conv_infer=0.0001, iter_infer=50, lda_model=None</em>)</p>
+<p>This class inherits super-class LdaLearning. This used for learning LDA by Streaming-VB method.</p>
+<div class="section" id="id21">
+<h3><a class="toc-backref" href="#id72">Parameters</a><a class="headerlink" href="#id21" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p class="first"><strong>num_terms</strong>: int,</p>
+<p>number words of vocabulary file</p>
+</li>
+<li><p class="first"><strong>num_topics</strong>: int, default: 100</p>
+<p>Number of topics shared by the whole corpus.</p>
+</li>
+<li><p class="first"><strong>alpha</strong>: float, default: 0.01</p>
+<p>parameter <span class="math">\(\alpha\)</span> of model LDA</p>
+</li>
+<li><p class="first"><strong>eta</strong> (<span class="math">\(\eta\)</span>): float, default: 0.01</p>
+</li>
+<li><p class="first"><strong>conv_infer</strong>: float, default: 0.0001</p>
+<p>The relative improvement of the lower bound on likelihood of VB inference. If If bound hasn’t changed much, the inference will be stopped</p>
+</li>
+<li><p class="first"><strong>iter_infer</strong>: int, default: 50.</p>
+<p>number of iterations to do inference</p>
+</li>
+<li><p class="first"><strong>lda_model</strong>: object of class LdaModel, default: None.</p>
+<p>If this is None value, it will be initialized and become a new object. If not, it will be the model learned previously</p>
+</li>
+</ul>
+</div>
+<div class="section" id="id22">
+<h3><a class="toc-backref" href="#id73">Attributes</a><a class="headerlink" href="#id22" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p class="first"><strong>num_terms</strong>: int,</p>
+</li>
+<li><p class="first"><strong>num_topics</strong>: int,</p>
+</li>
+<li><p class="first"><strong>alpha</strong>: float,</p>
+</li>
+<li><p class="first"><strong>eta</strong> (<span class="math">\(\eta\)</span>): float,</p>
+</li>
+<li><p class="first"><strong>conv_infer</strong>: float,</p>
+</li>
+<li><p class="first"><strong>iter_infer</strong>: int,</p>
+</li>
+<li><p class="first"><strong>lda_model</strong>: object of class LdaModel</p>
+</li>
+<li><p class="first"><strong>_Elogbeta</strong>: float,</p>
+<p>This is expectation of random variable <span class="math">\(\beta\)</span> (topics of model).</p>
+</li>
+<li><p class="first"><strong>_expElogbeta</strong>: float, this is equal exp(<strong>_Elogbeta</strong>)</p>
+</li>
+</ul>
+</div>
+<div class="section" id="id23">
+<h3><a class="toc-backref" href="#id74">Methods</a><a class="headerlink" href="#id23" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p class="first">__init__ (<em>num_terms, num_topics=100, alpha=0.01, eta=0.01, tau0=1.0, kappa=0.9, conv_infer=0.0001, iter_infer=50, lda_model=None</em>)</p>
+</li>
+<li><p class="first"><strong>static_online</strong> (<em>wordids, wordcts</em>)</p>
+<p>Excute the learning algorithm, includes: inference for individual document and update <span class="math">\(\lambda\)</span>. 2 parameters <em>wordids</em>, <em>wordcts</em> represent for term-frequency format of mini-batch</p>
+<p><strong>Return</strong>: tuple (time of E-step, time of M-step, gamma). gamma (<span class="math">\(\gamma\)</span>) is variational parameter of <span class="math">\(\theta\)</span></p>
+</li>
+<li><p class="first"><strong>e_step</strong> (<em>wordids, wordcts</em>)</p>
+<p>Do inference for indivial document (E-step)</p>
+<p><strong>Return</strong>: tuple (gamma, sstats), where, sstats is the sufficient statistics for the M-step</p>
+</li>
+<li><p class="first"><strong>update_lambda</strong> (<em>sstats</em>)</p>
+<p>Update <span class="math">\(\lambda\)</span> by stochastic way. Specificly, using stream learning</p>
+</li>
+<li><p class="first"><strong>learn_model</strong> (<em>data, save_model_every=0, compute_sparsity_every=0, save_statistic=False, save_top_words_every=0, num_top_words=20, model_folder=’model’</em>)</p>
+<p>Inheritted method</p>
+<p>see class LdaLearning</p>
+</li>
+<li><p class="first"><strong>infer_new_docs</strong> (<em>new_corpus</em>)</p>
+<p>Inheritted method</p>
+<p>see class LdaLearning</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="class-tmlib-lda-streaming-fw-streamingfw">
+<h2><a class="toc-backref" href="#id75">class tmlib.lda.Streaming_FW.StreamingFW</a><a class="headerlink" href="#class-tmlib-lda-streaming-fw-streamingfw" title="Permalink to this headline">¶</a></h2>
+<p>tmlib.lda.Streaming_FW. <strong>StreamingFW</strong> (<em>num_terms, num_topics=100, eta=0.01, iter_infer=50, lda_model=None</em>)</p>
+<p>This class inherits super-class LdaLearning. This used for learning LDA by Streaming-FW method.</p>
+<div class="section" id="id24">
+<h3><a class="toc-backref" href="#id76">Parameters</a><a class="headerlink" href="#id24" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p class="first"><strong>num_terms</strong>: int,</p>
+<p>Number of unique terms in the corpus (length of the vocabulary).</p>
+</li>
+<li><p class="first"><strong>num_topics</strong>: int, default: 100</p>
+<p>Number of topics shared by the whole corpus.</p>
+</li>
+<li><p class="first"><strong>eta</strong> (<span class="math">\(\eta\)</span>): float, default: 0.01</p>
+<p>Hyperparameter for prior on topics beta.</p>
+</li>
+<li><p class="first"><strong>iter_infer</strong>: int, default: 50.</p>
+<p>Number of iterations of FW algorithm.</p>
+</li>
+<li><p class="first"><strong>lda_model</strong>: object of class LdaModel, default: None.</p>
+<p>If this is None value, it will be initialized and become a new object. If not, it will be the model learned previously</p>
+</li>
+</ul>
+</div>
+<div class="section" id="id25">
+<h3><a class="toc-backref" href="#id77">Attributes</a><a class="headerlink" href="#id25" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><strong>num_terms</strong>: int,</li>
+<li><strong>num_topics</strong>: int,</li>
+<li><strong>eta</strong> (<span class="math">\(\eta\)</span>): float,</li>
+<li><strong>iter_infer</strong>: int,</li>
+<li><strong>lda_model</strong>: object of class LdaModel</li>
+</ul>
+</div>
+<div class="section" id="id26">
+<h3><a class="toc-backref" href="#id78">Methods</a><a class="headerlink" href="#id26" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p class="first">__init__ (<em>num_terms, num_topics=100, eta=0.01, iter_infer=50, lda_model=None</em>)</p>
+</li>
+<li><p class="first"><strong>static_online</strong> (<em>wordids, wordcts</em>)</p>
+<p>First does an E step on the mini-batch given in wordids and wordcts, then uses the result of that E step to update the topics in M step.</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><strong>wordids</strong>: A list whose each element is an array (terms), corresponding to a document. Each element of the array is index of a unique term, which appears in the document, in the vocabulary.</li>
+<li><strong>wordcts</strong>: A list whose each element is an array (frequency), corresponding to a document. Each element of the array says how many time the corresponding term in wordids appears in the document.</li>
+</ul>
+<p><strong>Returns</strong>: time the E and M steps have taken and the list of topic mixtures of all documents in the mini-batch.</p>
+</li>
+<li><p class="first"><strong>e_step</strong> (<em>wordids, wordcts</em>)</p>
+<p>Does e step</p>
+<p>Returns topic mixtures and their nonzero elements’ indexes of all documents in the mini-batch.</p>
+<p>Note that, FW can provides sparse solution (theta:topic mixture) when doing inference for each documents. It means that the theta have few non-zero elements whose indexes are stored in list of lists ‘index’.</p>
+</li>
+<li><p class="first"><strong>infer_doc</strong> (<em>ids, cts</em>):</p>
+<p>Does inference for a document using Frank Wolfe algorithm.</p>
+<p><strong>Parameters</strong></p>
+<ul class="simple">
+<li>ids: an element of wordids, corresponding to a document.</li>
+<li>cts: an element of wordcts, corresponding to a document.</li>
+</ul>
+<p><strong>Returns</strong>: inferred theta and list of indexes of non-zero elements of the theta.</p>
+</li>
+<li><p class="first"><strong>m_step</strong> (<em>wordids, wordcts, theta, index</em>)</p>
+<p>Does M-step</p>
+</li>
+<li><p class="first"><strong>learn_model</strong> (<em>data, save_model_every=0, compute_sparsity_every=0, save_statistic=False, save_top_words_every=0, num_top_words=20, model_folder=’model’</em>)</p>
+<p>Inheritted method</p>
+<p>see class LdaLearning</p>
+</li>
+<li><p class="first"><strong>infer_new_docs</strong> (<em>new_corpus</em>)</p>
+<p>Inheritted method</p>
+<p>see class LdaLearning</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="class-tmlib-lda-streaming-ope-streamingope">
+<h2><a class="toc-backref" href="#id79">class tmlib.lda.Streaming_OPE.StreamingOPE</a><a class="headerlink" href="#class-tmlib-lda-streaming-ope-streamingope" title="Permalink to this headline">¶</a></h2>
+<p>tmlib.lda.Streaming_OPE. <strong>StreamingOPE</strong> (<em>num_terms, num_topics=100, alpha=0.01, eta=0.01, iter_infer=50, lda_model=None</em>)</p>
+<p>This class inherits super-class LdaLearning. This used for learning LDA by Streaming-OPE method.</p>
+<div class="section" id="id27">
+<h3><a class="toc-backref" href="#id80">Parameters</a><a class="headerlink" href="#id27" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p class="first"><strong>num_terms</strong>: int,</p>
+<p>Number of unique terms in the corpus (length of the vocabulary)</p>
+</li>
+<li><p class="first"><strong>num_topics</strong>: int, default: 100</p>
+<p>Number of topics shared by the whole corpus.</p>
+</li>
+<li><p class="first"><strong>alpha</strong>: float, default: 0.01</p>
+<blockquote>
+<div><p>Hyperparameter for prior on topic mixture theta.</p>
+</div></blockquote>
+</li>
+<li><p class="first"><strong>eta</strong> (<span class="math">\(\eta\)</span>): float, default: 0.01</p>
+<p>Hyperparameter for prior on topics beta.</p>
+</li>
+<li><p class="first"><strong>iter_infer</strong>: int, default: 50.</p>
+<p>Number of iterations of FW algorithm.</p>
+</li>
+<li><p class="first"><strong>lda_model</strong>: object of class LdaModel, default: None.</p>
+<p>If this is None value, it will be initialized and become a new object. If not, it will be the model learned previously</p>
+</li>
+</ul>
+</div>
+<div class="section" id="id28">
+<h3><a class="toc-backref" href="#id81">Attributes</a><a class="headerlink" href="#id28" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p class="first"><strong>num_docs</strong>: int,</p>
+<p>Number of documents in the corpus.</p>
+</li>
+<li><p class="first"><strong>num_terms</strong>: int,</p>
+</li>
+<li><p class="first"><strong>num_topics</strong>: int,</p>
+</li>
+<li><p class="first"><strong>alpha</strong>: float,</p>
+</li>
+<li><p class="first"><strong>eta</strong> (<span class="math">\(\eta\)</span>): float,</p>
+</li>
+<li><p class="first"><strong>INF_MAX_ITER</strong>: int,</p>
+</li>
+<li><p class="first"><strong>lda_model</strong>: object of class LdaModel</p>
+</li>
+</ul>
+</div>
+<div class="section" id="id29">
+<h3><a class="toc-backref" href="#id82">Methods</a><a class="headerlink" href="#id29" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p class="first">__init__ (<em>num_terms, num_topics=100, alpha=0.01, eta=0.01, tau0=1.0, kappa=0.9, iter_infer=50, lda_model=None</em>)</p>
+</li>
+<li><p class="first"><strong>static_online</strong> (<em>wordids, wordcts</em>)</p>
+<p>First does an E step on the mini-batch given in wordids and wordcts, then uses the result of that E step to update the topics in M step.</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><strong>wordids</strong>: A list whose each element is an array (terms), corresponding to a document. Each element of the array is index of a unique term, which appears in the document, in the vocabulary.</li>
+<li><strong>wordcts</strong>: A list whose each element is an array (frequency), corresponding to a document. Each element of the array says how many time the corresponding term in wordids appears in the document.</li>
+</ul>
+<p><strong>Return</strong>: tuple (time of E-step, time of M-step, theta): time the E and M steps have taken and the list of topic mixtures of all documents in the mini-batch.</p>
+</li>
+<li><p class="first"><strong>e_step</strong> (<em>wordids, wordcts</em>)</p>
+<p>Does e step</p>
+<p><strong>Return</strong>: Returns topic mixtures theta.</p>
+</li>
+<li><p class="first"><strong>infer_doc</strong> (<em>ids, cts</em>):</p>
+<p>Does inference for a document using Online MAP Estimation algorithm.</p>
+<p><strong>Parameters</strong></p>
+<ul class="simple">
+<li>ids: an element of wordids, corresponding to a document.</li>
+<li>cts: an element of wordcts, corresponding to a document.</li>
+</ul>
+<p><strong>Returns</strong>: inferred theta</p>
+</li>
+<li><p class="first"><strong>m_step</strong> (<em>wordids, wordcts, theta</em>)</p>
+<p>Does M-step</p>
+</li>
+<li><p class="first"><strong>learn_model</strong> (<em>data, save_model_every=0, compute_sparsity_every=0, save_statistic=False, save_top_words_every=0, num_top_words=20, model_folder=’model’</em>)</p>
+<p>Inheritted method</p>
+<p>see class LdaLearning</p>
+</li>
+<li><p class="first"><strong>infer_new_docs</strong> (<em>new_corpus</em>)</p>
+<p>Inheritted method</p>
+<p>see class LdaLearning</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="class-tmlib-lda-ml-cgs-mlcgs">
+<h2><a class="toc-backref" href="#id83">class tmlib.lda.ML_CGS.MLCGS</a><a class="headerlink" href="#class-tmlib-lda-ml-cgs-mlcgs" title="Permalink to this headline">¶</a></h2>
+<p>tmlib.lda.ML_CGS. <strong>MLCGS</strong> (<em>num_terms, num_topics=100, alpha=0.01, eta=0.01, tau0=1.0, kappa=0.9, burn_in=25, samples=25, lda_model=None</em>)</p>
+<p>This class inherits super-class LdaLearning. This used for learning LDA by ML-CGS method.</p>
+<div class="section" id="id30">
+<h3><a class="toc-backref" href="#id84">Parameters</a><a class="headerlink" href="#id30" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p class="first"><strong>num_terms</strong>: int,</p>
+<p>number words of vocabulary file</p>
+</li>
+<li><p class="first"><strong>num_topics</strong>: int, default: 100</p>
+<p>number of topics of model.</p>
+</li>
+<li><p class="first"><strong>alpha</strong>: float, default: 0.01</p>
+<p>parameter <span class="math">\(\alpha\)</span> of model LDA</p>
+</li>
+<li><p class="first"><strong>eta</strong> (<span class="math">\(\eta\)</span>): float, default: 0.01</p>
+</li>
+<li><p class="first"><strong>tau0</strong> (<span class="math">\(\tau_{0}\)</span>): float, default: 1.0</p>
+</li>
+<li><p class="first"><strong>kappa</strong> (<span class="math">\(\kappa\)</span>): float, default: 0.9</p>
+</li>
+<li><p class="first"><strong>burn_in</strong>: int, default: 25</p>
+</li>
+<li><p class="first"><strong>samples</strong>: int, default: 25</p>
+<p>50 samples were used in CGS for which the first 25 (burn_in) were discarded and the remaining (samples) were used to approximate the posterior distribution</p>
+</li>
+<li><p class="first"><strong>lda_model</strong>: object of class LdaModel, default: None.</p>
+<p>If this is None value, it will be initialized and become a new object. If not, it will be the model learned previously</p>
+</li>
+</ul>
+</div>
+<div class="section" id="id31">
+<h3><a class="toc-backref" href="#id85">Attributes</a><a class="headerlink" href="#id31" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p class="first"><strong>num_terms</strong>: int,</p>
+</li>
+<li><p class="first"><strong>num_topics</strong>: int,</p>
+</li>
+<li><p class="first"><strong>alpha</strong>: float,</p>
+</li>
+<li><p class="first"><strong>eta</strong> (<span class="math">\(\eta\)</span>): float,</p>
+</li>
+<li><p class="first"><strong>tau0</strong> (<span class="math">\(\tau_{0}\)</span>): float,</p>
+</li>
+<li><p class="first"><strong>kappa</strong> (<span class="math">\(\kappa\)</span>): float,</p>
+</li>
+<li><p class="first"><strong>burn_in</strong>: int,</p>
+</li>
+<li><p class="first"><strong>samples</strong>: int,</p>
+</li>
+<li><p class="first"><strong>lda_model</strong>: object of class LdaModel</p>
+</li>
+<li><p class="first"><strong>_Elogbeta</strong>: float,</p>
+<p>This is expectation of random variable <span class="math">\(\beta\)</span> (topics of model).</p>
+</li>
+<li><p class="first"><strong>_expElogbeta</strong>: float, this is equal exp(<strong>_Elogbeta</strong>)</p>
+</li>
+</ul>
+</div>
+<div class="section" id="id32">
+<h3><a class="toc-backref" href="#id86">Methods</a><a class="headerlink" href="#id32" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p class="first">__init__ (<em>num_terms, num_topics=100, alpha=0.01, eta=0.01, tau0=1.0, kappa=0.9, burn_in=25, samples=25, lda_model=None</em>)</p>
+</li>
+<li><p class="first"><strong>static_online</strong> (<em>wordtks, lengths</em>)</p>
+<p>Excute the learning algorithm, includes: inference for individual document and update <span class="math">\(\lambda\)</span>. 2 parameters <em>wordtks</em>, <em>lengths</em> represent for term-sequence format of mini-batch</p>
+<p><strong>Return</strong>: tuple (time of E-step, time of M-step, theta).</p>
+</li>
+<li><p class="first"><strong>sample_z</strong> (<em>wordids, wordcts</em>)</p>
+<p>Does E-step</p>
+<p><strong>Return</strong>: tuple (Ndk_mean, z)</p>
+</li>
+<li><p class="first"><strong>update_lambda</strong> (<em>wordtks, lengths, Ndk_mean</em>)</p>
+<p>Update <span class="math">\(\lambda\)</span> by regularized online learning. <span class="math">\(\lambda\)</span> here is <span class="math">\(\beta\)</span></p>
+</li>
+<li><p class="first"><strong>learn_model</strong> (<em>data, save_model_every=0, compute_sparsity_every=0, save_statistic=False, save_top_words_every=0, num_top_words=20, model_folder=’model’</em>)</p>
+<p>Inheritted method</p>
+<p>see class LdaLearning</p>
+</li>
+<li><p class="first"><strong>infer_new_docs</strong> (<em>new_corpus</em>)</p>
+<p>Inheritted method</p>
+<p>see class LdaLearning</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="class-tmlib-lda-ml-fw-mlfw">
+<h2><a class="toc-backref" href="#id87">class tmlib.lda.ML_FW.MLFW</a><a class="headerlink" href="#class-tmlib-lda-ml-fw-mlfw" title="Permalink to this headline">¶</a></h2>
+<p>tmlib.lda.ML_FW. <strong>MLFW</strong> (<em>num_terms, num_topics=100, tau0=1.0, kappa=0.9, iter_infer=50, lda_model=None</em>)</p>
+<p>This class inherits super-class LdaLearning. This used for learning LDA by ML_FW method.</p>
+<div class="section" id="id33">
+<h3><a class="toc-backref" href="#id88">Parameters</a><a class="headerlink" href="#id33" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p class="first"><strong>num_terms</strong>: int,</p>
+<p>Number of unique terms in the corpus (length of the vocabulary).</p>
+</li>
+<li><p class="first"><strong>num_topics</strong>: int, default: 100</p>
+<p>Number of topics shared by the whole corpus.</p>
+</li>
+<li><p class="first"><strong>tau0</strong>: float, default: 1.0</p>
+<p>A (positive) learning parameter that downweights early iterations.</p>
+</li>
+<li><p class="first"><strong>kappa</strong>: float, default: 0.9</p>
+<p>Learning rate: exponential decay rate should be between (0.5, 1.0] to guarantee asymptotic convergence.</p>
+</li>
+<li><p class="first"><strong>iter_infer</strong>: int, default: 50.</p>
+<p>Number of iterations of FW algorithm.</p>
+</li>
+<li><p class="first"><strong>lda_model</strong>: object of class LdaModel, default: None.</p>
+<p>If this is None value, it will be initialized and become a new object. If not, it will be the model learned previously</p>
+</li>
+</ul>
+<p>Note that if you pass the same set of all documents in the corpus every time and set kappa=0 this class can also be used to do batch FW.</p>
+</div>
+<div class="section" id="id34">
+<h3><a class="toc-backref" href="#id89">Attributes</a><a class="headerlink" href="#id34" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><strong>num_terms</strong>: int,</li>
+<li><strong>num_topics</strong>: int,</li>
+<li><strong>tau0</strong> (<span class="math">\(\tau_{0}\)</span>): float,</li>
+<li><strong>kappa</strong> (<span class="math">\(\kappa\)</span>): float,</li>
+<li><strong>iter_infer</strong>: int,</li>
+<li><strong>lda_model</strong>: object of class LdaModel</li>
+</ul>
+</div>
+<div class="section" id="id35">
+<h3><a class="toc-backref" href="#id90">Methods</a><a class="headerlink" href="#id35" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p class="first">__init__ (<em>num_terms, num_topics=100, tau0=1.0, kappa=0.9, iter_infer=50, lda_model=None</em>)</p>
+</li>
+<li><p class="first"><strong>static_online</strong> (<em>wordids, wordcts</em>)</p>
+<p>First does an E step on the mini-batch given in wordids and wordcts, then uses the result of that E step to update the topics in M step.</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><strong>wordids</strong>: A list whose each element is an array (terms), corresponding to a document. Each element of the array is index of a unique term, which appears in the document, in the vocabulary.</li>
+<li><strong>wordcts</strong>: A list whose each element is an array (frequency), corresponding to a document. Each element of the array says how many time the corresponding term in wordids appears in the document.</li>
+</ul>
+<p><strong>Returns</strong>: time the E and M steps have taken and the list of topic mixtures of all documents in the mini-batch.</p>
+</li>
+<li><p class="first"><strong>e_step</strong> (<em>wordids, wordcts</em>)</p>
+<p>Does e step</p>
+<p>Returns topic mixtures and their nonzero elements’ indexes of all documents in the mini-batch.</p>
+<p>Note that, FW can provides sparse solution (theta:topic mixture) when doing inference for each documents. It means that the theta have few non-zero elements whose indexes are stored in list of lists ‘index’.</p>
+</li>
+<li><p class="first"><strong>infer_doc</strong> (<em>ids, cts</em>):</p>
+<p>Does inference for a document using Frank Wolfe algorithm.</p>
+<p><strong>Parameters</strong></p>
+<ul class="simple">
+<li>ids: an element of wordids, corresponding to a document.</li>
+<li>cts: an element of wordcts, corresponding to a document.</li>
+</ul>
+<p><strong>Returns</strong>: inferred theta and list of indexes of non-zero elements of the theta.</p>
+</li>
+<li><p class="first"><strong>sparse_m_step</strong> (<em>wordids, wordcts, theta, index</em>)</p>
+<p>Does m step: update global variables beta, exploiting sparseness of the solutions returned by Frank-Wolfe algorithm from e step as well as that of wordids and wordcts lists.</p>
+</li>
+<li><p class="first"><strong>m_step</strong> (<em>batch_size, wordids, wordcts, theta, index</em>)</p>
+<p>Does m step: update global variables beta without considering the sparseness.</p>
+</li>
+<li><p class="first"><strong>learn_model</strong> (<em>data, save_model_every=0, compute_sparsity_every=0, save_statistic=False, save_top_words_every=0, num_top_words=20, model_folder=’model’</em>)</p>
+<p>Inheritted method</p>
+<p>see class LdaLearning</p>
+</li>
+<li><p class="first"><strong>infer_new_docs</strong> (<em>new_corpus</em>)</p>
+<p>Inheritted method</p>
+<p>see class LdaLearning</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="class-tmlib-lda-ml-ope-mlope">
+<h2><a class="toc-backref" href="#id91">class tmlib.lda.ML_OPE.MLOPE</a><a class="headerlink" href="#class-tmlib-lda-ml-ope-mlope" title="Permalink to this headline">¶</a></h2>
+<p>tmlib.lda.ML_OPE. <strong>MLOPE</strong> (<em>num_terms, num_topics=100, alpha=0.01, tau0=1.0, kappa=0.9, iter_infer=50, lda_model=None</em>)</p>
+<p>This class inherits super-class LdaLearning. This used for learning LDA by Online-OPE method.</p>
+<div class="section" id="id36">
+<h3><a class="toc-backref" href="#id92">Parameters</a><a class="headerlink" href="#id36" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p class="first"><strong>num_terms</strong>: int,</p>
+<p>Number of unique terms in the corpus (length of the vocabulary)</p>
+</li>
+<li><p class="first"><strong>num_topics</strong>: int, default: 100</p>
+<p>Number of topics shared by the whole corpus.</p>
+</li>
+<li><p class="first"><strong>alpha</strong>: float, default: 0.01</p>
+<blockquote>
+<div><p>Hyperparameter for prior on topic mixture theta.</p>
+</div></blockquote>
+</li>
+<li><p class="first"><strong>tau0</strong> (<span class="math">\(\tau_{0}\)</span>): float, default: 1.0</p>
+<p>A (positive) learning parameter that downweights early iterations.</p>
+</li>
+<li><p class="first"><strong>kappa</strong> (<span class="math">\(\kappa\)</span>): float, default: 0.9</p>
+<p>Learning rate: exponential decay rate should be between (0.5, 1.0] to guarantee asymptotic convergence.</p>
+</li>
+<li><p class="first"><strong>iter_infer</strong>: int, default: 50.</p>
+<p>Number of iterations of FW algorithm.</p>
+</li>
+<li><p class="first"><strong>lda_model</strong>: object of class LdaModel, default: None.</p>
+<p>If this is None value, it will be initialized and become a new object. If not, it will be the model learned previously</p>
+</li>
+</ul>
+</div>
+<div class="section" id="id37">
+<h3><a class="toc-backref" href="#id93">Attributes</a><a class="headerlink" href="#id37" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p class="first"><strong>num_docs</strong>: int,</p>
+<p>Number of documents in the corpus.</p>
+</li>
+<li><p class="first"><strong>num_terms</strong>: int,</p>
+</li>
+<li><p class="first"><strong>num_topics</strong>: int,</p>
+</li>
+<li><p class="first"><strong>alpha</strong>: float,</p>
+</li>
+<li><p class="first"><strong>tau0</strong> (<span class="math">\(\tau_{0}\)</span>): float,</p>
+</li>
+<li><p class="first"><strong>kappa</strong> (<span class="math">\(\kappa\)</span>): float,</p>
+</li>
+<li><p class="first"><strong>INF_MAX_ITER</strong>: int,</p>
+</li>
+<li><p class="first"><strong>lda_model</strong>: object of class LdaModel</p>
+</li>
+</ul>
+</div>
+<div class="section" id="id38">
+<h3><a class="toc-backref" href="#id94">Methods</a><a class="headerlink" href="#id38" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p class="first">__init__ (<em>num_terms, num_topics=100, alpha=0.01, tau0=1.0, kappa=0.9, iter_infer=50, lda_model=None</em>)</p>
+</li>
+<li><p class="first"><strong>static_online</strong> (<em>wordids, wordcts</em>)</p>
+<p>First does an E step on the mini-batch given in wordids and wordcts, then uses the result of that E step to update the topics in M step.</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><strong>wordids</strong>: A list whose each element is an array (terms), corresponding to a document. Each element of the array is index of a unique term, which appears in the document, in the vocabulary.</li>
+<li><strong>wordcts</strong>: A list whose each element is an array (frequency), corresponding to a document. Each element of the array says how many time the corresponding term in wordids appears in the document.</li>
+</ul>
+<p><strong>Return</strong>: tuple (time of E-step, time of M-step, theta): time the E and M steps have taken and the list of topic mixtures of all documents in the mini-batch.</p>
+</li>
+<li><p class="first"><strong>e_step</strong> (<em>wordids, wordcts</em>)</p>
+<p>Does e step</p>
+<p><strong>Return</strong>: Returns topic mixtures theta.</p>
+</li>
+<li><p class="first"><strong>infer_doc</strong> (<em>ids, cts</em>):</p>
+<p>Does inference for a document using Online MAP Estimation algorithm.</p>
+<p><strong>Parameters</strong></p>
+<ul class="simple">
+<li>ids: an element of wordids, corresponding to a document.</li>
+<li>cts: an element of wordcts, corresponding to a document.</li>
+</ul>
+<p><strong>Returns</strong>: inferred theta</p>
+</li>
+<li><p class="first"><strong>m_step</strong> (<em>wordids, wordcts, theta</em>)</p>
+<p>Does M-step: update global variables beta.</p>
+</li>
+<li><p class="first"><strong>learn_model</strong> (<em>data, save_model_every=0, compute_sparsity_every=0, save_statistic=False, save_top_words_every=0, num_top_words=20, model_folder=’model’</em>)</p>
+<p>Inheritted method</p>
+<p>see class LdaLearning</p>
+</li>
+<li><p class="first"><strong>infer_new_docs</strong> (<em>new_corpus</em>)</p>
+<p>Inheritted method</p>
+<p>see class LdaLearning</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, DSLab.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.3.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

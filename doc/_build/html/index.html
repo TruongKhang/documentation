@@ -1,0 +1,328 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Welcome to topicmodel-lib’s documentation! &mdash; topicmodel-lib 0.3.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="topicmodel-lib 0.3.1 documentation" href="#"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="#" class="icon icon-home"> topicmodel-lib
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.3.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">Welcome to topicmodel-lib’s documentation!</a></li>
+<li><a class="reference internal" href="#id1">Welcome to topicmodel-lib’s documentation!</a><ul>
+<li><a class="reference internal" href="#features">Features</a></li>
+<li><a class="reference internal" href="#getting-started-in-30s">Getting started in 30s</a></li>
+<li><a class="reference internal" href="#installation">Installation</a></li>
+<li><a class="reference internal" href="#support">Support</a></li>
+<li><a class="reference internal" href="#license">License</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
+</ul>
+</div>
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">topicmodel-lib</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="#">Docs</a> &raquo;</li>
+        
+      <li>Welcome to topicmodel-lib’s documentation!</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="welcome-to-topicmodel-lib-s-documentation">
+<h1>Welcome to topicmodel-lib’s documentation!<a class="headerlink" href="#welcome-to-topicmodel-lib-s-documentation" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="id1">
+<h1>Welcome to topicmodel-lib’s documentation!<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<p>topicmodel-lib is a Python library for <em>topic modeling</em> - a field which provides an efficient way to discover hidden structures/semantics in massive data. Latent Dirichlet Allocation (LDA) is a popular model in this field and we focus on methods for learning LDA by online or stream scheme.</p>
+<div class="section" id="features">
+<h2>Features<a class="headerlink" href="#features" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Our library provides efficient algorithms for learning LDA from large-scale data. It includes the state-of-the-art learning methods at the present</li>
+<li>We also implement Cython code (a programming language that makes writing C extensions for the Python language as easy as Python itself) to increase speed of some algorithms</li>
+<li>We’ve also designed the visualization module to help users understand and explore the result that the model discovers after learning</li>
+</ul>
+</div>
+<div class="section" id="getting-started-in-30s">
+<h2>Getting started in 30s<a class="headerlink" href="#getting-started-in-30s" title="Permalink to this headline">¶</a></h2>
+<p><strong>Training data</strong></p>
+<p>Because we need to learn the model from the massive data, the loading whole of training data into memory is a bad idea. Therefore, the online/streaming learning algorithms are usually preferred in this case. Training data should be stored in a file and with a specific format. Our library supports 3 formats of training data and in here, we’ll demo with <a class="reference external" href="https://github.com/hncuong/topicmodel-lib/tree/master/examples/ap/data">ap corpus</a></p>
+<p><strong>Tutorial</strong></p>
+<p>First, class <cite>DataSet</cite> provides some functions to processing the training data:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">tmlib.datasets</span> <span class="k">import</span> <span class="n">DataSet</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="n">DataSet</span><span class="p">(</span><span class="s1">&#39;ap_train_raw.txt&#39;</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">passes</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">shuffle_every</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Learning LDA by Online VB method (<a class="reference external" href="http://www.cs.columbia.edu/~blei/papers/HoffmanBleiBach2010c.pdf">Hoffman, 2010</a>):</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">tmlib.lda</span> <span class="k">import</span> <span class="n">OnlineVB</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">onlinevb</span> <span class="o">=</span> <span class="n">OnlineVB</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">num_topics</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">model</span> <span class="o">=</span> <span class="n">onlinevb</span><span class="o">.</span><span class="n">learn_model</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>You can see the topics which is discovered by Online VB:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">model</span><span class="o">.</span><span class="n">print_top_words</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">vocab_file</span><span class="p">,</span> <span class="n">display_result</span><span class="o">=</span><span class="s1">&#39;screen&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>For a more in-depth tutorial about topicmodel-lib, you can see documentation.
+In the <a class="reference external" href="https://github.com/hncuong/topicmodel-lib/tree/master/examples">examples folder</a> of the repository, you will see the example code as well as training data. You can run a demo to understand how the library work</p>
+</div>
+<div class="section" id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<p><strong>Dependencies</strong></p>
+<p>To use the library, your computer must installed all of these packages first:</p>
+<ul class="simple">
+<li>Linux OS (Stable on Ubuntu)</li>
+<li>Python version 2 (stable on version 2.7)</li>
+<li>Numpy &gt;= 1.8</li>
+<li>Scipy &gt;= 0.10</li>
+<li>nltk (Natural Language Toolkit)</li>
+<li>Cython</li>
+<li>Pandas &gt;= 0.20</li>
+</ul>
+<p><strong>User Installation</strong></p>
+<ul>
+<li><p class="first">Installing by pip</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ sudo pip install tmlib
+</pre></div>
+</div>
+</li>
+<li><p class="first">Installing by download project</p>
+<p>After download project, you install by running file setup.py in folder topicmodel-lib as follow:</p>
+<p>First, build the necessary packages:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">setup</span><span class="o">.</span><span class="n">py</span> <span class="n">build_ext</span> <span class="o">--</span><span class="n">inplace</span>
+</pre></div>
+</div>
+<p>if you need permission to build:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">python</span> <span class="n">setup</span><span class="o">.</span><span class="n">py</span> <span class="n">build_ext</span> <span class="o">--</span><span class="n">inplace</span>
+</pre></div>
+</div>
+<p>After that, install library into your computer:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">python</span> <span class="n">setup</span><span class="o">.</span><span class="n">py</span> <span class="n">install</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+<div class="section" id="support">
+<h2>Support<a class="headerlink" href="#support" title="Permalink to this headline">¶</a></h2>
+<p>If you have an open-ended or a research question, you can join and contact via:</p>
+<ul class="simple">
+<li><a class="reference external" href="https://groups.google.com/forum/#!forum/dslab-tmlib">Google Group</a></li>
+<li><a class="reference external" href="https://www.facebook.com/groups/465441110326541/?ref=group_browse_new">Facebook Group</a></li>
+</ul>
+</div>
+<div class="section" id="license">
+<h2>License<a class="headerlink" href="#license" title="Permalink to this headline">¶</a></h2>
+<p>The project is licensed under the BSD license.</p>
+<div class="toctree-wrapper compound">
+</div>
+</div>
+</div>
+<div class="section" id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></li>
+<li><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></li>
+<li><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></li>
+</ul>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, DSLab.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.3.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

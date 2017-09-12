@@ -1,0 +1,312 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>2.1. Online-VB &mdash; topicmodel-lib 0.3.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="topicmodel-lib 0.3.1 documentation" href="../index.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> topicmodel-lib
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.3.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">2.1. Online-VB</a><ul>
+<li><a class="reference internal" href="#learning-model-from-training-set">Learning model from training set</a></li>
+<li><a class="reference internal" href="#inference-for-new-documents">Inference for new documents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">topicmodel-lib</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>2.1. Online-VB</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/user_guides/online_vb.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="online-vb">
+<h1>2.1. Online-VB<a class="headerlink" href="#online-vb" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="learning-model-from-training-set">
+<h2>Learning model from training set<a class="headerlink" href="#learning-model-from-training-set" title="Permalink to this headline">¶</a></h2>
+<p>Path of training file is <em>training_file_path</em>. If file is formatted (tf or sq), we need the vocabulary file <em>vocab_file_path</em></p>
+<p>First, import 2 class: <a class="reference external" href="../api/api_lda.rst">OnlineVB</a> and <a class="reference external" href="../api/api_dataset.rst">DataSet</a></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tmlib.lda.Online_VB</span> <span class="k">import</span> <span class="n">OnlineVB</span>
+<span class="kn">from</span> <span class="nn">tmlib.datasets.dataset</span> <span class="k">import</span> <span class="n">DataSet</span>
+</pre></div>
+</div>
+<p>Loading data:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1"># if training file is raw text</span>
+<span class="n">training_data</span> <span class="o">=</span> <span class="n">DataSet</span><span class="p">(</span><span class="n">traing_file_path</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">passes</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">shuffle_every</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Or if training file is formatted (term-frequency or term-sequence), we need one more parameter: file vocabulary <em>vocab_file_path</em></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1"># if training file is formatted</span>
+<span class="n">training_data</span> <span class="o">=</span> <span class="n">DataSet</span><span class="p">(</span><span class="n">training_file_path</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">passes</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">shuffle_every</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">vocab_file</span><span class="o">=</span><span class="n">vocab_file_path</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The <em>batch_size</em> controls how many documents are processed at a time in the training algorithm. Increasing batch_size will speed up training, at least as long as the chunk of documents easily fit into memory.</p>
+<p><em>passes</em> controls how often we train the model on the entire corpus. It also controls number of iterations in the algorithm.</p>
+<p><em>shuffle_every</em> controls the stochastic property in the algorithm. Because the corpus is saved in a file, and the mini-batches are read sequentially from that file. So to have the stochastic method, after some passes, we need to shuffle all of documents in corpus. Here if we set shuffle_every=2, it means after pass over corpus 2 time, we’ll shuffle corpus one time</p>
+<p>Next, we’ll create object of class OnlineVB to implement learning model</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1"># get number words in file vocabulary</span>
+<span class="n">num_terms</span> <span class="o">=</span> <span class="n">training_data</span><span class="o">.</span><span class="n">get_num_terms</span><span class="p">()</span>
+
+<span class="c1"># default settings</span>
+<span class="n">obj_onlvb</span> <span class="o">=</span> <span class="n">OnlineVB</span><span class="p">(</span><span class="n">num_terms</span><span class="p">)</span>
+
+<span class="c1"># or change settings as follow:</span>
+<span class="c1"># obj_onlvb = OnlineVB(num_terms, num_topics=50, alpha=0.02, eta=0.02, kappa=0.8, conv_infer=0.001, iter_infer=60)</span>
+</pre></div>
+</div>
+<p>Learning model by call function learn_model() of object OnlineVB</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">obj_model</span> <span class="o">=</span> <span class="n">obj_onlvb</span><span class="o">.</span><span class="n">learn_model</span><span class="p">(</span><span class="n">training_data</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>There are some parameters in method learn_model we need to attend: <em>save_model_every</em>, <em>compute_sparsity_every</em>, <em>save_statistic</em>, <em>save_top_words_every</em>, <em>num_top_words</em>, <em>model_folder</em> (folder we save the parameters). It means how often we save: the model (<span class="math">\(\lamda\)</span>), the statistics of method such as time for inference, time for learning in each iteration or document sparsity or top words of each topic in the learning process. In the call function above, this parameters won’t be saved by default (<em>save_model_every=0, compute_sparsity_every=0, save_statistic=False, save_top_words_every=0, num_top_words=20, model_folder=’model’</em>). (See class <a class="reference external" href="../api/api_lda.rst">LdaLearning</a> for detail)</p>
+<p>The returned result is a object of class <a class="reference external" href="../api/api_lda.rst">LdaModel</a> . The obj_model.model is value of <span class="math">\(\lambda\)</span> learned from training_data.</p>
+</div>
+<div class="section" id="inference-for-new-documents">
+<h2>Inference for new documents<a class="headerlink" href="#inference-for-new-documents" title="Permalink to this headline">¶</a></h2>
+<p>With the learned model, we need inference for new corpus with path file is <em>new_file_path</em>. Remember that in this part, we definitely need the file vocabulary used in training phase named <em>vocab_file_path</em>.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tmlib.datasets</span> <span class="k">import</span> <span class="n">base</span>
+<span class="kn">from</span> <span class="nn">tmlib.lda.Online_VB</span> <span class="k">import</span> <span class="n">OnlineVB</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+</pre></div>
+</div>
+<p>First, we need check the format of data</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">input_format</span> <span class="o">=</span> <span class="n">base</span><span class="o">.</span><span class="n">check_input_format</span><span class="p">(</span><span class="n">new_file_path</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>If format of data is raw text, we need to preprocess it</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">input_format</span> <span class="o">==</span> <span class="n">base</span><span class="o">.</span><span class="n">DataFormat</span><span class="o">.</span><span class="n">RAW_TEXT</span><span class="p">:</span>
+    <span class="c1"># load all of documents to memory with string format</span>
+    <span class="n">docs</span> <span class="o">=</span> <span class="n">base</span><span class="o">.</span><span class="n">load_batch_raw_text</span><span class="p">(</span><span class="n">new_file_path</span><span class="p">)</span>
+    <span class="c1"># read file vocabulary and save in a dictionary structure of python</span>
+    <span class="n">vocab_dict_format</span> <span class="o">=</span> <span class="n">base</span><span class="o">.</span><span class="n">read_vocab</span><span class="p">(</span><span class="n">vocab_file_path</span><span class="p">)</span>
+    <span class="c1"># preprocessing corpus for inference</span>
+    <span class="n">new_corpus</span> <span class="o">=</span> <span class="n">base</span><span class="o">.</span><span class="n">parse_doc_list</span><span class="p">(</span><span class="n">docs</span><span class="p">,</span> <span class="n">vocab_dict_format</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>If the corpus is formatted:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">else</span><span class="p">:</span>
+    <span class="n">new_corpus</span> <span class="o">=</span> <span class="n">base</span><span class="o">.</span><span class="n">load_batch_formatted_from_file</span><span class="p">(</span><span class="n">new_file_path</span><span class="p">)</span>
+<span class="c1"># learned_model is a object of class LdaModel</span>
+<span class="c1"># loading the model which is learned in training phase from file</span>
+<span class="n">learned_model</span> <span class="o">=</span> <span class="n">LdaModel</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">learned_model</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="o">&lt;</span><span class="n">path</span> <span class="n">to</span> <span class="n">file</span> <span class="n">model</span><span class="o">-</span><span class="k">lambda</span> <span class="n">learned</span><span class="o">&gt;</span><span class="p">)</span>
+<span class="c1"># get number of unique terms</span>
+<span class="n">num_terms</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="n">vocab_file_path</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">readlines</span><span class="p">())</span>
+<span class="c1"># calculate topic mixtures</span>
+<span class="n">obj_onlvb</span> <span class="o">=</span> <span class="n">OnlineVB</span><span class="p">(</span><span class="n">num_terms</span><span class="p">,</span> <span class="n">lda_model</span><span class="o">=</span><span class="n">learned_model</span><span class="p">)</span>
+<span class="n">theta</span> <span class="o">=</span> <span class="n">obj_onlvb</span><span class="o">.</span><span class="n">infer_new_docs</span><span class="p">(</span><span class="n">new_corpus</span><span class="p">)</span>
+<span class="c1"># we can write topic mixtures to a file</span>
+<span class="n">base</span><span class="o">.</span><span class="n">write_topic_mixtures</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="s1">&#39;topic_mixtures.txt&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Note:</strong></p>
+<ul class="simple">
+<li>learned_model may be loaded from file which is saved after learning phase. See section 3 to know how to load or save a model.</li>
+<li>We also continually learn model by call function <em>learn_model</em>. For example: obj_onlvb.learn_model(training_data).</li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, DSLab.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.3.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

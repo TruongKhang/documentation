@@ -1,0 +1,376 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>User guide &mdash; topicmodel-lib 0.3.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="topicmodel-lib 0.3.1 documentation" href="index.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> topicmodel-lib
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.3.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">User guide</a><ul>
+<li><a class="reference internal" href="#working-with-data-input">1. Working with data input</a><ul>
+<li><a class="reference internal" href="#preprocessing">1.1. Preprocessing</a></li>
+<li><a class="reference internal" href="#loading-a-mini-batch-from-corpus">1.2. Loading a “mini-batch” from corpus</a></li>
+<li><a class="reference internal" href="#loading-a-minibatch-from-wikipedia-website">1.3. Loading a minibatch from Wikipedia website</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#stochastic-methods-for-learning-lda-from-large-corpora">2. Stochastic methods for learning LDA from large corpora</a><ul>
+<li><a class="reference internal" href="#online-vb">2.1. Online-VB</a></li>
+<li><a class="reference internal" href="#online-cvb0">2.2. Online-CVB0</a></li>
+<li><a class="reference internal" href="#online-cgs">2.3. Online-CGS</a></li>
+<li><a class="reference internal" href="#online-ope">2.4. Online-OPE</a></li>
+<li><a class="reference internal" href="#online-fw">2.5. Online-FW</a></li>
+<li><a class="reference internal" href="#streaming-vb">2.6. Streaming-VB</a></li>
+<li><a class="reference internal" href="#streaming-ope">2.7. Streaming-OPE</a></li>
+<li><a class="reference internal" href="#streaming-fw">2.8. Streaming-FW</a></li>
+<li><a class="reference internal" href="#ml-cgs">2.9. ML-CGS</a></li>
+<li><a class="reference internal" href="#ml-ope">2.10. ML-OPE</a></li>
+<li><a class="reference internal" href="#ml-fw">2.11. ML-FW</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#how-to-save-or-load-model">3. How to save or load model</a><ul>
+<li><a class="reference internal" href="#save-model-or">Save model (<span class="math">\(\lambda\)</span> or <span class="math">\(\beta\)</span>)</a></li>
+<li><a class="reference internal" href="#load-model-from-a-file">Load model from a file</a></li>
+<li><a class="reference internal" href="#save-top-words-of-topics">Save top words of topics</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">topicmodel-lib</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>User guide</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/user_guide.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="user-guide">
+<h1>User guide<a class="headerlink" href="#user-guide" title="Permalink to this headline">¶</a></h1>
+<p>This document contains a description of all stochastic algorithms for learning LDA, and it also contains some tutorials about how to use the useful functions or methods in the library for many purposes. To understand clearly this document, user need to read <a class="reference external" href="./quick_start.rst">quick start</a> document and <a class="reference external" href="./LatentDirichletAllocation.rst">lda model</a> first.</p>
+<div class="section" id="working-with-data-input">
+<h2><a class="reference external" href="user_guides/work_data_input.rst">1. Working with data input</a><a class="headerlink" href="#working-with-data-input" title="Permalink to this headline">¶</a></h2>
+<p>This section includes some tutorials for process data input of model (documents - corpus). This corpus maybe supplied by user, or available copus from <a class="reference external" href="https://en.wikipedia.org/wiki/Main_Page">wikipedia</a> website (refer to <a class="reference external" href="https://www.cs.princeton.edu/~blei/papers/HoffmanBleiBach2010b.pdf">paper</a> and <a class="reference external" href="https://github.com/blei-lab/onlineldavb">source code</a>). The library will support preprocessing, converting format of input for specific learning method.</p>
+<div class="section" id="preprocessing">
+<h3><a class="reference external" href="user_guides/work_data_input.rst#preprocessing">1.1. Preprocessing</a><a class="headerlink" href="#preprocessing" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="loading-a-mini-batch-from-corpus">
+<h3><a class="reference external" href="user_guides/work_data_input.rst#loading-a-mini-batch-from-corpus">1.2. Loading a “mini-batch” from corpus</a><a class="headerlink" href="#loading-a-mini-batch-from-corpus" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="loading-a-minibatch-from-wikipedia-website">
+<h3><a class="reference external" href="user_guides/work_data_input.rst#loading-a-minibatch-from-wikipedia-website">1.3. Loading a minibatch from Wikipedia website</a><a class="headerlink" href="#loading-a-minibatch-from-wikipedia-website" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+<div class="section" id="stochastic-methods-for-learning-lda-from-large-corpora">
+<h2>2. Stochastic methods for learning LDA from large corpora<a class="headerlink" href="#stochastic-methods-for-learning-lda-from-large-corpora" title="Permalink to this headline">¶</a></h2>
+<p>Our library is deployed with 5 inference methods: VB <a class="footnote-reference" href="#id30" id="id5">[3]</a>, CVB0 <a class="footnote-reference" href="#id31" id="id6">[4]</a>, CGS <a class="footnote-reference" href="#id32" id="id7">[5]</a>, <a class="reference external" href="https://arxiv.org/abs/1512.03308">OPE</a>, <a class="reference external" href="https://arxiv.org/abs/1512.03300">FW</a> and apply with online scheme, stream scheme or regularized online learning</p>
+<ul class="simple">
+<li>Online learning includes methods: Online-VB <a class="footnote-reference" href="#id29" id="id8">[2]</a>, Online-CVB0 <a class="footnote-reference" href="#id33" id="id9">[6]</a>, Online-CGS <a class="footnote-reference" href="#id32" id="id10">[5]</a>, Online-OPE, Online-FW</li>
+<li>Streaming learning includes: Streaming-VB <a class="footnote-reference" href="#id34" id="id11">[7]</a>, Streaming-OPE, Streaming-FW</li>
+<li>Regularized online learning with CGS, FW, OPE: ML-CGS, ML-FW, ML-OPE.</li>
+</ul>
+<p><strong>Default setting parameters</strong>:</p>
+<ul class="simple">
+<li><em>Model paramters</em>: num_topics = 100; <span class="math">\(\alpha\)</span> = 0.01; <span class="math">\(\eta\)</span> = 0.01. Such a choice of (<span class="math">\(\alpha\)</span>, <span class="math">\(\eta\)</span>) has been observed to work well in many previous studies</li>
+<li><em>Inference parameters</em>: at most 50 iterations were allowed for OPE and VB to do inference. We terminated VB if the relative improvement of the lower bound on likelihood is not better than 10−4. 50 samples were used in CGS for which the first 25 were discarded and the remaining were used to approximate the posterior distribution. 50 iterations were used to do inference in CVB0, in which the first 25 iterations were burned in. Those number of samples/iterations are often enough to get a good inference solution according to <a class="footnote-reference" href="#id32" id="id12">[5]</a> , <a class="footnote-reference" href="#id33" id="id13">[6]</a></li>
+<li><em>Learning parameters</em>: <span class="math">\(\kappa\)</span> = 0.9; <span class="math">\(\tau\)</span> = 1; in addition to, <span class="math">\(\beta\)</span> (or <span class="math">\(\lambda\)</span>) is instructed randomly with a specific distribution, depend on each method learning.</li>
+<li>User can change value of setting parameters above when object of method is created. (see example below)</li>
+</ul>
+<div class="section" id="online-vb">
+<h3><a class="reference external" href="user_guides/online_vb.rst">2.1. Online-VB</a><a class="headerlink" href="#online-vb" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="online-cvb0">
+<h3><a class="reference external" href="user_guides/online_cvb0.rst">2.2. Online-CVB0</a><a class="headerlink" href="#online-cvb0" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="online-cgs">
+<h3><a class="reference external" href="user_guides/online_cgs.rst">2.3. Online-CGS</a><a class="headerlink" href="#online-cgs" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="online-ope">
+<h3><a class="reference external" href="user_guides/online_ope.rst">2.4. Online-OPE</a><a class="headerlink" href="#online-ope" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="online-fw">
+<h3><a class="reference external" href="user_guides/online_fw.rst">2.5. Online-FW</a><a class="headerlink" href="#online-fw" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="streaming-vb">
+<h3><a class="reference external" href="user_guides/streaming_vb.rst">2.6. Streaming-VB</a><a class="headerlink" href="#streaming-vb" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="streaming-ope">
+<h3><a class="reference external" href="user_guides/streaming_ope.rst">2.7. Streaming-OPE</a><a class="headerlink" href="#streaming-ope" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="streaming-fw">
+<h3><a class="reference external" href="user_guides/streaming_fw.rst">2.8. Streaming-FW</a><a class="headerlink" href="#streaming-fw" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="ml-cgs">
+<h3><a class="reference external" href="user_guides/ml_cgs.rst">2.9. ML-CGS</a><a class="headerlink" href="#ml-cgs" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="ml-ope">
+<h3><a class="reference external" href="user_guides/ml_ope.rst">2.10. ML-OPE</a><a class="headerlink" href="#ml-ope" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="ml-fw">
+<h3><a class="reference external" href="user_guides/ml_fw.rst">2.11. ML-FW</a><a class="headerlink" href="#ml-fw" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+<div class="section" id="how-to-save-or-load-model">
+<h2><a class="reference external" href="user_guides/load_save_model.rst">3. How to save or load model</a><a class="headerlink" href="#how-to-save-or-load-model" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="save-model-or">
+<h3><a class="reference external" href="user_guides/load_save_model.rst#save-model-lambda-or-beta">Save model</a> (<span class="math">\(\lambda\)</span> or <span class="math">\(\beta\)</span>)<a class="headerlink" href="#save-model-or" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="load-model-from-a-file">
+<h3><a class="reference external" href="user_guides/load_save_model.rst#load-model-from-a-file">Load model from a file</a><a class="headerlink" href="#load-model-from-a-file" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="save-top-words-of-topics">
+<h3><a class="reference external" href="user_guides/load_save_model.rst#save-top-words-of-topics">Save top words of topics</a><a class="headerlink" href="#save-top-words-of-topics" title="Permalink to this headline">¶</a></h3>
+<table class="docutils footnote" frame="void" id="id28" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[1]</td><td>Care and Feeding of Topic Models: Problems, Diagnostics, and Improvements Jordan Boyd-Graber, David Mimno, and David Newman. In Handbook of Mixed Membership Models and Their Applications, CRC/Chapman Hall, 2014.</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id29" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id8">[2]</a></td><td>M.D. Hoffman, D.M. Blei, C. Wang, and J. Paisley, “Stochastic variational inference,” The Journal of Machine Learning Research, vol. 14, no. 1, pp. 1303–1347, 2013.</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id30" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id5">[3]</a></td><td>D.M. Blei, A.Y. Ng, and M.I. Jordan, “Latent dirichlet allocation,” Journal of Machine Learning Research, vol. 3, no. 3, pp. 993–1022, 2003.</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id31" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id6">[4]</a></td><td>Asuncion, M. Welling, P. Smyth, and Y. Teh, “On smoothing and inference for topic models,” in Proceedings of the Twenty-Fifth Conference on Uncertainty in Artificial Intelligence, 2009, pp. 27–34.</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id32" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[5]</td><td><em>(<a class="fn-backref" href="#id7">1</a>, <a class="fn-backref" href="#id10">2</a>, <a class="fn-backref" href="#id12">3</a>)</em> D.Mimno, M. D. Hoffman, and D. M. Blei, “Sparse stochastic inference for latent dirichlet allocation,” in Proceedings of the 29th Annual International Conference on Machine Learning, 2012.</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id33" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[6]</td><td><em>(<a class="fn-backref" href="#id9">1</a>, <a class="fn-backref" href="#id13">2</a>)</em> James Foulds, Levi Boyles, Christopher DuBois, Padhraic Smyth, and Max Welling. Stochastic collapsed variational bayesian inference for latent dirichlet allocation. In Proceedings of the 19th ACM SIGKDD International Conference on Knowledge Discovery and Data Mining, pages 446–454. ACM, 2013.</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id34" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id11">[7]</a></td><td>Tamara Broderick, Nicholas Boyd, Andre Wibisono, Ashia C Wilson, and Michael Jordan. Streaming variational bayes. In Advances in Neural Information Processing Systems, pages 1727–1735, 2013.</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id35" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[8]</td><td>Khoat Than and Tu Bao Ho, “Fully sparse topic models”. European Conference on Machine Learning and Principles and Practice of Knowledge Discovery in Databases (ECML PKDD), Bristol, UK. Vol. 7523 of Lecture Notes in Computer Science, Springer, pages 490-505, 2012.</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, DSLab.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.3.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

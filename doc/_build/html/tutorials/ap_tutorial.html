@@ -1,0 +1,531 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Learning LDA and inference with an example dataset &mdash; topicmodel-lib 0.3.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="topicmodel-lib 0.3.1 documentation" href="../index.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> topicmodel-lib
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.3.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">Learning LDA and inference with an example dataset</a><ul>
+<li><a class="reference internal" href="#data">Data</a></li>
+<li><a class="reference internal" href="#learning">Learning</a></li>
+<li><a class="reference internal" href="#inference-for-new-corpus">Inference for new corpus</a></li>
+</ul>
+</li>
+</ul>
+</div>
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">topicmodel-lib</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>Learning LDA and inference with an example dataset</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/tutorials/ap_tutorial.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="learning-lda-and-inference-with-an-example-dataset">
+<h1><a class="toc-backref" href="#id1">Learning LDA and inference with an example dataset</a><a class="headerlink" href="#learning-lda-and-inference-with-an-example-dataset" title="Permalink to this headline">¶</a></h1>
+<p>The purpose of this tutorial is to show you how to train the LDA model on a specific data and after that, use this model to infer a new data. In this library, we designed a lot of learning methods but those methods are similar in the way of using. Therefore, we will select a detailed method to guide all of you. If you want to go into detail , you can find out more these methods in <a class="reference external" href="../user_guide.rst">user guide</a> document.</p>
+<div class="contents topic" id="contents">
+<p class="topic-title first">Contents</p>
+<ul class="simple">
+<li><a class="reference internal" href="#learning-lda-and-inference-with-an-example-dataset" id="id1">Learning LDA and inference with an example dataset</a><ul>
+<li><a class="reference internal" href="#data" id="id2">Data</a></li>
+<li><a class="reference internal" href="#learning" id="id3">Learning</a></li>
+<li><a class="reference internal" href="#inference-for-new-corpus" id="id4">Inference for new corpus</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="data">
+<h2><a class="toc-backref" href="#id2">Data</a><a class="headerlink" href="#data" title="Permalink to this headline">¶</a></h2>
+<p>We will be using AP corpus for this tutorial. Although this is a small dataset, but we still use this corpus for convenient. This corpus is also used in paper LDA model (Blei, 2003). If you’re following this tutorial to practice about LDA, you can pick a other corpus that you are familiar with.</p>
+<p>The datasets are available in folder <a class="reference external" href="../../examples/ap">topicmodel-lib/examples/ap</a> . This folder contains: (you must read <a class="reference external" href="../quick_start.rst#data-input-format">data format</a> used in this library first)</p>
+<ul class="simple">
+<li>Files <strong>ap_train_raw.txt</strong> and <strong>ap_infer_raw.txt</strong> are the raw text data, file <a class="reference external" href="../../examples/ap/ap_train_raw.txt">ap_train_raw.txt</a> inludes 2000 articles in AP corpus - used for training LDA, file <a class="reference external" href="../../examples/ap/ap_infer_raw.txt">ap_infer_raw.txt</a> includes 50 articles - used for inference.</li>
+<li>Files <a class="reference external" href="../../examples/ap/ap_train.txt">ap_train.txt</a> and <a class="reference external" href="../../examples/ap/ap_infer.txt">ap_infer.txt</a> are the formatted data (here is term-frequency format) and a file vocabulary <a class="reference external" href="../../examples/ap/vocab.txt">vocab.txt</a> is used for these files.</li>
+</ul>
+<p>Here, we’ll demo with both of group data above to help you understand clearly about
+the way of working with a specific data input.</p>
+</div>
+<div class="section" id="learning">
+<h2><a class="toc-backref" href="#id3">Learning</a><a class="headerlink" href="#learning" title="Permalink to this headline">¶</a></h2>
+<p>If data input is raw text, it must be pre-processed first. You can infer how to implement <a class="reference external" href="../user_guides/work_data_input.rst#preprocessing">preprocessing</a> step in user guide documentation. We will demo with the learning method <a class="reference external" href="../user_guides/online_vb.rst">Online VB</a></p>
+<p>First, we’ll create a object used for load data</p>
+<p><strong>In[1]</strong>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tmlib.datasets.dataset</span> <span class="k">import</span> <span class="n">DataSet</span>
+
+<span class="c1"># Create object, file raw text will be pre-processed in this statement</span>
+<span class="n">training_data</span> <span class="o">=</span> <span class="n">DataSet</span><span class="p">(</span><span class="s1">&#39;ap/ap_train_raw.txt&#39;</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="n">passes</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">shuffle_every</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="c1"># or if data input isn&#39;t raw text format, you need add parameter vocab_file, for example</span>
+<span class="c1"># training_data = DataSet(&#39;ap/ap_train.txt&#39;, 100, passes=10, shuffle_every=2, vocab_file=&#39;ap/vocab.txt&#39;)</span>
+</pre></div>
+</div>
+<p>The parameters <strong>passes</strong> or <strong>shuffle_every</strong> are described in <a class="reference external" href="../user_guides/work_data_input.rst#loading-a-mini-batch-from-corpus">here</a> . By default, you can see path of file formatted and file vocabulary after preprocessing as follow:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1"># By default, the format of this file is term-frequency</span>
+<span class="nb">print</span> <span class="s1">&#39;Path of file input after preprocessing: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span><span class="n">training_data</span><span class="o">.</span><span class="n">data_path</span>
+<span class="nb">print</span> <span class="s1">&#39;Path of file vocabulary extracted: $s&#39;</span> <span class="o">%</span><span class="n">training_data</span><span class="o">.</span><span class="n">vocab_file</span>
+</pre></div>
+</div>
+<p>The output will be:</p>
+<p><cite>Path of file input after preprocessing: /home/kde/tmlib_data/ap_train_raw/ap_train_raw.tf</cite></p>
+<p><cite>Path of file vocabulary extracted: /home/kde/tmlib_data/ap_train_raw/vocab.txt</cite></p>
+<p>After create object to load data, we need set value for <a class="reference external" href="../api/api_lda.rst#class-tmlib-lda-online-vb-onlinevb">parameters</a> . By default, number of topics is 100, but with AP corpus (a small dataset) We’ll set: num_topics = 20 and alpha = 0.05 and eta = 0.05. Other parameters such as: tau0, kappa, conv_infer, iter_infer, lda_model is set in <a class="reference external" href="../user_guide.rst#stochastic-methods-for-learning-lda-from-large-corpora">default</a></p>
+<p><strong>In[2]</strong>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tmlib.lda.Online_VB</span> <span class="k">import</span> <span class="n">OnlineVB</span>
+
+<span class="c1"># get number of unique terms</span>
+<span class="n">num_terms</span> <span class="o">=</span> <span class="n">training_data</span><span class="o">.</span><span class="n">get_num_terms</span><span class="p">()</span>
+<span class="c1">#create object and setting parameters</span>
+<span class="n">obj_onlvb</span> <span class="o">=</span> <span class="n">OnlineVB</span><span class="p">(</span><span class="n">num_terms</span><span class="p">,</span> <span class="n">num_topics</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">eta</span><span class="o">=</span><span class="mf">0.05</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>After that, we learn model as follow:</p>
+<p><strong>In[3]</strong>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1"># learn model, model and statistics are saved in folder model_vb</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">obj_onlvb</span><span class="o">.</span><span class="n">learn_model</span><span class="p">(</span><span class="n">training_data</span><span class="p">,</span> <span class="n">save_model_every</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">compute_sparsity_every</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+                              <span class="n">save_statistic</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">save_top_words_every</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">num_top_words</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+                              <span class="n">model_folder</span><span class="o">=</span><span class="s1">&#39;model_vb&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>See class <a class="reference external" href="../api/api_lda.rst#class-tmlib-lda-ldalearning-ldalearning">LdaLearning</a> to know what the above parameters mean. Because <cite>passes</cite> = 10 and training data includes 2200 documents, size of a mini-batch is 100 documents. Thus, the algorithm will be stopped after 220 iterations. At the 4th, 9th, 14th, …, 219th loop, the value of <span class="math">\(\lambda\)</span>, sparsity document, time and top words of each topic are saved. The folder <strong>model_vb</strong> inludes these files:</p>
+<ul class="simple">
+<li>model_batch4.npy, model_batch9.npy, model_batch14.npy, … , model_batch219.npy. These files save value of <span class="math">\(\lambda\)</span></li>
+<li>top_words_batch4.txt, top_words_batch9.txt, …, top_words_batch219.txt to save top 10 words of topics</li>
+<li>file sparsity220.csv and time220.csv save respectly document sparsity and time (time of E-step, time M-step in each iteration)</li>
+</ul>
+<p>Finally, we save the value of <span class="math">\(\lambda\)</span>, display top 10 words of topics as follow:</p>
+<p><strong>In[4]</strong>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1"># save lambda to a file text</span>
+<span class="n">model</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s1">&#39;model_vb/lambda_final.txt&#39;</span><span class="p">,</span> <span class="n">file_type</span><span class="o">=</span><span class="s1">&#39;text&#39;</span><span class="p">)</span>
+<span class="c1"># Estimating beta by normalize lambda</span>
+<span class="n">model</span><span class="o">.</span><span class="n">normalize</span><span class="p">()</span>
+<span class="c1"># Display top 10 words of 10 topic</span>
+<span class="n">model</span><span class="o">.</span><span class="n">print_top_words</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">training_data</span><span class="o">.</span><span class="n">vocab_file</span><span class="p">,</span> <span class="n">show_topics</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="c1"># or you can show all of topics by</span>
+<span class="c1"># model.print_topc_words(10, training_data.vocab_file)</span>
+<span class="c1"># or you can save to a file named top_words_final.txt</span>
+<span class="c1"># model.print_top_words(10, training_data.vocab_file, result_file=&#39;model_vb/top_words_final.txt&#39;)</span>
+</pre></div>
+</div>
+<p><strong>Output</strong>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">topic</span> <span class="mi">000</span>
+   <span class="n">year</span>                <span class="mf">0.018302</span>
+   <span class="n">percent</span>             <span class="mf">0.014672</span>
+   <span class="n">million</span>             <span class="mf">0.010303</span>
+   <span class="n">billion</span>             <span class="mf">0.006932</span>
+   <span class="n">company</span>             <span class="mf">0.006555</span>
+   <span class="n">department</span>      <span class="mf">0.005005</span>
+   <span class="n">tax</span>                 <span class="mf">0.004187</span>
+   <span class="n">workers</span>             <span class="mf">0.003893</span>
+   <span class="n">people</span>              <span class="mf">0.003462</span>
+   <span class="n">agreement</span>           <span class="mf">0.003264</span>
+
+<span class="n">topic</span> <span class="mi">001</span>
+   <span class="n">bush</span>                <span class="mf">0.020104</span>
+   <span class="n">soviet</span>              <span class="mf">0.013548</span>
+   <span class="n">gorbachev</span>           <span class="mf">0.010231</span>
+   <span class="n">president</span>           <span class="mf">0.009194</span>
+   <span class="n">party</span>               <span class="mf">0.008124</span>
+   <span class="n">reagan</span>              <span class="mf">0.005903</span>
+   <span class="n">states</span>              <span class="mf">0.005415</span>
+   <span class="n">dukakis</span>             <span class="mf">0.004877</span>
+   <span class="n">campaign</span>            <span class="mf">0.004796</span>
+   <span class="n">people</span>              <span class="mf">0.004327</span>
+
+<span class="n">topic</span> <span class="mi">002</span>
+   <span class="n">people</span>              <span class="mf">0.006942</span>
+   <span class="n">military</span>            <span class="mf">0.004494</span>
+   <span class="n">government</span>                  <span class="mf">0.004401</span>
+   <span class="n">state</span>               <span class="mf">0.004034</span>
+   <span class="n">iraq</span>                <span class="mf">0.004022</span>
+   <span class="n">year</span>                <span class="mf">0.004007</span>
+   <span class="n">police</span>              <span class="mf">0.003847</span>
+   <span class="n">panama</span>              <span class="mf">0.003385</span>
+   <span class="n">president</span>           <span class="mf">0.003355</span>
+   <span class="n">officials</span>           <span class="mf">0.003125</span>
+
+<span class="n">topic</span> <span class="mi">003</span>
+   <span class="n">people</span>              <span class="mf">0.008578</span>
+   <span class="n">year</span>                <span class="mf">0.005679</span>
+   <span class="n">government</span>                  <span class="mf">0.004368</span>
+   <span class="n">state</span>               <span class="mf">0.004326</span>
+   <span class="n">police</span>              <span class="mf">0.004302</span>
+   <span class="n">years</span>               <span class="mf">0.004258</span>
+   <span class="n">mrs</span>                 <span class="mf">0.003757</span>
+   <span class="n">time</span>                <span class="mf">0.003624</span>
+   <span class="n">president</span>           <span class="mf">0.003452</span>
+   <span class="n">house</span>               <span class="mf">0.003087</span>
+
+<span class="n">topic</span> <span class="mi">004</span>
+   <span class="n">dukakis</span>             <span class="mf">0.006863</span>
+   <span class="n">state</span>               <span class="mf">0.004504</span>
+   <span class="n">bush</span>                <span class="mf">0.004324</span>
+   <span class="n">democratic</span>                  <span class="mf">0.003690</span>
+   <span class="n">year</span>                <span class="mf">0.003658</span>
+   <span class="n">campaign</span>            <span class="mf">0.003655</span>
+   <span class="n">made</span>                <span class="mf">0.003281</span>
+   <span class="n">people</span>              <span class="mf">0.003174</span>
+   <span class="n">years</span>               <span class="mf">0.003081</span>
+   <span class="n">poll</span>                <span class="mf">0.002968</span>
+
+<span class="n">topic</span> <span class="mi">005</span>
+   <span class="n">year</span>                <span class="mf">0.007710</span>
+   <span class="n">years</span>               <span class="mf">0.004193</span>
+   <span class="n">time</span>                <span class="mf">0.003738</span>
+   <span class="n">federal</span>             <span class="mf">0.003703</span>
+   <span class="n">company</span>             <span class="mf">0.003479</span>
+   <span class="n">state</span>               <span class="mf">0.003247</span>
+   <span class="n">people</span>              <span class="mf">0.003153</span>
+   <span class="n">plant</span>               <span class="mf">0.003085</span>
+   <span class="n">million</span>             <span class="mf">0.002967</span>
+   <span class="n">service</span>             <span class="mf">0.002868</span>
+
+<span class="n">topic</span> <span class="mi">006</span>
+   <span class="n">year</span>                <span class="mf">0.005328</span>
+   <span class="n">aids</span>                <span class="mf">0.005280</span>
+   <span class="n">percent</span>             <span class="mf">0.005178</span>
+   <span class="n">government</span>                  <span class="mf">0.004817</span>
+   <span class="n">united</span>              <span class="mf">0.004670</span>
+   <span class="n">years</span>               <span class="mf">0.004621</span>
+   <span class="n">study</span>               <span class="mf">0.004392</span>
+   <span class="n">children</span>            <span class="mf">0.003958</span>
+   <span class="n">people</span>              <span class="mf">0.003840</span>
+   <span class="n">states</span>              <span class="mf">0.003833</span>
+
+<span class="n">topic</span> <span class="mi">007</span>
+   <span class="n">market</span>              <span class="mf">0.016671</span>
+   <span class="n">stock</span>               <span class="mf">0.013789</span>
+   <span class="n">dollar</span>              <span class="mf">0.013394</span>
+   <span class="n">prices</span>              <span class="mf">0.012173</span>
+   <span class="n">trading</span>             <span class="mf">0.009714</span>
+   <span class="n">cents</span>               <span class="mf">0.009282</span>
+   <span class="n">late</span>                <span class="mf">0.008945</span>
+   <span class="n">lower</span>               <span class="mf">0.008769</span>
+   <span class="n">exchange</span>            <span class="mf">0.008498</span>
+   <span class="n">york</span>                <span class="mf">0.008292</span>
+
+<span class="n">topic</span> <span class="mi">008</span>
+   <span class="n">years</span>               <span class="mf">0.005193</span>
+   <span class="n">people</span>              <span class="mf">0.004822</span>
+   <span class="n">year</span>                <span class="mf">0.004732</span>
+   <span class="n">president</span>           <span class="mf">0.003828</span>
+   <span class="n">time</span>                <span class="mf">0.003778</span>
+   <span class="n">government</span>                  <span class="mf">0.003334</span>
+   <span class="n">officials</span>           <span class="mf">0.003080</span>
+   <span class="n">states</span>              <span class="mf">0.003017</span>
+   <span class="n">state</span>               <span class="mf">0.002958</span>
+   <span class="n">department</span>                  <span class="mf">0.002893</span>
+
+<span class="n">topic</span> <span class="mi">009</span>
+   <span class="n">police</span>              <span class="mf">0.010539</span>
+   <span class="n">people</span>              <span class="mf">0.006032</span>
+   <span class="n">hospital</span>            <span class="mf">0.005449</span>
+   <span class="n">year</span>                <span class="mf">0.004424</span>
+   <span class="n">city</span>                <span class="mf">0.004294</span>
+   <span class="n">care</span>                <span class="mf">0.004002</span>
+   <span class="n">health</span>              <span class="mf">0.003962</span>
+   <span class="n">state</span>               <span class="mf">0.003774</span>
+   <span class="n">years</span>               <span class="mf">0.003538</span>
+   <span class="n">officials</span>           <span class="mf">0.003317</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="inference-for-new-corpus">
+<h2><a class="toc-backref" href="#id4">Inference for new corpus</a><a class="headerlink" href="#inference-for-new-corpus" title="Permalink to this headline">¶</a></h2>
+<p>We’ll use the learned model to infer for corpus <strong>ap_infer_raw.txt</strong>. If format of data is raw text, it need to be preprocessed with the vocabulary file is extracted from training corpus above.</p>
+<p>First, we need load data and return a corpus with specific format</p>
+<p><strong>In[5]</strong>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tmlib.datasets</span> <span class="k">import</span> <span class="n">base</span>
+
+<span class="n">data_path</span> <span class="o">=</span> <span class="s1">&#39;ap/ap_infer_raw.txt&#39;</span>
+<span class="n">vocab_path</span> <span class="o">=</span> <span class="n">training_data</span><span class="o">.</span><span class="n">vocab_file</span>
+<span class="c1"># or you can assign directly if you know exactly position of file vocab, example</span>
+<span class="c1"># vocab_path = &#39;/home/kde/tmlib_data/ap_train_raw/vocab.txt&#39; if training file is ap_train_raw.txt or</span>
+<span class="c1"># vocab_path = &#39;ap/vocab.txt&#39; if training file is ap_train.txt</span>
+<span class="c1"># check format of data</span>
+<span class="n">input_format</span> <span class="o">=</span> <span class="n">base</span><span class="o">.</span><span class="n">check_input_format</span><span class="p">(</span><span class="n">data_path</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">input_format</span> <span class="o">==</span> <span class="n">base</span><span class="o">.</span><span class="n">DataFormat</span><span class="o">.</span><span class="n">RAW_TEXT</span><span class="p">:</span>
+    <span class="c1"># get list documents which are still raw text</span>
+    <span class="n">docs</span> <span class="o">=</span> <span class="n">base</span><span class="o">.</span><span class="n">load_batch_raw_text</span><span class="p">(</span><span class="n">data_path</span><span class="p">)</span>
+    <span class="c1"># load vocab and save with dictionary type of python</span>
+    <span class="n">vocab_dict</span> <span class="o">=</span> <span class="n">base</span><span class="o">.</span><span class="n">read_vocab</span><span class="p">(</span><span class="n">vocab_path</span><span class="p">)</span> <span class="c1"># vocab_dict[term] = index</span>
+    <span class="c1"># parse raw corpus to obtain the term-frequency format</span>
+    <span class="n">new_corpus</span> <span class="o">=</span> <span class="n">base</span><span class="o">.</span><span class="n">parse_doc_list</span><span class="p">(</span><span class="n">docs</span><span class="p">,</span> <span class="n">vocab_dict</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="c1"># if data is formatted, it is loaded and return corpus with term-freqency format in default</span>
+    <span class="n">new_corpus</span> <span class="o">=</span> <span class="n">base</span><span class="o">.</span><span class="n">load_batch_formatted_from_file</span><span class="p">(</span><span class="n">data_path</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>After that, execute inference for new corpus</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tmlib.lda.ldamodel</span> <span class="k">import</span> <span class="n">LdaModel</span>
+
+<span class="c1"># create object model</span>
+<span class="n">learned_model</span> <span class="o">=</span> <span class="n">LdaModel</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+<span class="c1"># load value of lambda from file saved above</span>
+<span class="n">learned_model</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;model_vb/lambda_final.txt&#39;</span><span class="p">)</span>
+<span class="c1"># inference by create new object for OnlineVB</span>
+<span class="nb">object</span> <span class="o">=</span> <span class="n">OnlineVB</span><span class="p">(</span><span class="n">num_terms</span><span class="p">,</span> <span class="n">num_topics</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">eta</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">lda_model</span><span class="o">=</span><span class="n">learned_model</span><span class="p">)</span>
+<span class="n">theta</span> <span class="o">=</span> <span class="nb">object</span><span class="o">.</span><span class="n">infer_new_docs</span><span class="p">(</span><span class="n">new_corpus</span><span class="p">)</span>
+<span class="c1"># or you can infer by using object in learning phase</span>
+<span class="c1"># theta = obj_onlvb.infer_new_docs(new_corpus)</span>
+<span class="n">base</span><span class="o">.</span><span class="n">write_topic_mixtures</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="s1">&#39;model_vb/topic_mixtures.txt&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Output</strong>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="mf">0.04855</span> <span class="mf">0.05653</span> <span class="mf">0.04423</span> <span class="mf">0.05101</span> <span class="mf">0.06032</span> <span class="mf">0.06141</span> <span class="mf">0.04341</span> <span class="mf">0.05127</span> <span class="mf">0.03749</span> <span class="mf">0.04974</span>   <span class="mf">0.04644</span> <span class="mf">0.03937</span> <span class="mf">0.06163</span> <span class="mf">0.04959</span> <span class="mf">0.05229</span> <span class="mf">0.04412</span> <span class="mf">0.03936</span> <span class="mf">0.07344</span> <span class="mf">0.05019</span> <span class="mf">0.03962</span>
+<span class="mf">0.05997</span> <span class="mf">0.03375</span> <span class="mf">0.05260</span> <span class="mf">0.03929</span> <span class="mf">0.04541</span> <span class="mf">0.04531</span> <span class="mf">0.05012</span> <span class="mf">0.04784</span> <span class="mf">0.02725</span> <span class="mf">0.05416</span> <span class="mf">0.03658</span> <span class="mf">0.05041</span> <span class="mf">0.05371</span> <span class="mf">0.05137</span> <span class="mf">0.05131</span> <span class="mf">0.06556</span> <span class="mf">0.06572</span> <span class="mf">0.05870</span> <span class="mf">0.04749</span> <span class="mf">0.06345</span>
+<span class="mf">0.04046</span> <span class="mf">0.05575</span> <span class="mf">0.05613</span> <span class="mf">0.05741</span> <span class="mf">0.06087</span> <span class="mf">0.04108</span> <span class="mf">0.04663</span> <span class="mf">0.05648</span> <span class="mf">0.06102</span> <span class="mf">0.05899</span> <span class="mf">0.05117</span> <span class="mf">0.05081</span> <span class="mf">0.03895</span> <span class="mf">0.04344</span> <span class="mf">0.03452</span> <span class="mf">0.04075</span> <span class="mf">0.06002</span> <span class="mf">0.05300</span> <span class="mf">0.04759</span> <span class="mf">0.04492</span>
+<span class="mf">0.05188</span> <span class="mf">0.05720</span> <span class="mf">0.05281</span> <span class="mf">0.05049</span> <span class="mf">0.04958</span> <span class="mf">0.06348</span> <span class="mf">0.06122</span> <span class="mf">0.04709</span> <span class="mf">0.03503</span> <span class="mf">0.05076</span> <span class="mf">0.04387</span> <span class="mf">0.04457</span> <span class="mf">0.05280</span> <span class="mf">0.05577</span> <span class="mf">0.05846</span> <span class="mf">0.05004</span> <span class="mf">0.03257</span> <span class="mf">0.06078</span> <span class="mf">0.04199</span> <span class="mf">0.03961</span>
+<span class="mf">0.04668</span> <span class="mf">0.06816</span> <span class="mf">0.03686</span> <span class="mf">0.06530</span> <span class="mf">0.04859</span> <span class="mf">0.04283</span> <span class="mf">0.05323</span> <span class="mf">0.05883</span> <span class="mf">0.03720</span> <span class="mf">0.05094</span>  <span class="mf">0.03035</span> <span class="mf">0.04391</span> <span class="mf">0.04971</span> <span class="mf">0.05431</span> <span class="mf">0.04680</span> <span class="mf">0.06657</span> <span class="mf">0.03382</span> <span class="mf">0.05960</span> <span class="mf">0.04796</span> <span class="mf">0.05834</span>
+<span class="mf">0.05019</span> <span class="mf">0.05668</span> <span class="mf">0.04648</span> <span class="mf">0.05900</span> <span class="mf">0.03309</span> <span class="mf">0.04761</span> <span class="mf">0.03571</span> <span class="mf">0.06495</span> <span class="mf">0.06176</span> <span class="mf">0.04657</span> <span class="mf">0.05624</span> <span class="mf">0.04677</span> <span class="mf">0.04467</span> <span class="mf">0.03575</span> <span class="mf">0.04533</span> <span class="mf">0.05397</span> <span class="mf">0.05050</span> <span class="mf">0.07205</span> <span class="mf">0.04320</span> <span class="mf">0.04947</span>
+<span class="mf">0.04384</span> <span class="mf">0.04650</span> <span class="mf">0.04305</span> <span class="mf">0.05963</span> <span class="mf">0.04536</span> <span class="mf">0.06730</span> <span class="mf">0.05199</span> <span class="mf">0.03680</span> <span class="mf">0.06364</span> <span class="mf">0.05896</span> <span class="mf">0.05809</span> <span class="mf">0.04742</span> <span class="mf">0.02810</span> <span class="mf">0.04630</span> <span class="mf">0.05672</span> <span class="mf">0.03781</span> <span class="mf">0.05806</span> <span class="mf">0.04964</span> <span class="mf">0.04915</span> <span class="mf">0.05164</span>
+<span class="mf">0.05685</span> <span class="mf">0.04112</span> <span class="mf">0.06084</span> <span class="mf">0.05382</span> <span class="mf">0.06332</span> <span class="mf">0.04710</span> <span class="mf">0.06174</span> <span class="mf">0.06620</span> <span class="mf">0.04840</span> <span class="mf">0.05370</span> <span class="mf">0.04778</span> <span class="mf">0.04909</span> <span class="mf">0.04997</span> <span class="mf">0.03806</span> <span class="mf">0.04520</span> <span class="mf">0.04086</span> <span class="mf">0.03693</span> <span class="mf">0.05186</span> <span class="mf">0.03723</span> <span class="mf">0.04992</span>
+<span class="mf">0.02535</span> <span class="mf">0.02534</span> <span class="mf">0.05836</span> <span class="mf">0.04131</span> <span class="mf">0.05822</span> <span class="mf">0.04790</span> <span class="mf">0.08300</span> <span class="mf">0.07034</span> <span class="mf">0.01391</span> <span class="mf">0.01695</span> <span class="mf">0.06571</span> <span class="mf">0.03094</span> <span class="mf">0.09627</span> <span class="mf">0.04557</span> <span class="mf">0.08031</span> <span class="mf">0.06771</span> <span class="mf">0.04167</span> <span class="mf">0.03240</span> <span class="mf">0.06228</span> <span class="mf">0.03649</span>
+<span class="mf">0.05480</span> <span class="mf">0.05244</span> <span class="mf">0.03906</span> <span class="mf">0.04824</span> <span class="mf">0.03144</span> <span class="mf">0.03797</span> <span class="mf">0.03989</span> <span class="mf">0.05175</span> <span class="mf">0.04597</span> <span class="mf">0.05587</span> <span class="mf">0.06080</span> <span class="mf">0.04574</span> <span class="mf">0.04413</span> <span class="mf">0.05904</span> <span class="mf">0.04795</span> <span class="mf">0.05280</span> <span class="mf">0.06031</span> <span class="mf">0.05920</span> <span class="mf">0.04478</span> <span class="mf">0.06782</span>
+<span class="mf">0.05871</span> <span class="mf">0.04751</span> <span class="mf">0.05916</span> <span class="mf">0.03434</span> <span class="mf">0.05407</span> <span class="mf">0.05073</span> <span class="mf">0.04154</span> <span class="mf">0.04013</span> <span class="mf">0.04618</span> <span class="mf">0.06254</span> <span class="mf">0.06337</span> <span class="mf">0.04932</span> <span class="mf">0.05721</span> <span class="mf">0.06697</span> <span class="mf">0.06181</span> <span class="mf">0.06417</span> <span class="mf">0.03155</span> <span class="mf">0.04034</span> <span class="mf">0.04088</span> <span class="mf">0.02946</span>
+<span class="mf">0.04286</span> <span class="mf">0.04187</span> <span class="mf">0.04426</span> <span class="mf">0.04888</span> <span class="mf">0.04855</span> <span class="mf">0.05688</span> <span class="mf">0.06906</span> <span class="mf">0.04099</span> <span class="mf">0.05568</span> <span class="mf">0.03943</span>   <span class="mf">0.06292</span> <span class="mf">0.04908</span> <span class="mf">0.06567</span> <span class="mf">0.03792</span> <span class="mf">0.05226</span> <span class="mf">0.05485</span> <span class="mf">0.04789</span> <span class="mf">0.04561</span> <span class="mf">0.06194</span> <span class="mf">0.03342</span>
+<span class="mf">0.04749</span> <span class="mf">0.04982</span> <span class="mf">0.04550</span> <span class="mf">0.04244</span> <span class="mf">0.05487</span> <span class="mf">0.05228</span> <span class="mf">0.05689</span> <span class="mf">0.05751</span> <span class="mf">0.04590</span> <span class="mf">0.04556</span> <span class="mf">0.03818</span> <span class="mf">0.03898</span> <span class="mf">0.05071</span> <span class="mf">0.04064</span> <span class="mf">0.06108</span> <span class="mf">0.05337</span> <span class="mf">0.05939</span> <span class="mf">0.04545</span> <span class="mf">0.05051</span> <span class="mf">0.06341</span>
+<span class="mf">0.04691</span> <span class="mf">0.03059</span> <span class="mf">0.03860</span> <span class="mf">0.05256</span> <span class="mf">0.04207</span> <span class="mf">0.04233</span> <span class="mf">0.04897</span> <span class="mf">0.04930</span> <span class="mf">0.04861</span> <span class="mf">0.05655</span> <span class="mf">0.04875</span> <span class="mf">0.05382</span> <span class="mf">0.04862</span> <span class="mf">0.05924</span> <span class="mf">0.03481</span> <span class="mf">0.06436</span> <span class="mf">0.07502</span> <span class="mf">0.06051</span> <span class="mf">0.07115</span> <span class="mf">0.02723</span>
+<span class="mf">0.03612</span> <span class="mf">0.05713</span> <span class="mf">0.05239</span> <span class="mf">0.04916</span> <span class="mf">0.05616</span> <span class="mf">0.05865</span> <span class="mf">0.03381</span> <span class="mf">0.04875</span> <span class="mf">0.03743</span> <span class="mf">0.05923</span> <span class="mf">0.06432</span> <span class="mf">0.05125</span> <span class="mf">0.05207</span> <span class="mf">0.04929</span> <span class="mf">0.05661</span> <span class="mf">0.05106</span> <span class="mf">0.04829</span> <span class="mf">0.04847</span> <span class="mf">0.04461</span> <span class="mf">0.04519</span>
+<span class="mf">0.04125</span> <span class="mf">0.03342</span> <span class="mf">0.05460</span> <span class="mf">0.04359</span> <span class="mf">0.05520</span> <span class="mf">0.04115</span> <span class="mf">0.05008</span> <span class="mf">0.07303</span> <span class="mf">0.05348</span> <span class="mf">0.04705</span> <span class="mf">0.04484</span> <span class="mf">0.04680</span> <span class="mf">0.04079</span> <span class="mf">0.05068</span> <span class="mf">0.04832</span> <span class="mf">0.07016</span> <span class="mf">0.06002</span> <span class="mf">0.03659</span> <span class="mf">0.06770</span> <span class="mf">0.04126</span>
+<span class="mf">0.04606</span> <span class="mf">0.05633</span> <span class="mf">0.04979</span> <span class="mf">0.03408</span> <span class="mf">0.04267</span> <span class="mf">0.05732</span> <span class="mf">0.05482</span> <span class="mf">0.06208</span> <span class="mf">0.06391</span> <span class="mf">0.05695</span> <span class="mf">0.05391</span> <span class="mf">0.04358</span> <span class="mf">0.05679</span> <span class="mf">0.05024</span> <span class="mf">0.05834</span> <span class="mf">0.05090</span> <span class="mf">0.04362</span> <span class="mf">0.04088</span> <span class="mf">0.03876</span> <span class="mf">0.03895</span>
+<span class="mf">0.05411</span> <span class="mf">0.04949</span> <span class="mf">0.05692</span> <span class="mf">0.05868</span> <span class="mf">0.04912</span> <span class="mf">0.05981</span> <span class="mf">0.03936</span> <span class="mf">0.05109</span> <span class="mf">0.04797</span> <span class="mf">0.04225</span> <span class="mf">0.04944</span> <span class="mf">0.04549</span> <span class="mf">0.04079</span> <span class="mf">0.05708</span> <span class="mf">0.06257</span> <span class="mf">0.06069</span> <span class="mf">0.03424</span> <span class="mf">0.04231</span> <span class="mf">0.05097</span> <span class="mf">0.04761</span>
+<span class="mf">0.06284</span> <span class="mf">0.06094</span> <span class="mf">0.03648</span> <span class="mf">0.05575</span> <span class="mf">0.04673</span> <span class="mf">0.05057</span> <span class="mf">0.05416</span> <span class="mf">0.04808</span> <span class="mf">0.05258</span> <span class="mf">0.05002</span> <span class="mf">0.05488</span> <span class="mf">0.03429</span> <span class="mf">0.04865</span> <span class="mf">0.05740</span> <span class="mf">0.05125</span> <span class="mf">0.05031</span> <span class="mf">0.06656</span> <span class="mf">0.03392</span> <span class="mf">0.04235</span> <span class="mf">0.04223</span>
+<span class="mf">0.06581</span> <span class="mf">0.04898</span> <span class="mf">0.06289</span> <span class="mf">0.05704</span> <span class="mf">0.04200</span> <span class="mf">0.04421</span> <span class="mf">0.04411</span> <span class="mf">0.04380</span> <span class="mf">0.04157</span> <span class="mf">0.05180</span> <span class="mf">0.03915</span> <span class="mf">0.04680</span> <span class="mf">0.05555</span> <span class="mf">0.04733</span> <span class="mf">0.05139</span> <span class="mf">0.05301</span> <span class="mf">0.05376</span> <span class="mf">0.03843</span> <span class="mf">0.05723</span> <span class="mf">0.05512</span>
+<span class="mf">0.04262</span> <span class="mf">0.06181</span> <span class="mf">0.05904</span> <span class="mf">0.04356</span> <span class="mf">0.04492</span> <span class="mf">0.03259</span> <span class="mf">0.06036</span> <span class="mf">0.05020</span> <span class="mf">0.04119</span> <span class="mf">0.04441</span> <span class="mf">0.04864</span> <span class="mf">0.05568</span> <span class="mf">0.03615</span> <span class="mf">0.03284</span> <span class="mf">0.05559</span> <span class="mf">0.06553</span> <span class="mf">0.06558</span> <span class="mf">0.04576</span> <span class="mf">0.05638</span> <span class="mf">0.05715</span>
+<span class="mf">0.05394</span> <span class="mf">0.05654</span> <span class="mf">0.03819</span> <span class="mf">0.04678</span> <span class="mf">0.03923</span> <span class="mf">0.05355</span> <span class="mf">0.07231</span> <span class="mf">0.06859</span> <span class="mf">0.05154</span> <span class="mf">0.03831</span> <span class="mf">0.05684</span> <span class="mf">0.04186</span> <span class="mf">0.05477</span> <span class="mf">0.03704</span> <span class="mf">0.03074</span> <span class="mf">0.03663</span> <span class="mf">0.06398</span> <span class="mf">0.06813</span> <span class="mf">0.05637</span> <span class="mf">0.03467</span>
+<span class="mf">0.03231</span> <span class="mf">0.03724</span> <span class="mf">0.04716</span> <span class="mf">0.06739</span> <span class="mf">0.06464</span> <span class="mf">0.07377</span> <span class="mf">0.02288</span> <span class="mf">0.03454</span> <span class="mf">0.05760</span> <span class="mf">0.03981</span> <span class="mf">0.08134</span> <span class="mf">0.04662</span> <span class="mf">0.03870</span> <span class="mf">0.04567</span> <span class="mf">0.07471</span> <span class="mf">0.04004</span> <span class="mf">0.02098</span> <span class="mf">0.06167</span> <span class="mf">0.05185</span> <span class="mf">0.06110</span>
+<span class="mf">0.06196</span> <span class="mf">0.05868</span> <span class="mf">0.04917</span> <span class="mf">0.03301</span> <span class="mf">0.05696</span> <span class="mf">0.06749</span> <span class="mf">0.05362</span> <span class="mf">0.06185</span> <span class="mf">0.05395</span> <span class="mf">0.04239</span> <span class="mf">0.03715</span> <span class="mf">0.04471</span> <span class="mf">0.05365</span> <span class="mf">0.04497</span> <span class="mf">0.04755</span> <span class="mf">0.04811</span> <span class="mf">0.04352</span> <span class="mf">0.03606</span> <span class="mf">0.05731</span> <span class="mf">0.04787</span>
+<span class="mf">0.05106</span> <span class="mf">0.04532</span> <span class="mf">0.04614</span> <span class="mf">0.04271</span> <span class="mf">0.05626</span> <span class="mf">0.05454</span> <span class="mf">0.04039</span> <span class="mf">0.05114</span> <span class="mf">0.03677</span> <span class="mf">0.04502</span> <span class="mf">0.04999</span> <span class="mf">0.05531</span> <span class="mf">0.05126</span> <span class="mf">0.06120</span> <span class="mf">0.04965</span> <span class="mf">0.05346</span> <span class="mf">0.04621</span> <span class="mf">0.05536</span> <span class="mf">0.05078</span> <span class="mf">0.05744</span>
+<span class="mf">0.04846</span> <span class="mf">0.05043</span> <span class="mf">0.06712</span> <span class="mf">0.04888</span> <span class="mf">0.03933</span> <span class="mf">0.04474</span> <span class="mf">0.05058</span> <span class="mf">0.04468</span> <span class="mf">0.04155</span> <span class="mf">0.04585</span> <span class="mf">0.04778</span> <span class="mf">0.05339</span> <span class="mf">0.04792</span> <span class="mf">0.05627</span> <span class="mf">0.06493</span> <span class="mf">0.05459</span> <span class="mf">0.05860</span> <span class="mf">0.04967</span> <span class="mf">0.03533</span> <span class="mf">0.04990</span>
+<span class="mf">0.03960</span> <span class="mf">0.04590</span> <span class="mf">0.04912</span> <span class="mf">0.07218</span> <span class="mf">0.04125</span> <span class="mf">0.04273</span> <span class="mf">0.05521</span> <span class="mf">0.05198</span> <span class="mf">0.05126</span> <span class="mf">0.04704</span> <span class="mf">0.05824</span> <span class="mf">0.06024</span> <span class="mf">0.04666</span> <span class="mf">0.06373</span> <span class="mf">0.04543</span> <span class="mf">0.03208</span> <span class="mf">0.05586</span> <span class="mf">0.04940</span> <span class="mf">0.03918</span> <span class="mf">0.05291</span>
+<span class="mf">0.04319</span> <span class="mf">0.05252</span> <span class="mf">0.05073</span> <span class="mf">0.05450</span> <span class="mf">0.05712</span> <span class="mf">0.04390</span> <span class="mf">0.03796</span> <span class="mf">0.04552</span> <span class="mf">0.05700</span> <span class="mf">0.05640</span> <span class="mf">0.05523</span> <span class="mf">0.04045</span> <span class="mf">0.04636</span> <span class="mf">0.04916</span> <span class="mf">0.04908</span> <span class="mf">0.06368</span> <span class="mf">0.03059</span> <span class="mf">0.04960</span> <span class="mf">0.05170</span> <span class="mf">0.06530</span>
+<span class="mf">0.05728</span> <span class="mf">0.04606</span> <span class="mf">0.05557</span> <span class="mf">0.04383</span> <span class="mf">0.04968</span> <span class="mf">0.05534</span> <span class="mf">0.03824</span> <span class="mf">0.04835</span> <span class="mf">0.05675</span> <span class="mf">0.04629</span> <span class="mf">0.05932</span> <span class="mf">0.07635</span> <span class="mf">0.04682</span> <span class="mf">0.04705</span> <span class="mf">0.04742</span> <span class="mf">0.05322</span> <span class="mf">0.05274</span> <span class="mf">0.03478</span> <span class="mf">0.04351</span> <span class="mf">0.04142</span>
+<span class="mf">0.04237</span> <span class="mf">0.04564</span> <span class="mf">0.04127</span> <span class="mf">0.05528</span> <span class="mf">0.04585</span> <span class="mf">0.05108</span> <span class="mf">0.06173</span> <span class="mf">0.04598</span> <span class="mf">0.05015</span> <span class="mf">0.05221</span> <span class="mf">0.04987</span> <span class="mf">0.05646</span> <span class="mf">0.03632</span> <span class="mf">0.05990</span> <span class="mf">0.05733</span> <span class="mf">0.05725</span> <span class="mf">0.04707</span> <span class="mf">0.03732</span> <span class="mf">0.04686</span> <span class="mf">0.06004</span>
+<span class="mf">0.04680</span> <span class="mf">0.05577</span> <span class="mf">0.05644</span> <span class="mf">0.04934</span> <span class="mf">0.04783</span> <span class="mf">0.03461</span> <span class="mf">0.06147</span> <span class="mf">0.04914</span> <span class="mf">0.03758</span> <span class="mf">0.04983</span> <span class="mf">0.04709</span> <span class="mf">0.04693</span> <span class="mf">0.04101</span> <span class="mf">0.04134</span> <span class="mf">0.05732</span> <span class="mf">0.05130</span> <span class="mf">0.04224</span> <span class="mf">0.06137</span> <span class="mf">0.05227</span> <span class="mf">0.07031</span>
+<span class="mf">0.05154</span> <span class="mf">0.04771</span> <span class="mf">0.04499</span> <span class="mf">0.04687</span> <span class="mf">0.05763</span> <span class="mf">0.04348</span> <span class="mf">0.06087</span> <span class="mf">0.05986</span> <span class="mf">0.05060</span> <span class="mf">0.05471</span> <span class="mf">0.05502</span> <span class="mf">0.04155</span> <span class="mf">0.04377</span> <span class="mf">0.04471</span> <span class="mf">0.06868</span> <span class="mf">0.05544</span> <span class="mf">0.04428</span> <span class="mf">0.04969</span> <span class="mf">0.03869</span> <span class="mf">0.03992</span>
+<span class="mf">0.04097</span> <span class="mf">0.05199</span> <span class="mf">0.04469</span> <span class="mf">0.06465</span> <span class="mf">0.03482</span> <span class="mf">0.03858</span> <span class="mf">0.06328</span> <span class="mf">0.05446</span> <span class="mf">0.03943</span> <span class="mf">0.04879</span> <span class="mf">0.03661</span> <span class="mf">0.06759</span> <span class="mf">0.03924</span> <span class="mf">0.06594</span> <span class="mf">0.05004</span> <span class="mf">0.05979</span> <span class="mf">0.04849</span> <span class="mf">0.04321</span> <span class="mf">0.04692</span> <span class="mf">0.06050</span>
+<span class="mf">0.05084</span> <span class="mf">0.05039</span> <span class="mf">0.05210</span> <span class="mf">0.03791</span> <span class="mf">0.05367</span> <span class="mf">0.06189</span> <span class="mf">0.06315</span> <span class="mf">0.05878</span> <span class="mf">0.04929</span> <span class="mf">0.04628</span> <span class="mf">0.04477</span> <span class="mf">0.06008</span> <span class="mf">0.05282</span> <span class="mf">0.04024</span> <span class="mf">0.05455</span> <span class="mf">0.04368</span> <span class="mf">0.04355</span> <span class="mf">0.04213</span> <span class="mf">0.05103</span> <span class="mf">0.04287</span>
+<span class="mf">0.04973</span> <span class="mf">0.04971</span> <span class="mf">0.05817</span> <span class="mf">0.05121</span> <span class="mf">0.05507</span> <span class="mf">0.04257</span> <span class="mf">0.05511</span> <span class="mf">0.05503</span> <span class="mf">0.06401</span> <span class="mf">0.04005</span> <span class="mf">0.03639</span> <span class="mf">0.05218</span> <span class="mf">0.04056</span> <span class="mf">0.05576</span> <span class="mf">0.04497</span> <span class="mf">0.04376</span> <span class="mf">0.04923</span> <span class="mf">0.05786</span> <span class="mf">0.05136</span> <span class="mf">0.04726</span>
+<span class="mf">0.03989</span> <span class="mf">0.05958</span> <span class="mf">0.05125</span> <span class="mf">0.05430</span> <span class="mf">0.05875</span> <span class="mf">0.04631</span> <span class="mf">0.04988</span> <span class="mf">0.04382</span> <span class="mf">0.04022</span> <span class="mf">0.04871</span> <span class="mf">0.05869</span> <span class="mf">0.04778</span> <span class="mf">0.05154</span> <span class="mf">0.04568</span> <span class="mf">0.06076</span> <span class="mf">0.05401</span> <span class="mf">0.06166</span> <span class="mf">0.04527</span> <span class="mf">0.03699</span> <span class="mf">0.04490</span>
+<span class="mf">0.03175</span> <span class="mf">0.05102</span> <span class="mf">0.05901</span> <span class="mf">0.04389</span> <span class="mf">0.04965</span> <span class="mf">0.04420</span> <span class="mf">0.04536</span> <span class="mf">0.05340</span> <span class="mf">0.05534</span> <span class="mf">0.05250</span> <span class="mf">0.04452</span> <span class="mf">0.04153</span> <span class="mf">0.04996</span> <span class="mf">0.04443</span> <span class="mf">0.05050</span> <span class="mf">0.04056</span> <span class="mf">0.05129</span> <span class="mf">0.07355</span> <span class="mf">0.04873</span> <span class="mf">0.06882</span>
+<span class="mf">0.04439</span> <span class="mf">0.04909</span> <span class="mf">0.04468</span> <span class="mf">0.04552</span> <span class="mf">0.05442</span> <span class="mf">0.04255</span> <span class="mf">0.04898</span> <span class="mf">0.05140</span> <span class="mf">0.04820</span> <span class="mf">0.04862</span> <span class="mf">0.06398</span> <span class="mf">0.05472</span> <span class="mf">0.04334</span> <span class="mf">0.06467</span> <span class="mf">0.05229</span> <span class="mf">0.05435</span> <span class="mf">0.04313</span> <span class="mf">0.04556</span> <span class="mf">0.06637</span> <span class="mf">0.03372</span>
+<span class="mf">0.05433</span> <span class="mf">0.05098</span> <span class="mf">0.05076</span> <span class="mf">0.06159</span> <span class="mf">0.03733</span> <span class="mf">0.04944</span> <span class="mf">0.04354</span> <span class="mf">0.05289</span> <span class="mf">0.05281</span> <span class="mf">0.04473</span> <span class="mf">0.05485</span> <span class="mf">0.06478</span> <span class="mf">0.03936</span> <span class="mf">0.04703</span> <span class="mf">0.04916</span> <span class="mf">0.07122</span> <span class="mf">0.04297</span> <span class="mf">0.04919</span> <span class="mf">0.03563</span> <span class="mf">0.04742</span>
+<span class="mf">0.05145</span> <span class="mf">0.05954</span> <span class="mf">0.05186</span> <span class="mf">0.06563</span> <span class="mf">0.04170</span> <span class="mf">0.03042</span> <span class="mf">0.04401</span> <span class="mf">0.04830</span> <span class="mf">0.03911</span> <span class="mf">0.05273</span> <span class="mf">0.05122</span> <span class="mf">0.04671</span> <span class="mf">0.05391</span> <span class="mf">0.05047</span> <span class="mf">0.05147</span> <span class="mf">0.05636</span> <span class="mf">0.04612</span> <span class="mf">0.05497</span> <span class="mf">0.04696</span> <span class="mf">0.05706</span>
+<span class="mf">0.04295</span> <span class="mf">0.04604</span> <span class="mf">0.05112</span> <span class="mf">0.04490</span> <span class="mf">0.05057</span> <span class="mf">0.04550</span> <span class="mf">0.05269</span> <span class="mf">0.05043</span> <span class="mf">0.04828</span> <span class="mf">0.06888</span> <span class="mf">0.04858</span> <span class="mf">0.05570</span> <span class="mf">0.04479</span> <span class="mf">0.04312</span> <span class="mf">0.04472</span> <span class="mf">0.04401</span> <span class="mf">0.06402</span> <span class="mf">0.05263</span> <span class="mf">0.05375</span> <span class="mf">0.04731</span>
+<span class="mf">0.05456</span> <span class="mf">0.04972</span> <span class="mf">0.04889</span> <span class="mf">0.05264</span> <span class="mf">0.05824</span> <span class="mf">0.05214</span> <span class="mf">0.04830</span> <span class="mf">0.05617</span> <span class="mf">0.03742</span> <span class="mf">0.04821</span> <span class="mf">0.06839</span> <span class="mf">0.03970</span> <span class="mf">0.03926</span> <span class="mf">0.05228</span> <span class="mf">0.04378</span> <span class="mf">0.05051</span> <span class="mf">0.05686</span> <span class="mf">0.04017</span> <span class="mf">0.05158</span> <span class="mf">0.05118</span>
+<span class="mf">0.04937</span> <span class="mf">0.05167</span> <span class="mf">0.05159</span> <span class="mf">0.04262</span> <span class="mf">0.07179</span> <span class="mf">0.04082</span> <span class="mf">0.06060</span> <span class="mf">0.03941</span> <span class="mf">0.05212</span> <span class="mf">0.05049</span> <span class="mf">0.03544</span> <span class="mf">0.04178</span> <span class="mf">0.06774</span> <span class="mf">0.05387</span> <span class="mf">0.05970</span> <span class="mf">0.04985</span> <span class="mf">0.05012</span> <span class="mf">0.04356</span> <span class="mf">0.03653</span> <span class="mf">0.05094</span>
+<span class="mf">0.04535</span> <span class="mf">0.04814</span> <span class="mf">0.05305</span> <span class="mf">0.06106</span> <span class="mf">0.04016</span> <span class="mf">0.05326</span> <span class="mf">0.05224</span> <span class="mf">0.06730</span> <span class="mf">0.05980</span> <span class="mf">0.04973</span> <span class="mf">0.04620</span> <span class="mf">0.05526</span> <span class="mf">0.04201</span> <span class="mf">0.04333</span> <span class="mf">0.04952</span> <span class="mf">0.04745</span> <span class="mf">0.03387</span> <span class="mf">0.06711</span> <span class="mf">0.04911</span> <span class="mf">0.03605</span>
+<span class="mf">0.05062</span> <span class="mf">0.05299</span> <span class="mf">0.04507</span> <span class="mf">0.04252</span> <span class="mf">0.05661</span> <span class="mf">0.04978</span> <span class="mf">0.05242</span> <span class="mf">0.05250</span> <span class="mf">0.04808</span> <span class="mf">0.05040</span> <span class="mf">0.05945</span> <span class="mf">0.05292</span> <span class="mf">0.04745</span> <span class="mf">0.04802</span> <span class="mf">0.05502</span> <span class="mf">0.05160</span> <span class="mf">0.04564</span> <span class="mf">0.04344</span> <span class="mf">0.05169</span> <span class="mf">0.04377</span>
+<span class="mf">0.05432</span> <span class="mf">0.05414</span> <span class="mf">0.05779</span> <span class="mf">0.03690</span> <span class="mf">0.05524</span> <span class="mf">0.05437</span> <span class="mf">0.05241</span> <span class="mf">0.03971</span> <span class="mf">0.04186</span> <span class="mf">0.05023</span> <span class="mf">0.05561</span> <span class="mf">0.04629</span> <span class="mf">0.04789</span> <span class="mf">0.04713</span> <span class="mf">0.04085</span> <span class="mf">0.05330</span> <span class="mf">0.04564</span> <span class="mf">0.05705</span> <span class="mf">0.04593</span> <span class="mf">0.06333</span>
+<span class="mf">0.03963</span> <span class="mf">0.04747</span> <span class="mf">0.05688</span> <span class="mf">0.05103</span> <span class="mf">0.04098</span> <span class="mf">0.03778</span> <span class="mf">0.06956</span> <span class="mf">0.04665</span> <span class="mf">0.04289</span> <span class="mf">0.05711</span> <span class="mf">0.06029</span> <span class="mf">0.04778</span> <span class="mf">0.05724</span> <span class="mf">0.04722</span> <span class="mf">0.04566</span> <span class="mf">0.04280</span> <span class="mf">0.04929</span> <span class="mf">0.05878</span> <span class="mf">0.04657</span> <span class="mf">0.05437</span>
+<span class="mf">0.05294</span> <span class="mf">0.06364</span> <span class="mf">0.05021</span> <span class="mf">0.05641</span> <span class="mf">0.03804</span> <span class="mf">0.04314</span> <span class="mf">0.05183</span> <span class="mf">0.03797</span> <span class="mf">0.04597</span> <span class="mf">0.04781</span> <span class="mf">0.04474</span> <span class="mf">0.05260</span> <span class="mf">0.05217</span> <span class="mf">0.05392</span> <span class="mf">0.06416</span> <span class="mf">0.04730</span> <span class="mf">0.05394</span> <span class="mf">0.04954</span> <span class="mf">0.03479</span> <span class="mf">0.05887</span>
+<span class="mf">0.05013</span> <span class="mf">0.04091</span> <span class="mf">0.06504</span> <span class="mf">0.04437</span> <span class="mf">0.06210</span> <span class="mf">0.03791</span> <span class="mf">0.03803</span> <span class="mf">0.05871</span> <span class="mf">0.04651</span> <span class="mf">0.05528</span> <span class="mf">0.06224</span> <span class="mf">0.04330</span> <span class="mf">0.03696</span> <span class="mf">0.05381</span> <span class="mf">0.05535</span> <span class="mf">0.04661</span> <span class="mf">0.05118</span> <span class="mf">0.05229</span> <span class="mf">0.05243</span> <span class="mf">0.04685</span>
+<span class="mf">0.06454</span> <span class="mf">0.04446</span> <span class="mf">0.04557</span> <span class="mf">0.04729</span> <span class="mf">0.05457</span> <span class="mf">0.04733</span> <span class="mf">0.05780</span> <span class="mf">0.05545</span> <span class="mf">0.03986</span> <span class="mf">0.05625</span> <span class="mf">0.03691</span> <span class="mf">0.04922</span> <span class="mf">0.05276</span> <span class="mf">0.05340</span> <span class="mf">0.05097</span> <span class="mf">0.05201</span> <span class="mf">0.04921</span> <span class="mf">0.04031</span> <span class="mf">0.04972</span> <span class="mf">0.05237</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, DSLab.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.3.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

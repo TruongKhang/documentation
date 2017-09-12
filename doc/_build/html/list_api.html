@@ -1,0 +1,301 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Module &mdash; topicmodel-lib 0.3.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="topicmodel-lib 0.3.1 documentation" href="index.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> topicmodel-lib
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.3.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">Module</a><ul>
+<li><a class="reference internal" href="#tmlib-preprocessing-preprocessing">tmlib.preprocessing.preprocessing</a></li>
+<li><a class="reference internal" href="#tmlib-datasets-base">tmlib.datasets.base</a></li>
+<li><a class="reference internal" href="#tmlib-datasets-dataset">tmlib.datasets.dataset</a></li>
+<li><a class="reference internal" href="#tmlib-datasets-wiki-stream">tmlib.datasets.wiki_stream</a></li>
+<li><a class="reference internal" href="#tmlib-lda">tmlib.lda</a></li>
+</ul>
+</li>
+</ul>
+</div>
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">topicmodel-lib</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Module</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/list_api.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module">
+<h1>Module<a class="headerlink" href="#module" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="tmlib-preprocessing-preprocessing">
+<h2><a class="reference external" href="api/api_preprocessing.rst">tmlib.preprocessing.preprocessing</a><a class="headerlink" href="#tmlib-preprocessing-preprocessing" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>class <a class="reference external" href="api/api_preprocessing.rst#class-tmlib-preprocessing-preprocessing-preprocessing">tmlib.preprocessing.preprocessing.PreProcessing</a></li>
+</ul>
+</div>
+<div class="section" id="tmlib-datasets-base">
+<h2><a class="reference external" href="api/api_base.rst">tmlib.datasets.base</a><a class="headerlink" href="#tmlib-datasets-base" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><strong>Base classes</strong>:<ul>
+<li>class <a class="reference external" href="api/api_base.rst#class-tmlib-datasets-base-dataformat">tmlib.datasets.base.DataFormat</a></li>
+<li>class <a class="reference external" href="api/api_base.rst#class-tmlib-datasets-base-corpus">tmlib.datasets.base.Corpus</a></li>
+<li>class <a class="reference external" href="api/api_base.rst#class-tmlib-datasets-base-dataiterator">tmlib.datasets.base.DataIterator</a></li>
+</ul>
+</li>
+<li><strong>Base functions</strong>:<ul>
+<li>Function <a class="reference external" href="api/api_base.rst#function-base-get-data-home">base.get_data_home</a></li>
+<li>Function <a class="reference external" href="api/api_base.rst#function-base-clear-data-home">base.clear_data_home</a></li>
+<li>Function <a class="reference external" href="api/api_base.rst#function-base-check-input-format">base.check_input_format</a></li>
+<li>Function <a class="reference external" href="api/api_base.rst#function-base-load-batch-raw-text">base.load_batch_raw_text</a></li>
+<li>Function <a class="reference external" href="api/api_base.rst#function-base-pre-process">base.pre_process</a></li>
+<li>Function <a class="reference external" href="api/api_base.rst#function-base-format-reformat-file-to-term-sequence">base.reformat_file_to_term_sequence</a></li>
+<li>Function <a class="reference external" href="api/api_base.rst#function-base-reformat-file-to-term-frequency">base.reformat_file_to_term_frequency</a></li>
+<li>Function <a class="reference external" href="api/api_base.rst#function-base-convert-corpus-format">base.convert_corpus_format</a></li>
+<li>Function <a class="reference external" href="api/api_base.rst#function-base-load-batch-formatted-from-file">base.load_batch_formatted_from_file</a></li>
+<li>Function <a class="reference external" href="api/api_base.rst#function-base-load-mini-batch-term-sequence-from-sequence-file">base.load_mini_batch_term_sequence_from_sequence_file</a></li>
+<li>Function <a class="reference external" href="api/api_base.rst#function-base-load-mini-batch-term-sequence-from-term-frequency-file">base.load_mini_batch_term_sequence_from_term_frequency_file</a></li>
+<li>Function <a class="reference external" href="api/api_base.rst#function-base-load-mini-batch-term-frequency-from-sequence-file">base.load_mini_batch_term_frequency_from_sequence_file</a></li>
+<li>Function <a class="reference external" href="api/api_base.rst#function-base-load-mini-batch-term-frequency-from-term-frequency-file">base.load_mini_batch_term_frequency_from_term_frequency_file</a></li>
+<li>Function <a class="reference external" href="api/api_base.rst#function-base-shuffle-formatted-data-file">base.shuffle_formatted_data_file</a></li>
+<li>Function <a class="reference external" href="api/api_base.rst#function-base-compute-sparsity">base.compute_sparsity</a></li>
+<li>Function <a class="reference external" href="api/api_base.rst#function-base-write-topic-mixtures">base.write_topic_mixtures</a></li>
+<li>Function <a class="reference external" href="api/api_base.rst#function-base-read-vocab">base.read_vocab</a></li>
+<li>Function <a class="reference external" href="api/api_base.rst#function-base-parse-doc-list">base.parse_doc_list</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="tmlib-datasets-dataset">
+<h2><a class="reference external" href="api/api_dataset.rst">tmlib.datasets.dataset</a><a class="headerlink" href="#tmlib-datasets-dataset" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>class <a class="reference external" href="api/api_dataset.rst#class-tmlib-datasets-dataset-DataSet">tmlib.datasets.dataset.DataSet</a></li>
+</ul>
+</div>
+<div class="section" id="tmlib-datasets-wiki-stream">
+<h2><a class="reference external" href="api/api_wiki.rst">tmlib.datasets.wiki_stream</a><a class="headerlink" href="#tmlib-datasets-wiki-stream" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>class <a class="reference external" href="api/api_wiki.rst#class-tmlib-datasets-wiki-stream-wikistream">tmlib.datasets.wiki_stream.WikiStream</a></li>
+</ul>
+</div>
+<div class="section" id="tmlib-lda">
+<h2><a class="reference external" href="api/api_lda.rst">tmlib.lda</a><a class="headerlink" href="#tmlib-lda" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>class <a class="reference external" href="api/api_lda.rst#class-tmlib-lda-ldamodel-ldamodel">tmlib.lda.ldamodel.LdaModel</a></li>
+<li>class <a class="reference external" href="api/api_lda.rst#class-tmlib-lda-ldalearning-ldastatistics">tmlib.lda.ldalearning.LdaStatistics</a></li>
+<li>class <a class="reference external" href="api/api_lda.rst#class-tmlib-lda-ldalearning-ldalearning">tmlib.lda.ldalearning.LdaLearning</a></li>
+<li>class <a class="reference external" href="api/api_lda.rst#class-tmlib-lda-online-vb-onlinevb">tmlib.lda.Online_VB.OnlineVB</a></li>
+<li>class <a class="reference external" href="api/api_lda.rst#class-tmlib-lda-online-cvb0-onlinecvb0">tmlib.lda.Online_CVB0.OnlineCVB0</a></li>
+<li>class <a class="reference external" href="api/api_lda.rst#class-tmlib-lda-online-cgs-onlinecgs">tmlib.lda.Online_CGS.OnlineCGS</a></li>
+<li>class <a class="reference external" href="api/api_lda.rst#class-tmlib-lda-online-fw-onlinefw">tmlib.lda.Online_FW.OnlineFW</a></li>
+<li>class <a class="reference external" href="api/api_lda.rst#class-tmlib-lda-online-ope-onlineope">tmlib.lda.Online_OPE.OnlineOPE</a></li>
+<li>class <a class="reference external" href="api/api_lda.rst#class-tmlib-lda-streaming-vb-streamingvb">tmlib.lda.Streaming_VB.StreamingVB</a></li>
+<li>class <a class="reference external" href="api/api_lda.rst#class-tmlib-lda-streaming-fw-streamingfw">tmlib.lda.Streaming_FW.StreamingFW</a></li>
+<li>class <a class="reference external" href="api/api_lda.rst#class-tmlib-lda-streaming-ope-streamingope">tmlib.lda.Streaming_OPE.StreamingOPE</a></li>
+<li>class <a class="reference external" href="api/api_lda.rst#class-tmlib-lda-ml-cgs-mlcgs">tmlib.lda.ML_CGS.MLCGS</a></li>
+<li>class <a class="reference external" href="api/api_lda.rst#class-tmlib-lda-ml-fw-mlfw">tmlib.lda.ML_FW.MLFW</a></li>
+<li>class <a class="reference external" href="api/api_lda.rst#class-tmlib-lda-ml-ope-mlope">tmlib.lda.ML_OPE.MLOPE</a></li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, DSLab.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.3.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
