@@ -19,12 +19,12 @@ Topic models are probabilistic models of document collections that use latent va
 
 Large-scale learning
 ====================
-Modern data analysis requires computation with massive data. These problems illustrate some of the challenges to modern data analysis. Our data are complex and high-dimensional; we have assumptions to make�from science, intuition, or other data analyses�that involve structures we believe exist in the data but that we cannot directly observe; and finally our data sets are large, possibly even arriving in a never-ending stream. We deploy this library to computing with graphical models that is appropriate for massive data sets, data that might not fit in memory or even be stored locally. This is an efficient tool for learning LDA at large scales
+Modern data analysis requires computation with massive data. These problems illustrate some of the challenges to modern data analysis. Our data are complex and high-dimensional; we have assumptions to make from science, intuition, or other data analyses that involve structures we believe exist in the data but that we cannot directly observe; and finally, our data sets are large, possibly even arriving in a never-ending stream. We deploy this library to computing with graphical models that are appropriate for massive data sets, data that might not fit in memory or even be stored locally. This is an efficient tool for learning LDA at large scales
 
 
 Learning methods for LDA
 ========================
-To learn LDA at large-scale, a good and efficient approach is stochastic inference [1]_. The learning process includes 2 main steps:
+To learn LDA at large-scale, a good and efficient approach is stochastic learning (online/streaming methods). The learning process includes 2 main steps:
 
 - Inference for individual document: infer to find out the **local variables**: topic proportion :math:`\theta` and topic indices **z** (estimate directly or estimate their distribution :math:`\gamma`, :math:`\phi` - "variational parameters")
 - Update **global variable** in a stochastic way to find out directly topics :math:`\beta` (regularized online learning) or its distribution by estimating :math:`\lambda` (online, stream). Global variable here maybe :math:`\beta` or :math:`\lambda` depend on each stochastic methods.
@@ -37,12 +37,10 @@ Actually, this is the first step in learning phase above, posterior inference is
 
 With given model {:math:`\alpha`, :math:`\eta`, :math:`\beta` (or :math:`\lambda`)}, we can infer for new document to find out topic proportion :math:`\theta` and **z** if necessary.
 
-There exists some inference algorithms such as: Variational Bayesian (VB), Collapsed variational Bayes (CVB), Fast collapsed variational Bayes (CVB0), Collapsed Gibbs sampling (CGS), Frank Wolfe (FW) and Online Maximum a Posterior Estimation (OPE) (refer `user guide`_ document for detail)
-
-.. _user guide: ./user_guide.rst
+In this library, we designed some inference algorithms such as: Variational Bayesian (VB), Fast collapsed variational Bayes (CVB0), Collapsed Gibbs sampling (CGS), Frank Wolfe (FW) and Online Maximum a Posterior Estimation (OPE)
 
 ---------------------------------------------------------
-Data input format
+Data format
 ---------------------------------------------------------
 
 Corpus
@@ -54,7 +52,7 @@ Data Format
 
 Our framework is support for 3 input format:
 
-- Corpus with raw text format:
+- Corpus with **raw text** format:
   
   ::
 
@@ -68,9 +66,15 @@ Our framework is support for 3 input format:
                   "Graph minors IV Widths of trees and well quasi ordering",
                   "Graph minors A survey"]
 
-  More detail for format of raw text corpus in a file, see `user guide`_ document 
+  The raw corpus must be stored in a file. Each document is placed in 2 pair tag <DOC></DOC> and <TEXT></TEXT> as follow:
 
-- Term-frequency format (tf):
+  .. image:: ../images/format.PNG
+
+  You can see `ap corpus`_ for example
+
+  .. _ap corpus: https://github.com/TruongKhang/documentation/blob/master/examples/ap/data/ap_infer_raw.txt
+
+- Term-frequency format (**tf**):
 
   The implementations only support reading data type in LDA. Please refer to the following site for instructions: http://www.cs.columbia.edu/~blei/lda-c/
   Under LDA, the words of each document are assumed exchangeable.  Thus, each document is succinctly represented as a sparse vector of word counts. The data is a file where each line is of the form:
@@ -117,7 +121,7 @@ Our framework is support for 3 input format:
        31. "quasi"
        32. "ordering"
 
-  The tf format of corpus will be:
+  The **tf** format of corpus will be:
      
   ::
 
@@ -131,14 +135,14 @@ Our framework is support for 3 input format:
        6 27:1 29:1 30:1 25:1 31:1 32:1 
        3 27:1 29:1 7:1 
 
-- Term-sequence format (sq):
+- Term-sequence format (**sq**):
 
   Each document is represented by a sequence of token as follow
     
-      `[token_1] [token_2] ....`
+  `[token_1] [token_2] [token_3]....`
 
-  [token_i] also is index of it in vocabulary file, not a string. 
-  The sq format of corpus above will be:
+  [token_i] also is index of that token in vocabulary file, not a string. (maybe exist that [token_i] = [token_j]) 
+  The **sq** format of the corpus above will be:
 
   ::
 
@@ -153,55 +157,5 @@ Our framework is support for 3 input format:
        27 29 7 
 
 ----------------------
-Install topicmodel-lib
+Guide to train model
 ----------------------
-
-Requirements
-============
-
-Topicmodel-lib requires:
-
-- Linux OS (Stable on Ubuntu)
-- Python version 2 (stable on version 2.7)
-- Docutils >= 0.3 
-- Numpy >= 1.8 
-- Scipy >= 0.10, 
-- nltk (Natural Language Toolkit)
-- Cython
-
-Install
-=======
-
-If you installed successfully all of package above. Next is steps to install topicmodel-lib
-
-- First, build cython file .pyx to file .so which can be used by python
-
-  ::
-
-    .../topicmodel-lib$ python setup.py build_ext --inplace
-
-  or if you need permission to build:
-
-  ::
-
-    .../topicmodel-lib$ sudo python setup.py build_ext --inplace
-
-- Second, Install library
-
-  ::
-
-    .../topicmodel-lib$ sudo python setup.py install
-
-Uninstall
-=========
-
-To uninstall library:
-
-::
-
-    .../topicmodel-lib$ sudo python setup.py install --record files.txt
-
-    .../topicmodel-lib$ cat files.txt | xargs sudo rm -rf
-
-
-.. [1] M.D. Hoffman, D.M. Blei, C. Wang, and J. Paisley, "Stochastic variational inference," The Journal of Machine Learning Research, vol. 14, no. 1, pp. 1303�1347, 2013.
