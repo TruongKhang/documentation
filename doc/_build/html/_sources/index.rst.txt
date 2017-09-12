@@ -6,9 +6,6 @@
 Welcome to topicmodel-lib's documentation!
 ==========================================
 
-Welcome to topicmodel-lib's documentation!
-==========================================
-
 topicmodel-lib is a Python library for *topic modeling* - a field which provides an efficient way to discover hidden structures/semantics in massive data. Latent Dirichlet Allocation (LDA) is a popular model in this field and we focus on methods for learning LDA by online or stream scheme.
 
 Features
@@ -126,11 +123,7 @@ The project is licensed under the BSD license.
    :maxdepth: 2
    :caption: Contents:
 
-
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
+   quick_start
+   list_api
+   user_guide
+   tutorials

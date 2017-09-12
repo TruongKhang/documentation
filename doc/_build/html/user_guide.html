@@ -35,7 +35,9 @@
         <link rel="index" title="Index"
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="topicmodel-lib 0.3.1 documentation" href="index.html"/> 
+    <link rel="top" title="topicmodel-lib 0.3.1 documentation" href="index.html"/>
+        <link rel="next" title="topicmodel-lib Tutorials" href="tutorials.html"/>
+        <link rel="prev" title="Module" href="list_api.html"/> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -88,39 +90,42 @@
               
             
             
-              <!-- Local TOC -->
-              <div class="local-toc"><ul>
-<li><a class="reference internal" href="#">User guide</a><ul>
-<li><a class="reference internal" href="#working-with-data-input">1. Working with data input</a><ul>
-<li><a class="reference internal" href="#preprocessing">1.1. Preprocessing</a></li>
-<li><a class="reference internal" href="#loading-a-mini-batch-from-corpus">1.2. Loading a “mini-batch” from corpus</a></li>
-<li><a class="reference internal" href="#loading-a-minibatch-from-wikipedia-website">1.3. Loading a minibatch from Wikipedia website</a></li>
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="quick_start.html">Quick-Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="list_api.html">Module</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">User guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#working-with-data-input">1. Working with data input</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#preprocessing">1.1. Preprocessing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#loading-a-mini-batch-from-corpus">1.2. Loading a “mini-batch” from corpus</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#loading-a-minibatch-from-wikipedia-website">1.3. Loading a minibatch from Wikipedia website</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#stochastic-methods-for-learning-lda-from-large-corpora">2. Stochastic methods for learning LDA from large corpora</a><ul>
-<li><a class="reference internal" href="#online-vb">2.1. Online-VB</a></li>
-<li><a class="reference internal" href="#online-cvb0">2.2. Online-CVB0</a></li>
-<li><a class="reference internal" href="#online-cgs">2.3. Online-CGS</a></li>
-<li><a class="reference internal" href="#online-ope">2.4. Online-OPE</a></li>
-<li><a class="reference internal" href="#online-fw">2.5. Online-FW</a></li>
-<li><a class="reference internal" href="#streaming-vb">2.6. Streaming-VB</a></li>
-<li><a class="reference internal" href="#streaming-ope">2.7. Streaming-OPE</a></li>
-<li><a class="reference internal" href="#streaming-fw">2.8. Streaming-FW</a></li>
-<li><a class="reference internal" href="#ml-cgs">2.9. ML-CGS</a></li>
-<li><a class="reference internal" href="#ml-ope">2.10. ML-OPE</a></li>
-<li><a class="reference internal" href="#ml-fw">2.11. ML-FW</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#stochastic-methods-for-learning-lda-from-large-corpora">2. Stochastic methods for learning LDA from large corpora</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#online-vb">2.1. Online-VB</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#online-cvb0">2.2. Online-CVB0</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#online-cgs">2.3. Online-CGS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#online-ope">2.4. Online-OPE</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#online-fw">2.5. Online-FW</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#streaming-vb">2.6. Streaming-VB</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#streaming-ope">2.7. Streaming-OPE</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#streaming-fw">2.8. Streaming-FW</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ml-cgs">2.9. ML-CGS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ml-ope">2.10. ML-OPE</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ml-fw">2.11. ML-FW</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#how-to-save-or-load-model">3. How to save or load model</a><ul>
-<li><a class="reference internal" href="#save-model-or">Save model (<span class="math">\(\lambda\)</span> or <span class="math">\(\beta\)</span>)</a></li>
-<li><a class="reference internal" href="#load-model-from-a-file">Load model from a file</a></li>
-<li><a class="reference internal" href="#save-top-words-of-topics">Save top words of topics</a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="#how-to-save-or-load-model">3. How to save or load model</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#save-model-or">Save model (<span class="math">\(\lambda\)</span> or <span class="math">\(\beta\)</span>)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#load-model-from-a-file">Load model from a file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#save-top-words-of-topics">Save top words of topics</a></li>
 </ul>
 </li>
 </ul>
-</div>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials.html">topicmodel-lib Tutorials</a></li>
+</ul>
+
             
           
         </div>
@@ -316,6 +321,15 @@
            </div>
           </div>
           <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="tutorials.html" class="btn btn-neutral float-right" title="topicmodel-lib Tutorials" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="list_api.html" class="btn btn-neutral" title="Module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
   
 
   <hr/>
