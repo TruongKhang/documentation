@@ -19,28 +19,20 @@ Topic models are probabilistic models of document collections that use latent va
 
 Large-scale learning
 ====================
-Modern data analysis requires computation with massive data. These problems illustrate some of the challenges to modern data analysis. Our data are complex and high-dimensional; we have assumptions to make from science, intuition, or other data analyses that involve structures we believe exist in the data but that we cannot directly observe; and finally, our data sets are large, possibly even arriving in a never-ending stream. We deploy this library to computing with graphical models that are appropriate for massive data sets, data that might not fit in memory or even be stored locally. This is an efficient tool for learning LDA at large scales
+Modern data analysis requires computation with massive data. These problems illustrate some of the challenges to modern data analysis. Our data are complex and high-dimensional; we have assumptions to make from science, intuition, or other data analyses that involve structures we believe exist in the data but that we cannot directly observe; and finally, our data sets are large, possibly even arriving in a never-ending stream. We deploy this library to computing with graphical models that are appropriate for massive datasets, data that might not fit in memory or even be stored locally. This is an efficient tool for learning LDA at large scales
 
 
 Learning methods for LDA
 ========================
 To learn LDA at large-scale, a good and efficient approach is stochastic learning (online/streaming methods). The learning process includes 2 main steps:
 
-- Inference for individual document: infer to find out the **local variables**: topic proportion :math:`\theta` and topic indices **z** (estimate directly or estimate their distribution :math:`\gamma`, :math:`\phi` - "variational parameters")
-- Update **global variable** in a stochastic way to find out directly topics :math:`\beta` (regularized online learning) or its distribution by estimating :math:`\lambda` (online, stream). Global variable here maybe :math:`\beta` or :math:`\lambda` depend on each stochastic methods.
+- Inference for individual document: infer to find out the **hidden local variables**: topic proportion :math:`\theta` or topic indices **z**. To deal with this, we can estimate directly or estimate their distribution P(:math:`\theta` | :math:`\gamma`), P(**z** | :math:`\phi`) (:math:`\gamma`, :math:`phi` called "variational parameters"). 
+- Update **global variable** in a stochastic way to find out directly topics :math:`\beta` or we can estimate topics by finding out its distribution P(:math:`\beta` | :math:`\lambda`) (estimating variational parameter :math:`\lambda`). Global variable here maybe :math:`\beta` or :math:`\lambda` depend on each stochastic methods.
 
 Indeed, this phase is as same as training step in machine learning. 
 
-Posterior Inference
-===============================================
-Actually, this is the first step in learning phase above, posterior inference is the core step when designing efficient algorithms for learning topic models from large-scale data. It also plays a important role in many tasks, such as understanding individual texts, dimensionality reduction, and prediction
-
-With given model {:math:`\alpha`, :math:`\eta`, :math:`\beta` (or :math:`\lambda`)}, we can infer for new document to find out topic proportion :math:`\theta` and **z** if necessary.
-
-In this library, we designed some inference algorithms such as: Variational Bayesian (VB), Fast collapsed variational Bayes (CVB0), Collapsed Gibbs sampling (CGS), Frank Wolfe (FW) and Online Maximum a Posterior Estimation (OPE)
-
 ---------------------------------------------------------
-Data format
+Training Data
 ---------------------------------------------------------
 
 Corpus
@@ -156,6 +148,96 @@ Our framework is support for 3 input format:
        27 29 30 25 31 32 
        27 29 7 
 
-----------------------
-Guide to train model
-----------------------
+--------------------------
+Guide to the learning step
+--------------------------
+
+In this phase, the main task is find out the global variable (topics) - in this project, we call it named `model` for simple. We designed the state-of-the-art methods (online/streaming learning): `Online VB`_, `Online CVB0`_, `Online CGS`_, `Online OPE`_, `Online FW`_, `Streaming VB`_, `Streaming OPE`_, `Streaming FW`_, `ML-OPE`_, `ML-CGS`_, `ML-FW`_
+
+.. _Online VB: ./methods/online_vb.rst
+.. _Online CVB0: ./methods/online_cvb0.rst
+.. _Online CGS: ./methods/online_cgs.rst
+.. _Online OPE: ./methods/online_ope.rst
+.. _Online FW: ./methods/online_fw.rst
+.. _Streaming VB: ./methods/streaming_vb.rst
+.. _Streaming OPE: ./methods/streaming_ope.rst
+.. _Streaming FW: ./methods/streaming_fw.rst
+.. _ML-OPE: ./methods/ml_ope.rst
+.. _ML-CGS: ./methods/ml_cgs.rst
+.. _ML-FW: ./methods/ml_fw.rst
+
+All of this methods are used in the same way. So, in this guide, we'll demo with a specific method such as Online VB. This method is proposed by Hoffman-2010, using stochastic variational inference
+
+Data Preparation
+================
+Make sure that your training data must be stored in a text file and abide by the `format`_: **tf**, **sq** or **raw text**
+
+.. _format: ./quick_start.rst#data-format
+
+We also support the `preprocessing`_ module to work with the raw text format, you can convert to the tf or sq format. But if you don't want to use it, it's OK because we integrated that work in class ``DataSet``. Therefore, the first thing you need to do is create an object ``DataSet``
+
+::
+
+  from tmlib.datasets import DataSet
+  # data_path is the path of file contains your training data
+  data = DataSet(data_path, batch_size=5000, passes=5, shuffle_every=2)
+
+The statement above is used when `data_path` is the raw text format. If your training file is the tf or sq format. You need to add an argument is the vocabulary file of the corpus as follow:
+
+::
+
+  # vocab_file is the path of file vocabulary of corpus
+  data = DataSet(data_path, batch_size=5000, passes=5, shuffle_every=2, vocab_file=vocab_file)
+
+The parameters **batch_size**, **passes**, **shuffle_every** you can see in `documentation here`_
+
+.. _documentation here: ./methods/online_vb.rst
+.. _preprocessing: ./preprocessing.rst
+
+Learning
+========
+
+First, we need to create an object ``OnlineVB``:
+
+::
+
+  from tmlib.lda import OnlineVB
+  onl_vb = OnlineVB(data, num_topics=100, alpha=0.01, eta=0.01, tau0=1.0, kappa=0.9)
+
+``data`` is the object which created above. Parameter **num_topics** number of requested latent topics to be extracted from the training corpus. **alpha**, **eta** are hyperparameters of LDA model that affect sparsity of the topic proportions (:math:`\theta`) and topic-word (:math:`\beta`) distributions. **tau0**, **kappa** are learning parameters which are used in the update global variable step (same meaning as learning rate in the gradient descent optimization)
+
+Start learning by call function **learn_model**:
+
+::
+
+  model = onl_vb.learn_model()
+
+The returned result is an object `LdaModel`_
+
+.. _LdaModel: ./ldamodel.rst
+
+You can also save the model (:math:`\beta` or :math:`\lambda`) or some statistics such as: learning time, sparsity of document in the learning process
+
+::
+
+  model = onl_vb.learn_model(save_statistic=True, save_model_every=2, compute_sparsity_every=2, save_top_words_every=2, num_top_words=10, model_folder='models')
+
+The result is saved in folder `models`. More detail about this parameters, read `here`_
+
+.. _here: ./methods/online_vb.rst
+
+One more thing, the topic proportions (:math:`\theta`) of each document in the corpus can be saved in a file ``.h5``. This work is necessary for `visualization`_ module but it'll make the learning time slower. So, be careful when using it!
+
+::
+
+  # for example: path_of_h5_file = 'models/database.h5'
+  model = onl_vb.learn_model(save_topic_proportion=path_of_h5_file)
+
+.. _visualization: ./visualization.rst
+
+
+
+---------------------------
+Inference for new documents
+---------------------------
+After learning phase, you have the `model` - topics (:math:`\beta` or :math:`\lambda`). You want to infer for some documents to find out what topics these documents are related to. We need to estimate topic-proportions :math:`\theta`
