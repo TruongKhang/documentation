@@ -121,7 +121,7 @@ The project is licensed under the MIT license.
 
 .. toctree::
    :maxdepth: 2
-   :caption: Getting started:
+   :caption: Getting started
 
    quick_start
    list_api

@@ -1,11 +1,3 @@
-.. -*- coding: utf-8 -*-
-
-.. ===========
-.. Quick-Start
-.. ===========
-.. A very short introduction into topic models and how to solve them using topicmodel-lib. This document also introduces some basic concepts and conventions.
-
-
 ---------------------------
 Topic models
 ---------------------------
@@ -58,7 +50,7 @@ Our framework is support for 3 input format:
 
   The raw corpus must be stored in a file. Each document is placed in 2 pair tag <DOC></DOC> and <TEXT></TEXT> as follow:
 
-  .. image:: ../images/format.PNG
+  .. image:: ./images/format.PNG
 
   You can see `ap corpus`_ for example
 
@@ -150,7 +142,7 @@ Our framework is support for 3 input format:
 Guide to the learning step
 --------------------------
 
-In this phase, the main task is find out the global variable (topics) - in this project, we call it named `model` for simple. We designed the state-of-the-art methods (online/streaming learning): `Online VB`_, `Online CVB0`_, `Online CGS`_, `Online OPE`_, `Online FW`_, `Streaming VB`_, `Streaming OPE`_, `Streaming FW`_, `ML-OPE`_, `ML-CGS`_, `ML-FW`_
+In this phase, the main task is to find out the global variable (topics) - in this project, we call it named `model` for simple. We designed the state-of-the-art methods (online/streaming learning): `Online VB`_, `Online CVB0`_, `Online CGS`_, `Online OPE`_, `Online FW`_, `Streaming VB`_, `Streaming OPE`_, `Streaming FW`_, `ML-OPE`_, `ML-CGS`_, `ML-FW`_
 
 .. _Online VB: ./methods/online_vb.rst
 .. _Online CVB0: ./methods/online_cvb0.rst
@@ -168,9 +160,7 @@ All of this methods are used in the same way. So, in this guide, we'll demo with
 
 Data Preparation
 ================
-Make sure that your training data must be stored in a text file and abide by the `format`_: **tf**, **sq** or **raw text**
-
-.. _format: ./quick_start.rst#data-format
+Make sure that your training data must be stored in a text file and abide by the `Data Format`_: **tf**, **sq** or **raw text**
 
 We also support the `preprocessing`_ module to work with the raw text format, you can convert to the tf or sq format. But if you don't want to use it, it's OK because we integrated that work in class ``DataSet``. Therefore, the first thing you need to do is create an object ``DataSet``
 
@@ -233,9 +223,73 @@ One more thing, the topic proportions (:math:`\theta`) of each document in the c
 
 .. _visualization: ./visualization.rst
 
+Saving model, display topics
+============================
+After the learning phase as above, you can save the topic distribution (`model` - :math:`\beta` or :math:`\lambda`)
 
+::
+
+  # path_to_save is the path of file to save model
+  model.save_model(path_to_save, file_type='binary')
+
+File `path_to_save` is the ``.npy`` file if type of file is binary or is the ``.txt`` file if **file_type** is ``'txt'``
+
+You also can display the topics discovered
+
+::
+
+  # display topics, print the top 10 words of each topic to screen
+  model.print_top_words(10, display_result='screen')
+
+If you want to save in a file:
+
+::
+
+  # path_file is to which data is saved
+  model.print_top_words(10, display_result=path_file)
 
 ---------------------------
 Inference for new documents
 ---------------------------
-After learning phase, you have the `model` - topics (:math:`\beta` or :math:`\lambda`). You want to infer for some documents to find out what topics these documents are related to. We need to estimate topic-proportions :math:`\theta`
+After learning phase, you have the `model` - topic distributions (:math:`\beta` or :math:`\lambda`). You want to infer for some documents to find out what topics these documents are related to. We need to estimate topic-proportions :math:`\theta`
+
+First, create an object ``DataSet`` to load new documents from a file. 
+
+If data format in that file is `raw text`_, you need the vocabulary file used in learning phase
+
+.. _raw text: Data Format
+
+::
+
+  from tmlib.datasets import DataSet
+  
+  data = DataSet()
+  # vocab_file is the vocabulary file used in learning phase
+  new_corpus = data.load_new_documents(file_new_docs, vocab_file=vocab_file)
+
+or if data format is the **tf** or **sq** format. The statement simply is:
+
+::
+
+  new_corpus = data.load_new_documents(file_new_docs)
+
+After that, you have to load the model which is saved in the learning phase into object ``OnlineVB``
+
+::
+
+  # create object LdaModel
+  learnt_model = LdaModel()
+  # read topic distribution from file
+  lda_model.load_model(path_file_to_read)
+
+  # load lda_model into OnlineVB
+  from tmlib.lda import OnlineVB
+  online_vb = OnlineVB(lda_model=learnt_model)
+
+Call ``infer_new_docs`` function to inference step
+
+::
+
+  gamma = online_vb.infer_new_docs(new_corpus)
+  # you can estimate topic proportion theta from variational parameter gamma
+  theta = online_vb.estimate_topic_proportion(gamma)
