@@ -1,11 +1,9 @@
 .. -*- coding: utf-8 -*-
 
-===========
-Quick-Start
-===========
-A very short introduction into topic models and how to solve them using topicmodel-lib. This document also introduces some basic concepts and conventions.
-
-.. Contents::
+.. ===========
+.. Quick-Start
+.. ===========
+.. A very short introduction into topic models and how to solve them using topicmodel-lib. This document also introduces some basic concepts and conventions.
 
 
 ---------------------------

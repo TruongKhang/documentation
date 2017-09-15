@@ -116,12 +116,12 @@ If you have an open-ended or a research question, you can join and contact via:
 License
 -------
 
-The project is licensed under the BSD license.
+The project is licensed under the MIT license.
 
 
 .. toctree::
    :maxdepth: 2
-   :caption: Contents:
+   :caption: Getting started:
 
    quick_start
    list_api
