@@ -124,6 +124,24 @@ The project is licensed under the MIT license.
    :caption: Getting started
 
    quick_start
-   list_api
-   user_guide
-   tutorials
+
+.. toctree::
+   :maxdepth: 2
+   :caption: API
+
+   lda_model
+   methods/online_vb
+   methods/online_cvb0
+   methods/online_cgs
+   methods/online_fw
+   methods/online_ope
+   methods/streaming_vb
+   methods/streaming_fw
+   methods/streaming_ope
+   methods/ml_cgs
+   methods/ml_fw
+   methods/ml_ope
+   datasets
+   preprocessing
+   visualization
+

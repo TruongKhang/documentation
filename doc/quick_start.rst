@@ -1,3 +1,11 @@
+.. -*- coding: utf-8 -*-
+
+============
+Introduction
+============
+A very short introduction into topic models and how to solve them using topicmodel-lib. This document also introduces some basic concepts and conventions.
+
+
 ---------------------------
 Topic models
 ---------------------------
@@ -21,53 +29,57 @@ To learn LDA at large-scale, a good and efficient approach is stochastic learnin
 
 Indeed, this phase is as same as training step in machine learning. 
 
----------------------------------------------------------
-Training Data
----------------------------------------------------------
-
+======
 Corpus
 ======
+
 A corpus is a collection of digital documents. This collection is the input to topicmodel-lib from which it will infer the structure of the documents, their topics, topic proportions, etc. The latent structure inferred from the corpus can later be used to assign topics to new documents which were not present in the training corpus. For this reason, we also refer to this collection as the training corpus. No human intervention (such as tagging the documents by hand) is required - the topic classification is unsupervised.
 
+-----------
 Data Format
-===========
+-----------
 
-Our framework is support for 3 input format:
+Because we need to learn the model from the massive data, the loading whole of training data into memory is a bad idea. Corpus used for training should be stored in a file and with a specific format. Our library supports 3 formats of data:
 
-- Corpus with **raw text** format:
+Raw Text
+========
   
-  ::
+::
 
-    raw_corpus = ["Human machine interface for lab abc computer applications",
-                  "A survey of user opinion of computer system response time",
-                  "The EPS user interface management system",
-                  "System and human system engineering testing of EPS",              
-                  "Relation of user perceived response time to error measurement",
-                  "The generation of random binary unordered trees",
-                  "The intersection graph of paths in trees",
-                  "Graph minors IV Widths of trees and well quasi ordering",
-                  "Graph minors A survey"]
+  raw_corpus = ["Human machine interface for lab abc computer applications",
+                "A survey of user opinion of computer system response time",
+                "The EPS user interface management system",
+                "System and human system engineering testing of EPS",              
+                "Relation of user perceived response time to error measurement",
+                "The generation of random binary unordered trees",
+                "The intersection graph of paths in trees",
+                "Graph minors IV Widths of trees and well quasi ordering",
+                "Graph minors A survey"]
 
-  The raw corpus must be stored in a file. Each document is placed in 2 pair tag <DOC></DOC> and <TEXT></TEXT> as follow:
+The raw corpus must be stored in a file. Each document is placed in 2 pair tag <DOC></DOC> and <TEXT></TEXT> as follow
 
-  .. image:: ./images/format.PNG
+.. image:: ./images/format.PNG
 
-  You can see `ap corpus`_ for example
+You can see `raw AP corpus`_ for example
 
-  .. _ap corpus: https://github.com/TruongKhang/documentation/blob/master/examples/ap/data/ap_infer_raw.txt
+.. _raw AP corpus: https://github.com/TruongKhang/documentation/blob/master/examples/ap/data/ap_infer_raw.txt
 
-- Term-frequency format (**tf**):
+Term-frequency (tf)
+===================
 
-  The implementations only support reading data type in LDA. Please refer to the following site for instructions: http://www.cs.columbia.edu/~blei/lda-c/
-  Under LDA, the words of each document are assumed exchangeable.  Thus, each document is succinctly represented as a sparse vector of word counts. The data is a file where each line is of the form:
+Term-frequency format (**tf**) is derived from `Blei, 2003`_. This is a corpus which we achieve after preprocessing raw corpus. We also extract to a vocabulary set for that corpus (unique terms in whole corpus) 
 
-  `[N] [term_1]:[count] [term_2]:[count] ...  [term_N]:[count]`
+.. _`Blei, 2003`: http://www.cs.columbia.edu/~blei/lda-c/
 
-  where [N] is the number of unique terms in the document, and the [count] associated with each term is how many times that term appeared in the document.  Note that [term_i] is an integer which indexes the term (index of that term in file vocabulary); it is not a string.
+Under LDA, the words of each document are assumed exchangeable.  Thus, each document is succinctly represented as a sparse vector of word counts. The data is a file where each line is of the form:
 
-  For example, with corpus as raw_corpus above and file vocabulary is:
+`[N] [term_1]:[count] [term_2]:[count] ...  [term_N]:[count]`
 
-  ::
+where [N] is the number of unique terms in the document, and the [count] associated with each term is how many times that term appeared in the document.  Note that [term_i] is an integer which indexes the term (index of that term in file vocabulary); it is not a string.
+
+For example, with corpus as raw_corpus above and file vocabulary is:
+
+::
 
        0. "human"
        1. "machine"
@@ -103,9 +115,9 @@ Our framework is support for 3 input format:
        31. "quasi"
        32. "ordering"
 
-  The **tf** format of corpus will be:
+The **tf** format of corpus will be:
      
-  ::
+::
 
        7 0:1 1:1 2:1 3:1 4:1 5:1 6:1 
        7 7:1 8:1 9:1 5:1 10:1 11:1 12:1 
@@ -117,16 +129,17 @@ Our framework is support for 3 input format:
        6 27:1 29:1 30:1 25:1 31:1 32:1 
        3 27:1 29:1 7:1 
 
-- Term-sequence format (**sq**):
+Term-sequence (sq)
+==================
 
-  Each document is represented by a sequence of token as follow
+Each document is represented by a sequence of token as follow
     
-  `[token_1] [token_2] [token_3]....`
+`[token_1] [token_2] [token_3]....`
 
-  [token_i] also is index of that token in vocabulary file, not a string. (maybe exist that [token_i] = [token_j]) 
-  The **sq** format of the corpus above will be:
+[token_i] also is index of that token in vocabulary file, not a string. (maybe exist that [token_i] = [token_j]) 
+The **sq** format of the corpus above will be:
 
-  ::
+::
 
        0 1 2 3 4 5 6 
        7 8 9 5 10 11 12 
@@ -138,9 +151,9 @@ Our framework is support for 3 input format:
        27 29 30 25 31 32 
        27 29 7 
 
---------------------------
-Guide to the learning step
---------------------------
+====================
+Guide to learn model
+====================
 
 In this phase, the main task is to find out the global variable (topics) - in this project, we call it named `model` for simple. We designed the state-of-the-art methods (online/streaming learning): `Online VB`_, `Online CVB0`_, `Online CGS`_, `Online OPE`_, `Online FW`_, `Streaming VB`_, `Streaming OPE`_, `Streaming FW`_, `ML-OPE`_, `ML-CGS`_, `ML-FW`_
 
@@ -158,8 +171,9 @@ In this phase, the main task is to find out the global variable (topics) - in th
 
 All of this methods are used in the same way. So, in this guide, we'll demo with a specific method such as Online VB. This method is proposed by Hoffman-2010, using stochastic variational inference
 
+----------------
 Data Preparation
-================
+----------------
 Make sure that your training data must be stored in a text file and abide by the `Data Format`_: **tf**, **sq** or **raw text**
 
 We also support the `preprocessing`_ module to work with the raw text format, you can convert to the tf or sq format. But if you don't want to use it, it's OK because we integrated that work in class ``DataSet``. Therefore, the first thing you need to do is create an object ``DataSet``
@@ -182,15 +196,16 @@ The parameters **batch_size**, **passes**, **shuffle_every** you can see in `doc
 .. _documentation here: ./methods/online_vb.rst
 .. _preprocessing: ./preprocessing.rst
 
+--------
 Learning
-========
+--------
 
 First, we need to create an object ``OnlineVB``:
 
 ::
 
   from tmlib.lda import OnlineVB
-  onl_vb = OnlineVB(data, num_topics=100, alpha=0.01, eta=0.01, tau0=1.0, kappa=0.9)
+  onl_vb = OnlineVB(data=data, num_topics=100, alpha=0.01, eta=0.01, tau0=1.0, kappa=0.9)
 
 ``data`` is the object which created above. Parameter **num_topics** number of requested latent topics to be extracted from the training corpus. **alpha**, **eta** are hyperparameters of LDA model that affect sparsity of the topic proportions (:math:`\theta`) and topic-word (:math:`\beta`) distributions. **tau0**, **kappa** are learning parameters which are used in the update global variable step (same meaning as learning rate in the gradient descent optimization)
 
@@ -223,8 +238,9 @@ One more thing, the topic proportions (:math:`\theta`) of each document in the c
 
 .. _visualization: ./visualization.rst
 
+----------------------------
 Saving model, display topics
-============================
+----------------------------
 After the learning phase as above, you can save the topic distribution (`model` - :math:`\beta` or :math:`\lambda`)
 
 ::
@@ -239,25 +255,23 @@ You also can display the topics discovered
 ::
 
   # display topics, print the top 10 words of each topic to screen
-  model.print_top_words(10, display_result='screen')
+  model.print_top_words(10, data.vocab_file, display_result='screen')
 
 If you want to save in a file:
 
 ::
 
   # path_file is to which data is saved
-  model.print_top_words(10, display_result=path_file)
+  model.print_top_words(10, data.vocab_file, display_result=path_file)
 
----------------------------
+===========================
 Inference for new documents
----------------------------
+===========================
 After learning phase, you have the `model` - topic distributions (:math:`\beta` or :math:`\lambda`). You want to infer for some documents to find out what topics these documents are related to. We need to estimate topic-proportions :math:`\theta`
 
 First, create an object ``DataSet`` to load new documents from a file. 
 
-If data format in that file is `raw text`_, you need the vocabulary file used in learning phase
-
-.. _raw text: Data Format
+If data format in that file is `Raw Text`_, you need the vocabulary file used in learning phase
 
 ::
 
@@ -286,10 +300,112 @@ After that, you have to load the model which is saved in the learning phase into
   from tmlib.lda import OnlineVB
   online_vb = OnlineVB(lda_model=learnt_model)
 
-Call ``infer_new_docs`` function to inference step
+Call ``infer_new_docs`` function to rum inference
 
 ::
 
   gamma = online_vb.infer_new_docs(new_corpus)
   # you can estimate topic proportion theta from variational parameter gamma
   theta = online_vb.estimate_topic_proportion(gamma)
+  
+=======
+Example
+=======
+  
+You can see in `example folder`_. We prepared the AP corpus including both raw corpus and term-frequency corpus. In here, we'll show code with both of type corpus and use method `Online OPE`_ (known is fast than Online VB)
+
+.. _example folder: https://github.com/hncuong/topicmodel-lib/tree/master/examples/ap
+.. _Online OPE: ./methods/online_ope.rst
+
+- Raw AP corpus
+
+  ::
+
+    from tmlib.lda import OnlineOPE
+    from tmlib.datasets import DataSet
+
+    # data preparation
+    data = DataSet(data_path='data/ap_train_raw.txt', batch_size=100, passes=5, shuffle_every=2)
+    # learning
+    onl_ope = OnlineOPE(data=data, num_topics=20, alpha=0.2)
+    model = onl_vb.learn_model()
+    # save model (beta or lambda)
+    model.save_model('topic_distribution.npy')
+    # display top 10 words of each topic
+    model.print_top_words(10, data.vocab_file, display_result='screen')
+
+    # inference for new documents
+    vocab_file = data.vocab_file
+    new_corpus = data.load_new_documents('data/ap_infer_raw.txt', vocab_file=vocab_file)
+    topic_proportions = onl_ope.infer_new_docs(new_corpus)
+
+  Topics:
+
+  ::
+
+    topic 0: water, environmental, people, trust, earth, pollution, taxes, claims, air, boat, 
+    topic 1: year, people, years, mrs, police, time, day, family, state, women, 
+    topic 2: percent, year, company, department, million, plant, health, state, report, study, 
+    topic 3: police, government, people, military, iraq, army, killed, officials, israel, war, 
+    topic 4: cent, cents, weather, lower, temperatures, bushel, snow, inches, coast, central, 
+    topic 5: billion, deficit, housing, japan, japanese, trade, fair, cuba, imports, exports, 
+    topic 6: cbs, abc, williams, miles, area, earthquake, quake, homeless, pope, john, 
+    topic 7: bush, president, dukakis, states, reagan, congress, campaign, house, united, south, 
+    topic 8: campaign, state, northern, mexico, republican, police, county, alabama, cuomo, governor, 
+    topic 9: trade, takeshita, deconcini, oil, pension, committee, keating, fernandez, lawsuit, illness, 
+    topic 10: court, case, attorney, trial, judge, federal, charges, law, justice, jury, 
+    topic 11: party, government, political, workers, national, labor, opposition, people, elections, country, 
+    topic 12: million, tax, sales, income, year, cash, estate, assets, money, billion, 
+    topic 13: school, movie, film, board, parents, ban, mca, theater, roberts, fees, 
+    topic 14: students, computer, farmers, teachers, smoking, schools, student, stolen, kasparov, faculty, 
+    topic 15: dollar, yen, late, gold, london, bid, ounce, bank, thursday, dealers, 
+    topic 16: percent, market, year, stock, million, prices, billion, rose, exchange, index, 
+    topic 17: soviet, gorbachev, united, union, president, officials, west, year, germany, east, 
+    topic 18: bill, senate, house, kennedy, sen, rep, measure, humphrey, director, thompson, 
+    topic 19: meese, museum, disney, school, city, board, art, smith, buildings, memorial,
+
+- tf format
+
+  :: 
+    
+    from tmlib.lda import OnlineOPE
+    from tmlib.datasets import DataSet
+
+    # data preparation
+    data = DataSet(data_path='data/ap_train.txt', batch_size=100, passes=5, shuffle_every=2, vocab_file='data/vocab.txt')
+    # learning
+    onl_ope = OnlineOPE(data=data, num_topics=20, alpha=0.2)
+    model = onl_vb.learn_model()
+    # save model (beta or lambda)
+    model.save_model('topic_distribution.npy')
+    # display top 10 words of each topic
+    model.print_top_words(10, data.vocab_file, display_result='screen')
+
+    # inference for new documents
+    new_corpus = data.load_new_documents('data/ap_infer.txt')
+    topic_proportions = onl_ope.infer_new_docs(new_corpus)
+
+  Topics:
+
+  ::
+
+    topic 0: two, new, people, i, years, first, officials, time, fire, day, 
+    topic 1: israel, minister, prime, vietnam, thatcher, party, opec, ministers, demjanjuk, labor, 
+    topic 2: million, percent, futures, year, market, bank, analysts, new, cbs, nbc, 
+    topic 3: dukakis, jackson, democratic, presidential, campaign, candidates, candidate, vote, voters, delegates, 
+    topic 4: million, company, new, billion, inc, corp, board, year, court, federal, 
+    topic 5: bush, united, states, president, trade, billion, house, congress, new, budget, 
+    topic 6: stock, market, dollar, trading, exchange, yen, prices, late, index, rose, 
+    topic 7: korean, korea, city, village, police, north, st, traffic, koreas, citys, 
+    topic 8: police, people, killed, two, government, army, military, officials, three, city, 
+    topic 9: south, africa, african, black, elections, party, national, war, mandela, blacks, 
+    topic 10: states, united, nicaragua, noriega, drug, contras, court, coup, humphrey, manila, 
+    topic 11: reagan, china, nuclear, study, b, prisoners, fitzwater, researchers, games, animals, 
+    topic 12: i, new, people, years, percent, year, last, state, time, two, 
+    topic 13: trial, case, prison, charges, convicted, jury, attorney, guilty, sentence, prosecutors, 
+    topic 14: rain, northern, texas, inches, california, central, damage, santa, hospital, valley, 
+    topic 15: soviet, government, gorbachev, union, party, president, political, two, news, people, 
+    topic 16: service, offer, court, companies, firm, ruling, information, appeals, operations, services, 
+    topic 17: water, care, homeless, environmental, pollution, fair, species, air, disaster, farm, 
+    topic 18: percent, year, cents, oil, prices, west, german, rate, sales, price, 
+    topic 19: air, plane, flight, two, iraq, soviet, force, kuwait, airport, iraqi,
