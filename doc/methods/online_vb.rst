@@ -2,7 +2,7 @@
 Online VB
 =========
 
-Online VB stand for Online Variational Bayes which is proposed by Hoffman, 2010 [1]_. The learning problem of LDA is to estimate full joint distribution **P**(**z**, :math:`\theta`, :math:`\beta` | C) given a corpus C. This problem is intractable and to sovle this, VB [2]_ approximate that distribution by a distribution Q
+Online VB stand for Online Variational Bayes which is proposed by Hoffman, 2010 [1]_. The learning problem of LDA is to estimate full joint distribution **P** (**z**, :math:`\theta`, :math:`\beta` | C) given a corpus C. This problem is intractable and to sovle this, VB [2]_ approximate that distribution by a distribution Q
 
 .. math::
 
@@ -10,7 +10,7 @@ Online VB stand for Online Variational Bayes which is proposed by Hoffman, 2010 
 
 (k is index of topic)
 
-and now, the learning problem is reduced to estimation the variational parameters {:math`\phi`, :math:`\gamma`, :math:`\lambda`}
+and now, the learning problem is reduced to estimation the variational parameters {:math:`\phi`, :math:`\gamma`, :math:`\lambda`}
 
 The Online VB using `stochastic variational inference` includes 2 steps:
 
@@ -52,7 +52,7 @@ Parameters
 
   .. math::
 
-     \rho_t = (t + \tau_0)^(\kappa)
+     \rho_t = (t + \tau_0)^{-\kappa}
 
   And in this, the `delay` tau0 (:math:`\tau_{0}`) >= 0 down-weights early iterations
 
