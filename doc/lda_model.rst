@@ -10,7 +10,7 @@ class LdaModel
 
   tmlib.lda.LdaModel(num_terms=None, num_topics=None, random_type=0)
 
-This class provides some function to help you process model (:math:`\lambda` or :math:`\beta`): you can save model, load model or display words of topics...
+This class provides some function to help you manipulate model (:math:`\lambda` or :math:`\beta`): you can save model, load model or display words of topics...
 
 Parameters
 ===========
