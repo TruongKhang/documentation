@@ -8,7 +8,7 @@ CVB0 [2]_ is derived from CVB [1]_ (Collapsed Variational Bayes), it's an improv
 
    Q(z, \theta, \beta) = Q(\theta, \beta | z, \gamma, \lambda) * \prod_{d \in C} Q(z_d | \phi_d)
 
-Online CVB0 [3]_ is an online version of CVB0. It'll infer to the variational parameter :math:`\phi` and update the global variable by a stochastic algorithm. The global variable here is a statistic :math:`\textbf{N}^{\beta}` updated from :math:`\phi`. This statistic plays a similar role with :math:`\lambda` (`topic statistic`) in VB and we can estimate topics from this statistic. To estimate the topic proportions, Online CVB0 also used the other statistic is :math:`\bm{N}^{\theta}` called `document statistic`, and it also is updated from :math:`\phi` in a stochastic way. 
+Online CVB0 [3]_ is an online version of CVB0. It'll infer to the variational parameter :math:`\phi` and update the global variable by a stochastic algorithm. The global variable here is a statistic :math:`N^{\beta}` (`topic statistic`) updated from :math:`\phi`. This statistic plays a similar role with :math:`\lambda` in VB and we can estimate topics from this statistic. To estimate the topic proportions, Online CVB0 also used the other statistic is :math:`N^{\theta}` called `document statistic`, and it also is updated from :math:`\phi` in a stochastic way. 
 
 --------------------------------------
 class OnlineCVB0
@@ -47,7 +47,7 @@ Parameters
 
   The learning parameters s, :math:`\tau_0` and :math:`\kappa` can be changed manually and called the step-size schedule. But there exist some constrain: :math:`\tau_0 \geq 0` and :math:`\kappa \in (0.5, 1]`. 
 
-  The step-size schedule (s_phi, tau_phi, kappa_phi) is used for update :math:`\bm{N}^{\beta}` and (s_theta, tau_theta, kappa_theta) used for update :math:`\bm{N}^{\theta}. 
+  The step-size schedule (s_phi, tau_phi, kappa_phi) is used for update :math:`N^{\beta}` and (s_theta, tau_theta, kappa_theta) used for update :math:`N^{\theta}. 
 
 - **kappa_phi** : float, default: 0.9
 
