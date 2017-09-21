@@ -170,7 +170,7 @@ Example
     vocab_file = data.vocab_file
     # create object ``Corpus`` to store new documents
     new_corpus = data.load_new_documents('data/ap_infer_raw.txt', vocab_file=vocab_file)
-    topic_proportions = onl_ope.infer_new_docs(new_corpus)
+    gamma = onl_vb.infer_new_docs(new_corpus)
 
 .. [1] M.D. Hoffman, D.M. Blei, C. Wang, and J. Paisley, "Stochastic variational inference," The Journal of Machine Learning Research, vol. 14, no. 1, pp. 1303–1347, 2013.
 .. [2] D. M. Blei, A. Y. Ng, and M. I. Jordan, “Latent dirichlet allocation,” Journal of Machine Learning Research, vol. 3, no. 3, pp. 993–1022, 2003.
