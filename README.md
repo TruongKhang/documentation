@@ -1,7 +1,7 @@
 topicmodel-lib
 ================
 
-[![GitHub release](https://img.shields.io/badge/release-1.0.0-brightgreen.svg)]()[![Wheel](https://img.shields.io/pypi/wheel/gensim.svg)](https://pypi.python.org/pypi/tmlib) 
+[![GitHub release](https://img.shields.io/badge/release-1.0.0-yellow.svg)]()[![Wheel](https://img.shields.io/pypi/wheel/gensim.svg)](https://pypi.python.org/pypi/tmlib) 
 [![Mailing List](https://img.shields.io/badge/-Mailing%20List-lightgrey.svg)](https://groups.google.com/forum/#!forum/dslab-tmlib)
 [![License](https://img.shields.io/packagist/l/doctrine/orm.svg)]()
 
