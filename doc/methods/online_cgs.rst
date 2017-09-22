@@ -6,7 +6,7 @@ Originally, Collapsed Gibbs Sampling (CGS) was proposed by [1]_ for learning LDA
 
 .. math::
 
-   P(z_i = k | z^{-i}) \propto (\alpha + \sum_{t \neq i} I(z_t = k)) exp[\psi(\lambda_{kz_i} - \psi(\sum_t \lambda_{kt})].
+   P(z_i = k | z^{-i}) \propto (\alpha + \sum_{t \neq i} I(z_t = k)) * exp[\psi(\lambda_{kz_i} - \psi(\sum_t \lambda_{kt})].
 
 Note that this adaptation makes the inference more local, i.e., posterior inference for a document does not need to modify any global variable. This property is similar with VB, but very different with CVB and CVB0
 
@@ -59,7 +59,7 @@ Parameters
 
 - **samples**: int, default: 25
 
-  After burn-in sweeps, we begin saving sampled topic indicators and we have saved S samples :math:`{**z**}^{1,...,S}` (by default, S = 25)
+  After burn-in sweeps, we begin saving sampled topic indicators and we have saved S samples :math:`{z}^{1,...,S}` (by default, S = 25)
 
 - **lda_model**: object of class ``LdaModel``.
 
@@ -105,7 +105,7 @@ Methods
 
 .. _Corpus: ../datasets.rst
 
-  **Return**: tuple (time of E-step, time of M-step, statistic_theta). statistic_theta is a statistic estimated from sampled topic indicators :math:`**z**^{1,...,S}`. It plays a similar role with :math:`\gamma` in VB 
+  **Return**: tuple (time of E-step, time of M-step, statistic_theta). statistic_theta is a statistic estimated from sampled topic indicators :math:`{z}^{1,...,S}`. It plays a similar role with :math:`\gamma` in VB 
 
 - **learn_model** (*save_model_every=0, compute_sparsity_every=0, save_statistic=False, save_top_words_every=0, num_top_words=10, model_folder=None, save_topic_proportions=None*)
 
