@@ -146,7 +146,7 @@ Example
 
     # data preparation
     data = DataSet(data_path='data/ap_train_raw.txt', batch_size=100, passes=5, shuffle_every=2)
-    # learning and save the model, statistics in folder 'models-online-vb'
+    # learning and save the model, statistics in folder 'models-online-cvb0'
     onl_cvb0 = OnlineCVB0(data=data, num_topics=20, alpha=0.2)
     model = onl_cvb0.learn_model(save_model_every=1, compute_sparsity_every=1, save_statistic=True, save_top_words_every=1, model_folder='models-online-cvb0')
     
