@@ -2,7 +2,7 @@
 Online CGS
 ==========
 
-Originally, Collapsed Gibbs Sampling (CGS) was proposed by [1]_ for learning LDA from data. It recently has been successfully adapted to posterior inference for individual documents by [2]_. It tries to estimate **P** (**z**|d, :math:`\alpha`, :math:`\eta`) by iteratively resampling the topic indicator at each token in document d from the conditional distribution over that position given the remaining topic indicator variables (:math:`z^{−i}`):
+Originally, Collapsed Gibbs Sampling (CGS) was proposed by [1]_ for learning LDA from data. It recently has been successfully adapted to posterior inference for individual documents by [2]_. It tries to estimate **P** (z|d, :math:`\alpha`, :math:`\eta`) by iteratively resampling the topic indicator at each token in document d from the conditional distribution over that position given the remaining topic indicator variables (:math:`z^{−i}`):
 
 .. math::
 
