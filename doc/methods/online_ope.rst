@@ -14,7 +14,7 @@ where :math:`\theta` is a vector K-dimention (K is number of topics) and :math:`
 
 .. math::
 
-   \left\{ \theta_k > 0 , k = 1, ..., K \\ \theta_1 + \theta_2 + ... + \theta_K = 1  \right.
+   \left\{\begin{array}k = 1, ..., K: \quad \theta_k > 0  \\ \theta_1 + \theta_2 + ... + \theta_K = 1  \end{array}\right.
 
 The objective function sounds like FW, but OPE hasn't a constraint about :math:`\alpha` like FW and so, the optimization algorithm of OPE is also different from FW
 

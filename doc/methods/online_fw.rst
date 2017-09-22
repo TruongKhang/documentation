@@ -14,7 +14,7 @@ where :math:`\theta` is a vector K-dimention (K is number of topics) and :math:`
 
 .. math::
 
-   \left\{\begin{array}\theta_k > 0 , k = 1, ..., K \\ \theta_1 + \theta_2 + ... + \theta_K = 1  \end{array}\right.
+   \left\{\begin{array}k = 1, ..., K: \quad \theta_k > 0  \\ \theta_1 + \theta_2 + ... + \theta_K = 1  \end{array}\right.
 
 With some assumptions, we can convert the MAP problem above to the concave maximazation over simplex. And here, the Frank-Wolfe algorithm [2]_ is applied
    
