@@ -1,6 +1,6 @@
-=========
-Online FW
-=========
+============
+Streaming FW
+============
 
 Similar to `Online FW`_, Streaming FW uses the inference FW [1]_ for individual document to find out the local variables :math:`\theta` (topic proportions). But, the update global variable :math:`\lambda` (variational pamameter of :math:`\beta`) is adapted to the stream environments. With the streaming learning, we don't need to know the number of documents in Corpus.
 
