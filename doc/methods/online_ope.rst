@@ -24,7 +24,9 @@ The update :math:`\lambda` (variational parameter of :math:`\beta`) is designed 
 class OnlineOPE
 ------------------------------------
 
-tmlib.lda.Online_OPE. **OnlineOPE** (*data=None, num_topics=100, alpha=0.01, eta=0.01, tau0=1.0, kappa=0.9, iter_infer=50, lda_model=None*)
+::
+
+  tmlib.lda.OnlineOPE(data=None, num_topics=100, alpha=0.01, eta=0.01, tau0=1.0, kappa=0.9, iter_infer=50, lda_model=None)
 
 Parameters
 ========== 
@@ -159,7 +161,7 @@ Example
     data = DataSet(data_path='data/ap_train_raw.txt', batch_size=100, passes=5, shuffle_every=2)
     # learning and save the model, statistics in folder 'models-online-ope'
     onl_ope = OnlineOPE(data=data, num_topics=20, alpha=0.2)
-    model = onl_vb.learn_model(save_model_every=1, compute_sparsity_every=1, save_statistic=True, save_top_words_every=1, num_top_words=10, model_folder='models-online-ope')
+    model = streaming_ope.learn_model(save_model_every=1, compute_sparsity_every=1, save_statistic=True, save_top_words_every=1, num_top_words=10, model_folder='models-online-ope')
     
 
     # inference for new documents
