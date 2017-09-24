@@ -139,6 +139,28 @@ Methods
 
   This used to do inference for new documents. **new_corpus** is object ``Corpus``. This method return topic proportions :math:`\theta` for each document in new corpus
 
+-------
+Example
+-------
+
+  ::
+
+    from tmlib.lda import MLFW
+    from tmlib.datasets import DataSet
+
+    # data preparation
+    data = DataSet(data_path='data/ap_train_raw.txt', batch_size=100, passes=5, shuffle_every=2)
+    # learning and save the model, statistics in folder 'models-ml-fw'
+    ml_fw = MLFW(data=data, num_topics=20)
+    model = ml_fw.learn_model(save_model_every=1, compute_sparsity_every=1, save_statistic=True, save_top_words_every=1, num_top_words=10, model_folder='models-ml-fw')
+    
+
+    # inference for new documents
+    vocab_file = data.vocab_file
+    # create object ``Corpus`` to store new documents
+    new_corpus = data.load_new_documents('data/ap_infer_raw.txt', vocab_file=vocab_file)
+    theta = ml_fw.infer_new_docs(new_corpus)
+
 .. [1] K. Than and T. B. Ho, “Fully sparse topic models,” in Machine Learning and Knowledge Discovery in Databases, ser. Lecture Notes in Computer Science, P. Flach, T. De Bie, and N. Cristianini, Eds. Springer, 2012, vol. 7523, pp. 490–505.
 
 .. [2] Khoat Than, Tu Bao Ho, “Inference in topic models: sparsity and trade-off”. [Online]. Available: https://arxiv.org/abs/1512.03300

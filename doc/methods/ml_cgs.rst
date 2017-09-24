@@ -4,13 +4,13 @@ ML-CGS
 
 You can see that `Online CGS`_ is also a hybrid algorithm. It infers to topic indicators **z** at each token in individual document by Gibb sampling. After that, it defines a approximatee sufficient statistics to update global variable :math:`\lambda`. By borrowing idea from `ML-FW`_ and `ML-OPE`_, ML-CGS will estimate directly topics :math:`\beta` instead of :math:`\lambda`
 
-First, ML-CGS will estimate :math:`\theta` from S sampled topic indicators :math:`{z}^{1,2,...,S} in each mini-batch B [1]_
+First, ML-CGS will estimate :math:`\theta` from S sampled topic indicators :math:`{z}^{1,2,...,S}` in each mini-batch [1]_
 
 And then, we can define a sufficient statistics :math:`\hat{\beta}` to update :math:`\beta` following [2]_ 
 
 .. _Online CGS: ./online_cgs.rst
-.. _Online FW: ./online_fw.rst
-.. _Online OPE: ./online_ope.rst 
+.. _ML-FW: ./online_fw.rst
+.. _ML-OPE: ./online_ope.rst 
 
 ------------------------------------
 class tmlib.lda.MLCGS
