@@ -139,4 +139,4 @@ Example
     new_corpus = data.load_new_documents('data/ap_infer_raw.txt', vocab_file=vocab_file)
     theta = streaming_ope.infer_new_docs(new_corpus)
   
-[1]  Khoat Than, Tung Doan, “Guaranteed inference in topic models". [Online]. Available at: https://arxiv.org/abs/1512.03308
+.. [1]  Khoat Than, Tung Doan, “Guaranteed inference in topic models". [Online]. Available at: https://arxiv.org/abs/1512.03308
