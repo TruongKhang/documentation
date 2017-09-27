@@ -8,7 +8,7 @@ This module includes some classes and utility functions which help us work with 
 class DataSet
 -----------------------------------------------------
 
-This is the main class storing the information about your corpus such as: number of documents, size of vocabulary set... You also can load the mini-batches data to implement your learning algorithm. 
+This is the main class storing the information about your corpus such as: number of documents, size of vocabulary set, etc. You also can load the mini-batches data to implement your learning algorithm. 
 
 ::
 
