@@ -1,0 +1,723 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>tmlib.datasets &mdash; topicmodel-lib 0.3.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="topicmodel-lib 0.3.1 documentation" href="index.html"/>
+        <link rel="prev" title="ML-OPE" href="methods/ml_ope.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> topicmodel-lib
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.3.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="quick_start.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quick_start.html#corpus">Corpus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quick_start.html#guide-to-learn-model">Guide to learn model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quick_start.html#inference-for-new-documents">Inference for new documents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quick_start.html#example">Example</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="lda_model.html">LDA Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="methods/online_vb.html">Online VB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="methods/online_cvb0.html">Online CVB0</a></li>
+<li class="toctree-l1"><a class="reference internal" href="methods/online_cgs.html">Online CGS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="methods/online_fw.html">Online FW</a></li>
+<li class="toctree-l1"><a class="reference internal" href="methods/online_ope.html">Online OPE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="methods/streaming_vb.html">Streaming VB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="methods/streaming_fw.html">Streaming FW</a></li>
+<li class="toctree-l1"><a class="reference internal" href="methods/streaming_ope.html">Streaming OPE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="methods/ml_cgs.html">ML-CGS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="methods/ml_fw.html">ML-FW</a></li>
+<li class="toctree-l1"><a class="reference internal" href="methods/ml_ope.html">ML-OPE</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">tmlib.datasets</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#class-dataset">class DataSet</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#parameters">Parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#attributes">Attributes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#methods">Methods</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#example">Example</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#class-dataformat">class DataFormat</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#static-attributes">Static Attributes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id1">Example</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#class-corpus">class Corpus</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id2">Parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">Attributes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">Methods</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#utility-functions">Utility functions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#get-data-home">get_data_home</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#clear-data-home">clear_data_home</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#check-input-format">check_input_format</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#load-batch-raw-text">load_batch_raw_text</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pre-process">pre_process</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#load-batch-formatted-from-file">load_batch_formatted_from_file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#reformat-file-to-term-sequence">reformat_file_to_term_sequence</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#reformat-file-to-term-frequency">reformat_file_to_term_frequency</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#convert-corpus-format">convert_corpus_format</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#compute-sparsity">compute_sparsity</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#write-topic-proportions">write_topic_proportions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">topicmodel-lib</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>tmlib.datasets</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/datasets.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="tmlib-datasets">
+<h1>tmlib.datasets<a class="headerlink" href="#tmlib-datasets" title="Permalink to this headline">¶</a></h1>
+<p>This module includes some classes and utility functions which help us work with the dataset</p>
+<div class="section" id="class-dataset">
+<h2>class DataSet<a class="headerlink" href="#class-dataset" title="Permalink to this headline">¶</a></h2>
+<p>This is the main class storing the information about your corpus such as: number of documents, size of vocabulary set, etc. You also can load the mini-batches data to implement your learning algorithm.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">tmlib</span><span class="o">.</span><span class="n">datasets</span><span class="o">.</span><span class="n">DataSet</span><span class="p">(</span><span class="n">data_path</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">passes</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">shuffle_every</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">vocab_file</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="section" id="parameters">
+<h3>Parameters<a class="headerlink" href="#parameters" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p class="first"><strong>data_path</strong>: string,</p>
+<p>Path of file input (corpus)</p>
+</li>
+<li><p class="first"><strong>batch_size</strong>: int</p>
+<p>size of mini-batch in each sampling from corpus.</p>
+</li>
+<li><p class="first"><strong>passes</strong>: int, default: 1</p>
+<p>passes controls how often we train the model on the entire corpus. Another word for passes might be “epochs” (in training neural network). iterations is somewhat technical, but essentially it controls how often we repeat a particular loop over each document. It is important to set the number of “passes” and “iterations” high enough.</p>
+<p>For example, if you set passes = 5, assume that batch_size = 100 and size of corpus is 10000 then number of training iterations is 10000/100*5 = 5000</p>
+</li>
+<li><p class="first"><strong>shuffle_every</strong>: int,</p>
+<p>This parameter help us shuffle the samples (documents) in corpus at each pass (epoch)</p>
+<p>If you set shuffle_every=2, it means after passing over corpus 2 times, corpus will be shuffled</p>
+</li>
+<li><p class="first"><strong>vocab_file</strong>: string, default: None</p>
+<p>File vocabulary of corpus</p>
+<p>If corpus is raw text format, file vocabulary is non-necessary. Otherwise, if corpus is tf or sq format, user must set it</p>
+</li>
+</ul>
+</div>
+<div class="section" id="attributes">
+<h3>Attributes<a class="headerlink" href="#attributes" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p class="first"><strong>batch_size</strong>: int</p>
+</li>
+<li><p class="first"><strong>vocab_file</strong>: string,</p>
+</li>
+<li><p class="first"><strong>num_docs</strong>: int,</p>
+<p>Return number of document in corpus</p>
+</li>
+<li><p class="first"><strong>data_path</strong>: string,</p>
+<p>path of file corpus which is the term-frequency or term-sequence format</p>
+</li>
+<li><p class="first"><strong>data_format</strong>: attribute of class <code class="docutils literal"><span class="pre">DataFormat</span></code></p>
+<p>The class <code class="docutils literal"><span class="pre">DataFormat</span></code> stores name of formats data: DataFormat.RAW_TEXT, DataFormat.TERM_SEQUENCE or DataFormat.TERM_FREQUENCY</p>
+</li>
+<li><p class="first"><strong>output_format</strong>: attribute of class <code class="docutils literal"><span class="pre">DataFormat</span></code>, default is DataFormat.TERM_FREQUENCY</p>
+<p>format of mini-batch. User change the format by use method <em>set_output_format</em></p>
+</li>
+<li><p class="first"><strong>passes</strong>: int</p>
+</li>
+<li><p class="first"><strong>shuffle_every</strong>: int</p>
+</li>
+<li><p class="first"><strong>work_path</strong>: string</p>
+<p>This path is different from data_path. If corpus is shuffled then work_path is path of the shuffled file, not the original file</p>
+</li>
+</ul>
+</div>
+<div class="section" id="methods">
+<h3>Methods<a class="headerlink" href="#methods" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p class="first">__init__(<em>data_path=None, batch_size=None, passes=1, shuffle_every=None, vocab_file=None</em>)</p>
+</li>
+<li><p class="first"><strong>load_mini_batch</strong> ()</p>
+<p>loading a mini-batch from corpus with specific format (controlled by <strong>output_format</strong>)
+Return: object class <code class="docutils literal"><span class="pre">Corpus</span></code> storing mini-batch</p>
+</li>
+<li><p class="first"><strong>load_new_document</strong> (path_file, vocab_file=None)</p>
+<p>You can load new document from <code class="docutils literal"><span class="pre">path_file</span></code>. If format of file is raw text, you need add <code class="docutils literal"><span class="pre">vocab_file</span></code>
+Return: object <code class="docutils literal"><span class="pre">Corpus</span></code></p>
+</li>
+<li><p class="first"><strong>check_end_of_data</strong> ()</p>
+<p>To check out that whether we visit to the last mini-batch or not.</p>
+<p>Return True if the last mini-batch is loaded and the training is done</p>
+</li>
+<li><p class="first"><strong>set_output_format</strong> (output_format)</p>
+<p>set format for the loaded mini-batch</p>
+<ul class="simple">
+<li><strong>Parameters</strong>: output_format (DataFormat.TERM_SEQUENCE or DataFormat.TERM_FREQUENCY)</li>
+</ul>
+</li>
+<li><p class="first"><strong>get_total_docs</strong> ()</p>
+<p>Return number of documents which have been analyzed until the present</p>
+</li>
+<li><p class="first"><strong>get_num_tokens</strong> ()</p>
+<p>Return number of tokens in corpus</p>
+</li>
+<li><p class="first"><strong>get_num_terms</strong> ()</p>
+<p>Return number of unique terms in corpus (size of vocabulary set)</p>
+</li>
+</ul>
+</div>
+<div class="section" id="example">
+<h3>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Load mini-batch with term-frequency format</li>
+</ul>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tmlib.datasets</span> <span class="k">import</span> <span class="n">DataSet</span>
+
+<span class="c1">#AP corpus in folder examples/ap/data</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">DataSet</span><span class="p">(</span><span class="n">data_path</span><span class="o">=</span><span class="s1">&#39;data/ap_train_raw.txt&#39;</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">passes</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">shuffle_every</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">minibatch</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">load_mini_batch</span><span class="p">()</span>  <span class="c1"># The format is term-frequency by default</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>Load mini-batch with term-sequence format</li>
+</ul>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tmlib.datasets</span> <span class="k">import</span> <span class="n">DataSet</span>
+<span class="kn">from</span> <span class="nn">tmlib.datasets.utilities</span> <span class="k">import</span> <span class="n">DataFormat</span>
+
+<span class="c1">#AP corpus in folder examples/ap/data</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">DataSet</span><span class="p">(</span><span class="n">data_path</span><span class="o">=</span><span class="s1">&#39;data/ap_train_raw.txt&#39;</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">passes</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">shuffle_every</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">data</span><span class="o">.</span><span class="n">set_output_format</span><span class="p">(</span><span class="n">DataFormat</span><span class="o">.</span><span class="n">TERM_SEQUENCE</span><span class="p">)</span>
+<span class="n">minibatch</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">load_mini_batch</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>In these examples, we set <strong>passes=4</strong> and <strong>shuffle_every=2</strong>, it means: 4 times of passing over data and after every 2 times, corpus is shuffled again. Assume that size of corpus is 5000 documents, batch_size = 100, then number of iterators is: 5000/100*4 = 2000. We can check the last iterator by using method <em>check_end_of_data()</em>.</p>
+</div>
+</div>
+<div class="section" id="class-dataformat">
+<h2>class DataFormat<a class="headerlink" href="#class-dataformat" title="Permalink to this headline">¶</a></h2>
+<p>This is class which contains 3 <a class="reference external" href="./quick_start.rst">data-format</a> types of library is: raw text, term_sequence, term-frequency</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">tmlib</span><span class="o">.</span><span class="n">datasets</span><span class="o">.</span><span class="n">utilities</span><span class="o">.</span><span class="n">DataFormat</span>
+</pre></div>
+</div>
+<div class="section" id="static-attributes">
+<h3>Static Attributes<a class="headerlink" href="#static-attributes" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><strong>RAW_TEXT</strong>: string, value is ‘txt’</li>
+<li><strong>TERM_FREQUENCY</strong>: string, value is ‘tf’</li>
+<li><strong>TERM_SEQUENCE</strong>: string, value is ‘sq’</li>
+</ul>
+</div>
+<div class="section" id="id1">
+<h3>Example<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<p>This example allows checking data format for: corpus <em>examples/ap/ap_train_raw.txt</em></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tmlib.datasets.utilities</span> <span class="k">import</span> <span class="n">DataFormat</span><span class="p">,</span> <span class="n">check_input_format</span>
+
+<span class="n">input_format</span> <span class="o">=</span> <span class="n">check_input_format</span><span class="p">(</span><span class="s1">&#39;examples/ap/ap_train_raw.txt&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">input_format</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">input_format</span> <span class="o">==</span> <span class="n">DataFormat</span><span class="o">.</span><span class="n">RAW_TEXT</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Corpus is raw text&#39;</span><span class="p">)</span>
+<span class="k">elif</span> <span class="n">input_format</span> <span class="o">==</span> <span class="n">DataFormat</span><span class="o">.</span><span class="n">TERM_SEQUENCE</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Corpus is term-sequence format&#39;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">Corpus</span> <span class="ow">is</span> <span class="n">term</span><span class="o">-</span><span class="n">frequency</span> <span class="nb">format</span><span class="s1">&#39;)</span>
+</pre></div>
+</div>
+<p><strong>Output</strong>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">txt</span>
+<span class="n">Corpus</span> <span class="ow">is</span> <span class="n">raw</span> <span class="n">text</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="class-corpus">
+<h2>class Corpus<a class="headerlink" href="#class-corpus" title="Permalink to this headline">¶</a></h2>
+<p>This class is used to store the corpus with 2 formats: term-frequency and term-sequence</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">tmlib</span><span class="o">.</span><span class="n">datasets</span><span class="o">.</span><span class="n">utilities</span><span class="o">.</span><span class="n">Corpus</span><span class="p">(</span><span class="n">format_type</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="section" id="id2">
+<h3>Parameters<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><strong>format_type</strong>: DataFormat.TERM_SEQUENCE or DataFormat.TERM_FREQUENCY</li>
+</ul>
+</div>
+<div class="section" id="id3">
+<h3>Attributes<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p class="first"><strong>format_type</strong>: format of corpus</p>
+</li>
+<li><p class="first"><strong>word_ids_tks</strong>: list of list,</p>
+<p>Each element in this list is a list which include the words of a document in corpus (words is unique terms if format is term-frequency and is list of tokens if format is term-sequence)</p>
+</li>
+<li><p class="first"><strong>cts_lens</strong>: list</p>
+<p>if format is term-frequency, each element in list is a list frequency of unique terms in respectly document of corpus. If format is term-sequence, each element in list is the number of tokens in document (number of tokens in each doc).</p>
+</li>
+</ul>
+</div>
+<div class="section" id="id4">
+<h3>Methods<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p class="first"><strong>append_doc</strong> (ids_tks, cts_lens)</p>
+<p>Add a document to corpus. If format of this document is term-frequency, this method will append list of unique terms to <strong>word_ids_tks</strong> and append list of frequency to <strong>cts_lens</strong>. If format is term-sequence, the list of tokens and number of tokens will be appended respectly</p>
+<ul>
+<li><p class="first"><strong>Parameters</strong>: ids_tks and cts_lens is format (tf or sq) of added document</p>
+<p><strong>ids_tks</strong>: list of unique terms (term-frequency format) or list of tokens (term-sequence format)
+<strong>cts_lens</strong>: list of frequency of unique terms (term-frequency format) or number tokens in document (term-sequence format)</p>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="utility-functions">
+<h2>Utility functions<a class="headerlink" href="#utility-functions" title="Permalink to this headline">¶</a></h2>
+<p>These functions below are in module <code class="docutils literal"><span class="pre">tmlib.datasets.utilities</span></code></p>
+<div class="section" id="get-data-home">
+<h3>get_data_home<a class="headerlink" href="#get-data-home" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">tmlib</span><span class="o">.</span><span class="n">datasets</span><span class="o">.</span><span class="n">utilities</span><span class="o">.</span><span class="n">get_data_home</span><span class="p">(</span><span class="n">data_home</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This folder is used by some large dataset loaders to avoid downloading the data several times.</p>
+<p>By default the data dir is set to a folder named ‘tmlib_data’ in the user home folder. We can change it by change value of data_home parameter
+The ‘~’ symbol is expanded to the user home folder.</p>
+<p>If the folder does not already exist, it is automatically created.</p>
+<ul class="simple">
+<li><strong>Return</strong>: path of the tmlib data dir.</li>
+</ul>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">tmlib.datasets</span> <span class="k">import</span> <span class="n">utilities</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span> <span class="mf">100.</span><span class="n">get_data_home</span><span class="p">()</span>
+<span class="go">/home/kde/tmlib_data</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="clear-data-home">
+<h3>clear_data_home<a class="headerlink" href="#clear-data-home" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">tmlib</span><span class="o">.</span><span class="n">datasets</span><span class="o">.</span><span class="n">utilities</span><span class="o">.</span><span class="n">clear_data_home</span><span class="p">(</span><span class="n">data_home</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Delete all the content of the data home cache.</p>
+</div>
+<div class="section" id="check-input-format">
+<h3>check_input_format<a class="headerlink" href="#check-input-format" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">tmlib</span><span class="o">.</span><span class="n">datasets</span><span class="o">.</span><span class="n">utilities</span><span class="o">.</span><span class="n">check_input_format</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
+</pre></div>
+</div>
+<ul>
+<li><p class="first">Check format of input file(text formatted or raw text)</p>
+</li>
+<li><p class="first"><strong>Parameters</strong>: file_path (string)</p>
+<p>Path of file input</p>
+</li>
+<li><p class="first"><strong>Return</strong>: format of input (DataFormat.RAW_TEXT, DataFormat.TERM_FREQUENCY or DataFormat.TERM_SEQUENCE)</p>
+</li>
+</ul>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">tmlib.datasets</span> <span class="k">import</span> <span class="n">utilities</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">file_path</span> <span class="o">=</span> <span class="s1">&#39;/home/kde/Desktop/topicmodel-lib/examples/ap/ap_train.txt&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span> <span class="n">utilities</span><span class="o">.</span><span class="n">check_input_format</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
+<span class="go">tf</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">file_path</span> <span class="o">=</span> <span class="s1">&#39;/home/kde/Desktop/topicmodel-lib/examples/ap/ap_train_raw.txt&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span> <span class="n">utilities</span><span class="o">.</span><span class="n">check_input_format</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
+<span class="go">txt</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="load-batch-raw-text">
+<h3>load_batch_raw_text<a class="headerlink" href="#load-batch-raw-text" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">tmlib</span><span class="o">.</span><span class="n">datasets</span><span class="o">.</span><span class="n">utilities</span><span class="o">.</span><span class="n">load_batch_raw_text</span><span class="p">(</span><span class="n">file_raw_text_path</span><span class="p">)</span>
+</pre></div>
+</div>
+<ul>
+<li><p class="first">load all of documents and store as a list. Each element in this list is a document with raw text format (string)</p>
+</li>
+<li><p class="first"><strong>Parameters</strong>: file_raw_text_path (string)</p>
+<p>Path of file input</p>
+</li>
+<li><p class="first"><strong>Return</strong>: list, each element in list is string type and also is text of a document</p>
+</li>
+</ul>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">tmlib.datasets</span> <span class="k">import</span> <span class="n">utilities</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">path_file_raw_text</span> <span class="o">=</span> <span class="s1">&#39;/home/kde/Desktop/topicmodel-lib/examples/ap/ap_infer_raw.txt&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">list_docs</span> <span class="o">=</span> <span class="n">utilities</span><span class="o">.</span><span class="n">load_batch_raw_text</span><span class="p">(</span><span class="n">path_file_raw_text</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span> <span class="s1">&#39;number of documents: &#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">list_docs</span><span class="p">)</span>
+<span class="go">number of documents:  50</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span> <span class="n">list_docs</span><span class="p">[</span><span class="mi">8</span><span class="p">]</span>
+<span class="go"> Here is a summary of developments in forest and brush fires in Western states:</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="pre-process">
+<h3>pre_process<a class="headerlink" href="#pre-process" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">tmlib</span><span class="o">.</span><span class="n">datasets</span><span class="o">.</span><span class="n">utilities</span><span class="o">.</span><span class="n">pre_process</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
+</pre></div>
+</div>
+<ul>
+<li><p class="first">Preprocessing for file input if format of data is raw text</p>
+</li>
+<li><p class="first"><strong>Paremeter</strong>: file_path (string)</p>
+<p>Path of file input</p>
+</li>
+<li><p class="first"><strong>Return</strong>: list which respectly includes path of vocabulary file, term-frequency file, term-sequence file after preprocessing</p>
+</li>
+</ul>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">tmlib.datasets</span> <span class="k">import</span> <span class="n">utilities</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">path_file</span> <span class="o">=</span> <span class="s1">&#39;/home/kde/Desktop/topicmodel-lib/examples/ap/ap_train_raw.txt&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">path_vocab</span><span class="p">,</span> <span class="n">path_tf</span><span class="p">,</span> <span class="n">path_sq</span> <span class="o">=</span> <span class="n">utilities</span><span class="o">.</span><span class="n">pre_process</span><span class="p">(</span><span class="n">path_file</span><span class="p">)</span>
+<span class="go">Waiting...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span> <span class="s1">&#39;path to file vocabulary extracted: &#39;</span><span class="p">,</span> <span class="n">path_vocab</span>
+<span class="go">path to file vocabulary extracted:  /home/kde/tmlib_data/ap_train_raw/vocab.txt</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span> <span class="s1">&#39;path to file with term-frequency format: &#39;</span><span class="p">,</span> <span class="n">path_tf</span>
+<span class="go">path to file with term-frequency format:  /home/kde/tmlib_data/ap_train_raw/ap_train_raw.tf</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span> <span class="s1">&#39;path to file with term-sequence format: &#39;</span><span class="p">,</span> <span class="n">path_sq</span>
+<span class="go">path to file with term-sequence format:  /home/kde/tmlib_data/ap_train_raw/ap_train_raw.sq</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="load-batch-formatted-from-file">
+<h3>load_batch_formatted_from_file<a class="headerlink" href="#load-batch-formatted-from-file" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">tmlib</span><span class="o">.</span><span class="n">datasets</span><span class="o">.</span><span class="n">utilities</span><span class="o">.</span><span class="n">load_batch_formatted_from_file</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="n">output_format</span><span class="o">=</span><span class="n">DataFormat</span><span class="o">.</span><span class="n">TERM_FREQUENCY</span><span class="p">)</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>load all of documents in file which is formatted as term-frequency format or term-sequence format and return a corpus with format is <strong>output_format</strong></li>
+<li><strong>Parameters</strong>:<ul>
+<li><strong>data_path</strong>: path of file data input which is formatted</li>
+<li><strong>output_format</strong>: format data of output, default: term-frequence format</li>
+</ul>
+</li>
+<li><strong>Return</strong>: object corpus which is the data input for learning</li>
+</ul>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">path_file_tf</span> <span class="o">=</span> <span class="s1">&#39;/home/kde/Desktop/topicmodel-lib/examples/ap/ap_train.txt&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">corpus_tf</span> <span class="o">=</span> <span class="n">utilities</span><span class="o">.</span><span class="n">load_batch_formatted_from_file</span><span class="p">(</span><span class="n">path_file_tf</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span> <span class="s1">&#39;Unique terms in the 9th documents: &#39;</span><span class="p">,</span> <span class="n">corpus_tf</span><span class="o">.</span><span class="n">word_ids_tks</span><span class="p">[</span><span class="mi">8</span><span class="p">]</span>
+<span class="go">Unique terms in the 9th documents:  [5829 4040 2891   14 1783  381 2693]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span> <span class="s1">&#39;Frequency of unique terms in the 9th documents: &#39;</span><span class="p">,</span> <span class="n">corpus_tf</span><span class="o">.</span><span class="n">cts_lens</span><span class="p">[</span><span class="mi">8</span><span class="p">]</span>
+<span class="go">Frequency of unique terms in the 9th documents:  [1 1 1 1 1 1 1]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">corpus_sq</span> <span class="o">=</span> <span class="n">utilities</span><span class="o">.</span><span class="n">load_batch_formatted_from_file</span><span class="p">(</span><span class="n">path_file_tf</span><span class="p">,</span> <span class="n">output_format</span><span class="o">=</span><span class="n">utilities</span><span class="o">.</span><span class="n">DataFormat</span><span class="o">.</span><span class="n">TERM_SEQUENCE</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span> <span class="s1">&#39;List of tokens in the 9th documents: &#39;</span><span class="p">,</span> <span class="n">corpus_sq</span><span class="o">.</span><span class="n">word_ids_tks</span><span class="p">[</span><span class="mi">8</span><span class="p">]</span>
+<span class="go">List of tokens in the 9th documents:  [5829 4040 2891   14 1783  381 2693]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span> <span class="s1">&#39;Number of tokens in the 9th document: &#39;</span><span class="p">,</span> <span class="n">corpus_sq</span><span class="o">.</span><span class="n">cts_lens</span><span class="p">[</span><span class="mi">8</span><span class="p">]</span>
+<span class="go">Number of tokens in the 9th document:  7</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="reformat-file-to-term-sequence">
+<h3>reformat_file_to_term_sequence<a class="headerlink" href="#reformat-file-to-term-sequence" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">tmlib</span><span class="o">.</span><span class="n">datasets</span><span class="o">.</span><span class="n">utilities</span><span class="o">.</span><span class="n">reformat_file_to_term_sequence</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
+</pre></div>
+</div>
+<ul>
+<li><p class="first">convert the formatted file input (tf or sq) to file with format term-sequence</p>
+</li>
+<li><p class="first"><strong>Parameter</strong>: file_path (string)</p>
+<p>Path of file input</p>
+</li>
+<li><p class="first"><strong>Return</strong>: path of file which is formatted to term-sequence</p>
+</li>
+</ul>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">tmlib.datasets</span> <span class="k">import</span> <span class="n">utilities</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">path_file_tf</span> <span class="o">=</span> <span class="n">tmlib</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">path_file_sq</span> <span class="o">=</span> <span class="n">utilities</span><span class="o">.</span><span class="n">reformat_file_to_term_sequence</span><span class="p">(</span><span class="n">path_file_tf</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span> <span class="s1">&#39;path to file term-sequence: &#39;</span><span class="p">,</span> <span class="n">path_file_sq</span>
+<span class="go">path to file term-sequence:  /home/kde/tmlib_data/ap_train/ap_train.sq</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="reformat-file-to-term-frequency">
+<h3>reformat_file_to_term_frequency<a class="headerlink" href="#reformat-file-to-term-frequency" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">tmlib</span><span class="o">.</span><span class="n">datasets</span><span class="o">.</span><span class="n">utilities</span><span class="o">.</span><span class="n">reformat_file_to_term_sequence</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
+</pre></div>
+</div>
+<ul>
+<li><p class="first">convert the formatted file input (tf or sq) to file with format term-frequency</p>
+</li>
+<li><p class="first"><strong>Parameter</strong>: file_path (string)</p>
+<p>Path of file input</p>
+</li>
+<li><p class="first"><strong>Return</strong>: path of file which is formatted to term-frequency</p>
+</li>
+</ul>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">tmlib.datasets</span> <span class="k">import</span> <span class="n">utilities</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">path_file</span> <span class="o">=</span> <span class="s1">&#39;/home/kde/Desktop/topicmodel-lib/examples/ap/ap_train.txt&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">path_file_tf</span> <span class="o">=</span> <span class="n">utilities</span><span class="o">.</span><span class="n">reformat_file_to_term_sequence</span><span class="p">(</span><span class="n">path_file</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span> <span class="s1">&#39;path to file term-frequency: &#39;</span><span class="p">,</span> <span class="n">path_file_tf</span>
+<span class="go">path to file term-frequency:  /home/kde/tmlib_data/ap_train/ap_train.tf</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="convert-corpus-format">
+<h3>convert_corpus_format<a class="headerlink" href="#convert-corpus-format" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">tmlib</span><span class="o">.</span><span class="n">datasets</span><span class="o">.</span><span class="n">utilities</span><span class="o">.</span><span class="n">convert_corpus_format</span><span class="p">(</span><span class="n">corpus</span><span class="p">,</span> <span class="n">data_format</span><span class="p">)</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>convert corpus (object of class <code class="docutils literal"><span class="pre">Corpus</span></code>) to desired format</li>
+<li><strong>Parameters</strong>:<ul>
+<li><strong>corpus</strong>: object of class Corpus,</li>
+<li><strong>data_format</strong>: format type desired (DataFormat.TERM_SEQUENCE or DataFormat.TERM_FREQUENCY)</li>
+</ul>
+</li>
+<li><strong>Return</strong>: object corpus with desired format</li>
+</ul>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">tmlib.datasets</span> <span class="k">import</span> <span class="n">utilities</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">path_file_tf</span> <span class="o">=</span> <span class="s1">&#39;/home/kde/Desktop/topicmodel-lib/examples/ap/ap_train.txt&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">corpus</span> <span class="o">=</span> <span class="n">utilities</span><span class="o">.</span><span class="n">load_batch_formatted_from_file</span><span class="p">(</span><span class="n">path_file_tf</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">corpus_sq</span> <span class="o">=</span> <span class="n">utilities</span><span class="o">.</span><span class="n">convert_corpus_format</span><span class="p">(</span><span class="n">corpus</span><span class="p">,</span> <span class="n">utilities</span><span class="o">.</span><span class="n">DataFormat</span><span class="o">.</span><span class="n">TERM_SEQUENCE</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span> <span class="s1">&#39;Unique terms in the 22th documents: &#39;</span><span class="p">,</span> <span class="n">corpus</span><span class="o">.</span><span class="n">word_ids_tks</span><span class="p">[</span><span class="mi">21</span><span class="p">]</span>
+<span class="go">Unique terms in the 22th documents:  [  32  396  246   87  824 3259  316  285]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span> <span class="s1">&#39;Frequency of unique terms in the 22th documents: &#39;</span><span class="p">,</span> <span class="n">corpus</span><span class="o">.</span><span class="n">cts_lens</span><span class="p">[</span><span class="mi">21</span><span class="p">]</span>
+<span class="go">Frequency of unique terms in the 22th documents:  [1 1 1 2 1 1 2 1]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span> <span class="s1">&#39;List of tokens in the 22th documents: &#39;</span><span class="p">,</span> <span class="n">corpus_sq</span><span class="o">.</span><span class="n">word_ids_tks</span><span class="p">[</span><span class="mi">21</span><span class="p">]</span>
+<span class="go">List of tokens in the 22th documents:  [32, 396, 246, 87, 87, 824, 3259, 316, 316, 285]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span> <span class="s1">&#39;Number of tokens in the 22th document: &#39;</span><span class="p">,</span> <span class="n">corpus_sq</span><span class="o">.</span><span class="n">cts_lens</span><span class="p">[</span><span class="mi">21</span><span class="p">]</span>
+<span class="go">Number of tokens in the 22th document:  10</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="compute-sparsity">
+<h3>compute_sparsity<a class="headerlink" href="#compute-sparsity" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">tmlib</span><span class="o">.</span><span class="n">datasets</span><span class="o">.</span><span class="n">utilities</span><span class="o">.</span><span class="n">compute_sparsity</span><span class="p">(</span><span class="n">doc_tp</span><span class="p">,</span> <span class="n">num_docs</span><span class="p">,</span> <span class="n">num_topics</span><span class="p">,</span> <span class="n">_type</span><span class="p">)</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>Compute document sparsity.</li>
+<li><strong>Parameters</strong>:<ul>
+<li><strong>doc_tp</strong>: numpy.array, 2-dimention, the estimated topic mixtures of all documents in corpus</li>
+<li><strong>num_docs</strong>: int, the number of documents in corpus</li>
+<li><strong>num_topics</strong>: int, is the number of requested latent topics to be extracted from the training corpus.</li>
+<li><strong>_type</strong>: string, if the value is ‘z’, the topic mixtures is estimated by the sampling method as CGS or CVB0, so we have the individual caculation for this. Otherwise, if the value of it isn’t ‘z’, this is for the methods as: VB, OPE or FW</li>
+</ul>
+</li>
+<li><strong>Return</strong>: float, sparsity of documents</li>
+</ul>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">tmlib.datasets</span> <span class="k">import</span> <span class="n">utilities</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">theta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.02</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.03</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">]],</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;float32&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">utilities</span><span class="o">.</span><span class="n">compute_sparsity</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">theta</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">theta</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">_type</span><span class="o">=</span><span class="s1">&#39;t&#39;</span><span class="p">)</span>
+<span class="go">1.0</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="write-topic-proportions">
+<h3>write_topic_proportions<a class="headerlink" href="#write-topic-proportions" title="Permalink to this headline">¶</a></h3>
+<p>tmlib.datasets.utilities.write_topic_proportions(theta, file_name)</p>
+<ul class="simple">
+<li>save topic mixtures (theta) to a file</li>
+<li><strong>Parameters</strong>:<ul>
+<li><strong>theta</strong>: numpy.array, 2-dimention</li>
+<li><strong>file_name</strong>: name (path) of file which is written</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="methods/ml_ope.html" class="btn btn-neutral" title="ML-OPE" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, DSLab.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.3.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

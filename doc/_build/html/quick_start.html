@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Quick-Start &mdash; topicmodel-lib 0.3.1 documentation</title>
+  <title>Introduction &mdash; topicmodel-lib 0.3.1 documentation</title>
   
 
   
@@ -36,7 +36,7 @@
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
     <link rel="top" title="topicmodel-lib 0.3.1 documentation" href="index.html"/>
-        <link rel="next" title="Module" href="list_api.html"/>
+        <link rel="next" title="LDA Model" href="lda_model.html"/>
         <link rel="prev" title="Welcome to topicmodel-lib’s documentation!" href="index.html"/> 
 
   
@@ -90,31 +90,49 @@
               
             
             
-              <p class="caption"><span class="caption-text">Contents:</span></p>
+              <p class="caption"><span class="caption-text">Getting started</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Quick-Start</a><ul>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Introduction</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#topic-models">Topic models</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#large-scale-learning">Large-scale learning</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#learning-methods-for-lda">Learning methods for LDA</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#posterior-inference">Posterior Inference</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#data-input-format">Data input format</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#corpus">Corpus</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#data-format">Data Format</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#install-topicmodel-lib">Install topicmodel-lib</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#requirements">Requirements</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#install">Install</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#uninstall">Uninstall</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="list_api.html">Module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="user_guide.html">User guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="tutorials.html">topicmodel-lib Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#corpus">Corpus</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#data-format">Data Format</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#raw-text">Raw Text</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#term-frequency-tf">Term-frequency (tf)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#term-sequence-sq">Term-sequence (sq)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#guide-to-learn-model">Guide to learn model</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#data-preparation">Data Preparation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#learning">Learning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#saving-model-display-topics">Saving model, display topics</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#inference-for-new-documents">Inference for new documents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#example">Example</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="lda_model.html">LDA Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="methods/online_vb.html">Online VB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="methods/online_cvb0.html">Online CVB0</a></li>
+<li class="toctree-l1"><a class="reference internal" href="methods/online_cgs.html">Online CGS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="methods/online_fw.html">Online FW</a></li>
+<li class="toctree-l1"><a class="reference internal" href="methods/online_ope.html">Online OPE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="methods/streaming_vb.html">Streaming VB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="methods/streaming_fw.html">Streaming FW</a></li>
+<li class="toctree-l1"><a class="reference internal" href="methods/streaming_ope.html">Streaming OPE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="methods/ml_cgs.html">ML-CGS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="methods/ml_fw.html">ML-FW</a></li>
+<li class="toctree-l1"><a class="reference internal" href="methods/ml_ope.html">ML-OPE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="datasets.html">tmlib.datasets</a></li>
 </ul>
 
             
@@ -159,7 +177,7 @@
     
       <li><a href="index.html">Docs</a> &raquo;</li>
         
-      <li>Quick-Start</li>
+      <li>Introduction</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -178,69 +196,36 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="quick-start">
-<h1><a class="toc-backref" href="#id3">Quick-Start</a><a class="headerlink" href="#quick-start" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="introduction">
+<h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h1>
 <p>A very short introduction into topic models and how to solve them using topicmodel-lib. This document also introduces some basic concepts and conventions.</p>
-<div class="contents topic" id="contents">
-<p class="topic-title first">Contents</p>
-<ul class="simple">
-<li><a class="reference internal" href="#quick-start" id="id3">Quick-Start</a><ul>
-<li><a class="reference internal" href="#topic-models" id="id4">Topic models</a><ul>
-<li><a class="reference internal" href="#large-scale-learning" id="id5">Large-scale learning</a></li>
-<li><a class="reference internal" href="#learning-methods-for-lda" id="id6">Learning methods for LDA</a></li>
-<li><a class="reference internal" href="#posterior-inference" id="id7">Posterior Inference</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#data-input-format" id="id8">Data input format</a><ul>
-<li><a class="reference internal" href="#corpus" id="id9">Corpus</a></li>
-<li><a class="reference internal" href="#data-format" id="id10">Data Format</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#install-topicmodel-lib" id="id11">Install topicmodel-lib</a><ul>
-<li><a class="reference internal" href="#requirements" id="id12">Requirements</a></li>
-<li><a class="reference internal" href="#install" id="id13">Install</a></li>
-<li><a class="reference internal" href="#uninstall" id="id14">Uninstall</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</div>
 <div class="section" id="topic-models">
-<h2><a class="toc-backref" href="#id4">Topic models</a><a class="headerlink" href="#topic-models" title="Permalink to this headline">¶</a></h2>
+<h2>Topic models<a class="headerlink" href="#topic-models" title="Permalink to this headline">¶</a></h2>
 <p>Topic models are probabilistic models of document collections that use latent variables to encode recurring patterns of word use (Blei, 2012). Topic modeling algorithms are inference algorithms; they uncover a set of patterns that pervade a collection and represent each document according to how it exhibits them. These patterns tend to be thematically coherent, which is why the models are called “topic models.” Topic models are used for both descriptive tasks, such as to build thematic navigators of large collections of documents, and for predictive tasks, such as to aid document classification. Topic models have been extended and applied in many domains</p>
 <p><a class="reference external" href="./LatentDirichletAllocation.rst">Latent Dirichlet Allocation (LDA)</a> is the simplest topic model, LDA is a generative probabilistic model for collections of discrete data such as text corpora.</p>
 <div class="section" id="large-scale-learning">
-<h3><a class="toc-backref" href="#id5">Large-scale learning</a><a class="headerlink" href="#large-scale-learning" title="Permalink to this headline">¶</a></h3>
-<p>Modern data analysis requires computation with massive data. These problems illustrate some of the challenges to modern data analysis. Our data are complex and high-dimensional; we have assumptions to make�from science, intuition, or other data analyses�that involve structures we believe exist in the data but that we cannot directly observe; and finally our data sets are large, possibly even arriving in a never-ending stream. We deploy this library to computing with graphical models that is appropriate for massive data sets, data that might not fit in memory or even be stored locally. This is an efficient tool for learning LDA at large scales</p>
+<h3>Large-scale learning<a class="headerlink" href="#large-scale-learning" title="Permalink to this headline">¶</a></h3>
+<p>Modern data analysis requires computation with massive data. These problems illustrate some of the challenges to modern data analysis. Our data are complex and high-dimensional; we have assumptions to make from science, intuition, or other data analyses that involve structures we believe exist in the data but that we cannot directly observe; and finally, our data sets are large, possibly even arriving in a never-ending stream. We deploy this library to computing with graphical models that are appropriate for massive datasets, data that might not fit in memory or even be stored locally. This is an efficient tool for learning LDA at large scales</p>
 </div>
 <div class="section" id="learning-methods-for-lda">
-<h3><a class="toc-backref" href="#id6">Learning methods for LDA</a><a class="headerlink" href="#learning-methods-for-lda" title="Permalink to this headline">¶</a></h3>
-<p>To learn LDA at large-scale, a good and efficient approach is stochastic inference <a class="footnote-reference" href="#id2" id="id1">[1]</a>. The learning process includes 2 main steps:</p>
+<h3>Learning methods for LDA<a class="headerlink" href="#learning-methods-for-lda" title="Permalink to this headline">¶</a></h3>
+<p>To learn LDA at large-scale, a good and efficient approach is stochastic learning (online/streaming methods). The learning process includes 2 main steps:</p>
 <ul class="simple">
-<li>Inference for individual document: infer to find out the <strong>local variables</strong>: topic proportion <span class="math">\(\theta\)</span> and topic indices <strong>z</strong> (estimate directly or estimate their distribution <span class="math">\(\gamma\)</span>, <span class="math">\(\phi\)</span> - “variational parameters”)</li>
-<li>Update <strong>global variable</strong> in a stochastic way to find out directly topics <span class="math">\(\beta\)</span> (regularized online learning) or its distribution by estimating <span class="math">\(\lambda\)</span> (online, stream). Global variable here maybe <span class="math">\(\beta\)</span> or <span class="math">\(\lambda\)</span> depend on each stochastic methods.</li>
+<li>Inference for individual document: infer to find out the <strong>hidden local variables</strong>: topic proportion <span class="math">\(\theta\)</span> or topic indices <strong>z</strong>. To deal with this, we can estimate directly or estimate their distribution P(<span class="math">\(\theta\)</span> | <span class="math">\(\gamma\)</span>), P(<strong>z</strong> | <span class="math">\(\phi\)</span>) (<span class="math">\(\gamma\)</span>, <span class="math">\(phi\)</span> called “variational parameters”).</li>
+<li>Update <strong>global variable</strong> in a stochastic way to find out directly topics <span class="math">\(\beta\)</span> or we can estimate topics by finding out its distribution P(<span class="math">\(\beta\)</span> | <span class="math">\(\lambda\)</span>) (estimating variational parameter <span class="math">\(\lambda\)</span>). Global variable here maybe <span class="math">\(\beta\)</span> or <span class="math">\(\lambda\)</span> depend on each stochastic methods.</li>
 </ul>
 <p>Indeed, this phase is as same as training step in machine learning.</p>
 </div>
-<div class="section" id="posterior-inference">
-<h3><a class="toc-backref" href="#id7">Posterior Inference</a><a class="headerlink" href="#posterior-inference" title="Permalink to this headline">¶</a></h3>
-<p>Actually, this is the first step in learning phase above, posterior inference is the core step when designing efficient algorithms for learning topic models from large-scale data. It also plays a important role in many tasks, such as understanding individual texts, dimensionality reduction, and prediction</p>
-<p>With given model {<span class="math">\(\alpha\)</span>, <span class="math">\(\eta\)</span>, <span class="math">\(\beta\)</span> (or <span class="math">\(\lambda\)</span>)}, we can infer for new document to find out topic proportion <span class="math">\(\theta\)</span> and <strong>z</strong> if necessary.</p>
-<p>There exists some inference algorithms such as: Variational Bayesian (VB), Collapsed variational Bayes (CVB), Fast collapsed variational Bayes (CVB0), Collapsed Gibbs sampling (CGS), Frank Wolfe (FW) and Online Maximum a Posterior Estimation (OPE) (refer <a class="reference external" href="./user_guide.rst">user guide</a> document for detail)</p>
 </div>
 </div>
-<div class="section" id="data-input-format">
-<h2><a class="toc-backref" href="#id8">Data input format</a><a class="headerlink" href="#data-input-format" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="corpus">
-<h3><a class="toc-backref" href="#id9">Corpus</a><a class="headerlink" href="#corpus" title="Permalink to this headline">¶</a></h3>
+<h1>Corpus<a class="headerlink" href="#corpus" title="Permalink to this headline">¶</a></h1>
 <p>A corpus is a collection of digital documents. This collection is the input to topicmodel-lib from which it will infer the structure of the documents, their topics, topic proportions, etc. The latent structure inferred from the corpus can later be used to assign topics to new documents which were not present in the training corpus. For this reason, we also refer to this collection as the training corpus. No human intervention (such as tagging the documents by hand) is required - the topic classification is unsupervised.</p>
-</div>
 <div class="section" id="data-format">
-<h3><a class="toc-backref" href="#id10">Data Format</a><a class="headerlink" href="#data-format" title="Permalink to this headline">¶</a></h3>
-<p>Our framework is support for 3 input format:</p>
-<ul>
-<li><p class="first">Corpus with raw text format:</p>
+<h2>Data Format<a class="headerlink" href="#data-format" title="Permalink to this headline">¶</a></h2>
+<p>Because we need to learn the model from the massive data, the loading whole of training data into memory is a bad idea. Corpus used for training should be stored in a file and with a specific format. Our library supports 3 formats of data:</p>
+<div class="section" id="raw-text">
+<h3>Raw Text<a class="headerlink" href="#raw-text" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">raw_corpus</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Human machine interface for lab abc computer applications&quot;</span><span class="p">,</span>
               <span class="s2">&quot;A survey of user opinion of computer system response time&quot;</span><span class="p">,</span>
               <span class="s2">&quot;The EPS user interface management system&quot;</span><span class="p">,</span>
@@ -252,11 +237,14 @@
               <span class="s2">&quot;Graph minors A survey&quot;</span><span class="p">]</span>
 </pre></div>
 </div>
-<p>More detail for format of raw text corpus in a file, see <a class="reference external" href="./user_guide.rst">user guide</a> document</p>
-</li>
-<li><p class="first">Term-frequency format (tf):</p>
-<p>The implementations only support reading data type in LDA. Please refer to the following site for instructions: <a class="reference external" href="http://www.cs.columbia.edu/~blei/lda-c/">http://www.cs.columbia.edu/~blei/lda-c/</a>
-Under LDA, the words of each document are assumed exchangeable.  Thus, each document is succinctly represented as a sparse vector of word counts. The data is a file where each line is of the form:</p>
+<p>The raw corpus must be stored in a file. Each document is placed in 2 pair tag &lt;DOC&gt;&lt;/DOC&gt; and &lt;TEXT&gt;&lt;/TEXT&gt; as follow</p>
+<img alt="_images/format1.PNG" src="_images/format1.PNG" />
+<p>You can see <a class="reference external" href="https://github.com/TruongKhang/documentation/blob/master/examples/ap/data/ap_infer_raw.txt">raw AP corpus</a> for example</p>
+</div>
+<div class="section" id="term-frequency-tf">
+<h3>Term-frequency (tf)<a class="headerlink" href="#term-frequency-tf" title="Permalink to this headline">¶</a></h3>
+<p>Term-frequency format (<strong>tf</strong>) is derived from <a class="reference external" href="http://www.cs.columbia.edu/~blei/lda-c/">Blei, 2003</a>. This is a corpus which we achieve after preprocessing raw corpus. We also extract to a vocabulary set for that corpus (unique terms in whole corpus)</p>
+<p>Under LDA, the words of each document are assumed exchangeable.  Thus, each document is succinctly represented as a sparse vector of word counts. The data is a file where each line is of the form:</p>
 <p><cite>[N] [term_1]:[count] [term_2]:[count] …  [term_N]:[count]</cite></p>
 <p>where [N] is the number of unique terms in the document, and the [count] associated with each term is how many times that term appeared in the document.  Note that [term_i] is an integer which indexes the term (index of that term in file vocabulary); it is not a string.</p>
 <p>For example, with corpus as raw_corpus above and file vocabulary is:</p>
@@ -295,7 +283,7 @@ Under LDA, the words of each document are assumed exchangeable.  Thus, each docu
 <span class="mf">32.</span> <span class="s2">&quot;ordering&quot;</span>
 </pre></div>
 </div>
-<p>The tf format of corpus will be:</p>
+<p>The <strong>tf</strong> format of corpus will be:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="mi">7</span> <span class="mi">0</span><span class="p">:</span><span class="mi">1</span> <span class="mi">1</span><span class="p">:</span><span class="mi">1</span> <span class="mi">2</span><span class="p">:</span><span class="mi">1</span> <span class="mi">3</span><span class="p">:</span><span class="mi">1</span> <span class="mi">4</span><span class="p">:</span><span class="mi">1</span> <span class="mi">5</span><span class="p">:</span><span class="mi">1</span> <span class="mi">6</span><span class="p">:</span><span class="mi">1</span>
 <span class="mi">7</span> <span class="mi">7</span><span class="p">:</span><span class="mi">1</span> <span class="mi">8</span><span class="p">:</span><span class="mi">1</span> <span class="mi">9</span><span class="p">:</span><span class="mi">1</span> <span class="mi">5</span><span class="p">:</span><span class="mi">1</span> <span class="mi">10</span><span class="p">:</span><span class="mi">1</span> <span class="mi">11</span><span class="p">:</span><span class="mi">1</span> <span class="mi">12</span><span class="p">:</span><span class="mi">1</span>
 <span class="mi">5</span> <span class="mi">13</span><span class="p">:</span><span class="mi">1</span> <span class="mi">8</span><span class="p">:</span><span class="mi">1</span> <span class="mi">2</span><span class="p">:</span><span class="mi">1</span> <span class="mi">14</span><span class="p">:</span><span class="mi">1</span> <span class="mi">10</span><span class="p">:</span><span class="mi">1</span>
@@ -307,14 +295,13 @@ Under LDA, the words of each document are assumed exchangeable.  Thus, each docu
 <span class="mi">3</span> <span class="mi">27</span><span class="p">:</span><span class="mi">1</span> <span class="mi">29</span><span class="p">:</span><span class="mi">1</span> <span class="mi">7</span><span class="p">:</span><span class="mi">1</span>
 </pre></div>
 </div>
-</li>
-<li><p class="first">Term-sequence format (sq):</p>
+</div>
+<div class="section" id="term-sequence-sq">
+<h3>Term-sequence (sq)<a class="headerlink" href="#term-sequence-sq" title="Permalink to this headline">¶</a></h3>
 <p>Each document is represented by a sequence of token as follow</p>
-<blockquote>
-<div><p><cite>[token_1] [token_2] ….</cite></p>
-</div></blockquote>
-<p>[token_i] also is index of it in vocabulary file, not a string.
-The sq format of corpus above will be:</p>
+<p><cite>[token_1] [token_2] [token_3]….</cite></p>
+<p>[token_i] also is index of that token in vocabulary file, not a string. (maybe exist that [token_i] = [token_j])
+The <strong>sq</strong> format of the corpus above will be:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="mi">0</span> <span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span> <span class="mi">4</span> <span class="mi">5</span> <span class="mi">6</span>
 <span class="mi">7</span> <span class="mi">8</span> <span class="mi">9</span> <span class="mi">5</span> <span class="mi">10</span> <span class="mi">11</span> <span class="mi">12</span>
 <span class="mi">13</span> <span class="mi">8</span> <span class="mi">2</span> <span class="mi">14</span> <span class="mi">10</span>
@@ -326,61 +313,199 @@ The sq format of corpus above will be:</p>
 <span class="mi">27</span> <span class="mi">29</span> <span class="mi">7</span>
 </pre></div>
 </div>
-</li>
-</ul>
 </div>
 </div>
-<div class="section" id="install-topicmodel-lib">
-<h2><a class="toc-backref" href="#id11">Install topicmodel-lib</a><a class="headerlink" href="#install-topicmodel-lib" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="requirements">
-<h3><a class="toc-backref" href="#id12">Requirements</a><a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h3>
-<p>Topicmodel-lib requires:</p>
-<ul class="simple">
-<li>Linux OS (Stable on Ubuntu)</li>
-<li>Python version 2 (stable on version 2.7)</li>
-<li>Docutils &gt;= 0.3</li>
-<li>Numpy &gt;= 1.8</li>
-<li>Scipy &gt;= 0.10,</li>
-<li>nltk (Natural Language Toolkit)</li>
-<li>Cython</li>
-</ul>
 </div>
-<div class="section" id="install">
-<h3><a class="toc-backref" href="#id13">Install</a><a class="headerlink" href="#install" title="Permalink to this headline">¶</a></h3>
-<p>If you installed successfully all of package above. Next is steps to install topicmodel-lib</p>
-<ul>
-<li><p class="first">First, build cython file .pyx to file .so which can be used by python</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>.../topicmodel-lib$ python setup.py build_ext --inplace
+<div class="section" id="guide-to-learn-model">
+<h1>Guide to learn model<a class="headerlink" href="#guide-to-learn-model" title="Permalink to this headline">¶</a></h1>
+<p>In this phase, the main task is to find out the global variable (topics) - in this project, we call it named <cite>model</cite> for simple. We designed the state-of-the-art methods (online/streaming learning): <a class="reference external" href="./methods/online_vb.rst">Online VB</a>, <a class="reference external" href="./methods/online_cvb0.rst">Online CVB0</a>, <a class="reference external" href="./methods/online_cgs.rst">Online CGS</a>, <a class="reference external" href="./methods/online_ope.rst">Online OPE</a>, <a class="reference external" href="./methods/online_fw.rst">Online FW</a>, <a class="reference external" href="./methods/streaming_vb.rst">Streaming VB</a>, <a class="reference external" href="./methods/streaming_ope.rst">Streaming OPE</a>, <a class="reference external" href="./methods/streaming_fw.rst">Streaming FW</a>, <a class="reference external" href="./methods/ml_ope.rst">ML-OPE</a>, <a class="reference external" href="./methods/ml_cgs.rst">ML-CGS</a>, <a class="reference external" href="./methods/ml_fw.rst">ML-FW</a></p>
+<p>All of this methods are used in the same way. So, in this guide, we’ll demo with a specific method such as Online VB. This method is proposed by Hoffman-2010, using stochastic variational inference</p>
+<div class="section" id="data-preparation">
+<h2>Data Preparation<a class="headerlink" href="#data-preparation" title="Permalink to this headline">¶</a></h2>
+<p>Make sure that your training data must be stored in a text file and abide by the <a class="reference internal" href="#data-format">Data Format</a>: <strong>tf</strong>, <strong>sq</strong> or <strong>raw text</strong></p>
+<p>We also support the <a class="reference external" href="./preprocessing.rst">preprocessing</a> module to work with the raw text format, you can convert to the tf or sq format. But if you don’t want to use it, it’s OK because we integrated that work in class <code class="docutils literal"><span class="pre">DataSet</span></code>. Therefore, the first thing you need to do is create an object <code class="docutils literal"><span class="pre">DataSet</span></code></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tmlib.datasets</span> <span class="k">import</span> <span class="n">DataSet</span>
+<span class="c1"># data_path is the path of file contains your training data</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">DataSet</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">5000</span><span class="p">,</span> <span class="n">passes</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">shuffle_every</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>or if you need permission to build:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>.../topicmodel-lib$ sudo python setup.py build_ext --inplace
+<p>The statement above is used when <cite>data_path</cite> is the raw text format. If your training file is the tf or sq format. You need to add an argument is the vocabulary file of the corpus as follow:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1"># vocab_file is the path of file vocabulary of corpus</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">DataSet</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">5000</span><span class="p">,</span> <span class="n">passes</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">shuffle_every</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">vocab_file</span><span class="o">=</span><span class="n">vocab_file</span><span class="p">)</span>
 </pre></div>
 </div>
-</li>
-<li><p class="first">Second, Install library</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>.../topicmodel-lib$ sudo python setup.py install
+<p>The parameters <strong>batch_size</strong>, <strong>passes</strong>, <strong>shuffle_every</strong> you can see in <a class="reference external" href="./methods/online_vb.rst">documentation here</a></p>
+</div>
+<div class="section" id="learning">
+<h2>Learning<a class="headerlink" href="#learning" title="Permalink to this headline">¶</a></h2>
+<p>First, we need to create an object <code class="docutils literal"><span class="pre">OnlineVB</span></code>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tmlib.lda</span> <span class="k">import</span> <span class="n">OnlineVB</span>
+<span class="n">onl_vb</span> <span class="o">=</span> <span class="n">OnlineVB</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">,</span> <span class="n">num_topics</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">eta</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">tau0</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">kappa</span><span class="o">=</span><span class="mf">0.9</span><span class="p">)</span>
 </pre></div>
 </div>
-</li>
-</ul>
+<p><code class="docutils literal"><span class="pre">data</span></code> is the object which created above. Parameter <strong>num_topics</strong> number of requested latent topics to be extracted from the training corpus. <strong>alpha</strong>, <strong>eta</strong> are hyperparameters of LDA model that affect sparsity of the topic proportions (<span class="math">\(\theta\)</span>) and topic-word (<span class="math">\(\beta\)</span>) distributions. <strong>tau0</strong>, <strong>kappa</strong> are learning parameters which are used in the update global variable step (same meaning as learning rate in the gradient descent optimization)</p>
+<p>Start learning by call function <strong>learn_model</strong>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">onl_vb</span><span class="o">.</span><span class="n">learn_model</span><span class="p">()</span>
+</pre></div>
 </div>
-<div class="section" id="uninstall">
-<h3><a class="toc-backref" href="#id14">Uninstall</a><a class="headerlink" href="#uninstall" title="Permalink to this headline">¶</a></h3>
-<p>To uninstall library:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>.../topicmodel-lib$ sudo python setup.py install --record files.txt
+<p>The returned result is an object <a class="reference external" href="./ldamodel.rst">LdaModel</a></p>
+<p>You can also save the model (<span class="math">\(\beta\)</span> or <span class="math">\(\lambda\)</span>) or some statistics such as: learning time, sparsity of document in the learning process</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">onl_vb</span><span class="o">.</span><span class="n">learn_model</span><span class="p">(</span><span class="n">save_statistic</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">save_model_every</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">compute_sparsity_every</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">save_top_words_every</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">num_top_words</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">model_folder</span><span class="o">=</span><span class="s1">&#39;models&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The result is saved in folder <cite>models</cite>. More detail about this parameters, read <a class="reference external" href="./methods/online_vb.rst">here</a></p>
+<p>One more thing, the topic proportions (<span class="math">\(\theta\)</span>) of each document in the corpus can be saved in a file <code class="docutils literal"><span class="pre">.h5</span></code>. This work is necessary for <a class="reference external" href="./visualization.rst">visualization</a> module but it’ll make the learning time slower. So, be careful when using it!</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1"># for example: path_of_h5_file = &#39;models/database.h5&#39;</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">onl_vb</span><span class="o">.</span><span class="n">learn_model</span><span class="p">(</span><span class="n">save_topic_proportion</span><span class="o">=</span><span class="n">path_of_h5_file</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="saving-model-display-topics">
+<h2>Saving model, display topics<a class="headerlink" href="#saving-model-display-topics" title="Permalink to this headline">¶</a></h2>
+<p>After the learning phase as above, you can save the topic distribution (<cite>model</cite> - <span class="math">\(\beta\)</span> or <span class="math">\(\lambda\)</span>)</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1"># path_to_save is the path of file to save model</span>
+<span class="n">model</span><span class="o">.</span><span class="n">save_model</span><span class="p">(</span><span class="n">path_to_save</span><span class="p">,</span> <span class="n">file_type</span><span class="o">=</span><span class="s1">&#39;binary&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>File <cite>path_to_save</cite> is the <code class="docutils literal"><span class="pre">.npy</span></code> file if type of file is binary or is the <code class="docutils literal"><span class="pre">.txt</span></code> file if <strong>file_type</strong> is <code class="docutils literal"><span class="pre">'txt'</span></code></p>
+<p>You also can display the topics discovered</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1"># display topics, print the top 10 words of each topic to screen</span>
+<span class="n">model</span><span class="o">.</span><span class="n">print_top_words</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">vocab_file</span><span class="p">,</span> <span class="n">display_result</span><span class="o">=</span><span class="s1">&#39;screen&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>If you want to save in a file:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1"># path_file is to which data is saved</span>
+<span class="n">model</span><span class="o">.</span><span class="n">print_top_words</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">vocab_file</span><span class="p">,</span> <span class="n">display_result</span><span class="o">=</span><span class="n">path_file</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="inference-for-new-documents">
+<h1>Inference for new documents<a class="headerlink" href="#inference-for-new-documents" title="Permalink to this headline">¶</a></h1>
+<p>After learning phase, you have the <cite>model</cite> - topic distributions (<span class="math">\(\beta\)</span> or <span class="math">\(\lambda\)</span>). You want to infer for some documents to find out what topics these documents are related to. We need to estimate topic-proportions <span class="math">\(\theta\)</span></p>
+<p>First, create an object <code class="docutils literal"><span class="pre">DataSet</span></code> to load new documents from a file.</p>
+<p>If data format in that file is <a class="reference internal" href="#raw-text">Raw Text</a>, you need the vocabulary file used in learning phase</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tmlib.datasets</span> <span class="k">import</span> <span class="n">DataSet</span>
 
-.../topicmodel-lib$ cat files.txt | xargs sudo rm -rf
+<span class="n">data</span> <span class="o">=</span> <span class="n">DataSet</span><span class="p">()</span>
+<span class="c1"># vocab_file is the vocabulary file used in learning phase</span>
+<span class="n">new_corpus</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">load_new_documents</span><span class="p">(</span><span class="n">file_new_docs</span><span class="p">,</span> <span class="n">vocab_file</span><span class="o">=</span><span class="n">vocab_file</span><span class="p">)</span>
 </pre></div>
 </div>
-<table class="docutils footnote" frame="void" id="id2" rules="none">
-<colgroup><col class="label" /><col /></colgroup>
-<tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>M.D. Hoffman, D.M. Blei, C. Wang, and J. Paisley, “Stochastic variational inference,” The Journal of Machine Learning Research, vol. 14, no. 1, pp. 1303�1347, 2013.</td></tr>
-</tbody>
-</table>
+<p>or if data format is the <strong>tf</strong> or <strong>sq</strong> format. The statement simply is:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">new_corpus</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">load_new_documents</span><span class="p">(</span><span class="n">file_new_docs</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>After that, you have to load the model which is saved in the learning phase into object <code class="docutils literal"><span class="pre">OnlineVB</span></code></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1"># create object LdaModel</span>
+<span class="n">learnt_model</span> <span class="o">=</span> <span class="n">LdaModel</span><span class="p">()</span>
+<span class="c1"># read topic distribution from file</span>
+<span class="n">lda_model</span><span class="o">.</span><span class="n">load_model</span><span class="p">(</span><span class="n">path_file_to_read</span><span class="p">)</span>
+
+<span class="c1"># load lda_model into OnlineVB</span>
+<span class="kn">from</span> <span class="nn">tmlib.lda</span> <span class="k">import</span> <span class="n">OnlineVB</span>
+<span class="n">online_vb</span> <span class="o">=</span> <span class="n">OnlineVB</span><span class="p">(</span><span class="n">lda_model</span><span class="o">=</span><span class="n">learnt_model</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Call <code class="docutils literal"><span class="pre">infer_new_docs</span></code> function to rum inference</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">gamma</span> <span class="o">=</span> <span class="n">online_vb</span><span class="o">.</span><span class="n">infer_new_docs</span><span class="p">(</span><span class="n">new_corpus</span><span class="p">)</span>
+<span class="c1"># you can estimate topic proportion theta from variational parameter gamma</span>
+<span class="n">theta</span> <span class="o">=</span> <span class="n">online_vb</span><span class="o">.</span><span class="n">estimate_topic_proportion</span><span class="p">(</span><span class="n">gamma</span><span class="p">)</span>
+</pre></div>
 </div>
 </div>
+<div class="section" id="example">
+<h1>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h1>
+<p>You can see in <a class="reference external" href="https://github.com/hncuong/topicmodel-lib/tree/master/examples/ap">example folder</a>. We prepared the AP corpus including both raw corpus and term-frequency corpus. In here, we’ll show code with both of type corpus and use method <a class="reference external" href="./methods/online_ope.rst">Online OPE</a> (known is fast than Online VB)</p>
+<ul>
+<li><p class="first">Raw AP corpus</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tmlib.lda</span> <span class="k">import</span> <span class="n">OnlineOPE</span>
+<span class="kn">from</span> <span class="nn">tmlib.datasets</span> <span class="k">import</span> <span class="n">DataSet</span>
+
+<span class="c1"># data preparation</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">DataSet</span><span class="p">(</span><span class="n">data_path</span><span class="o">=</span><span class="s1">&#39;data/ap_train_raw.txt&#39;</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">passes</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">shuffle_every</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="c1"># learning</span>
+<span class="n">onl_ope</span> <span class="o">=</span> <span class="n">OnlineOPE</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">,</span> <span class="n">num_topics</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">onl_vb</span><span class="o">.</span><span class="n">learn_model</span><span class="p">()</span>
+<span class="c1"># save model (beta or lambda)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">save_model</span><span class="p">(</span><span class="s1">&#39;topic_distribution.npy&#39;</span><span class="p">)</span>
+<span class="c1"># display top 10 words of each topic</span>
+<span class="n">model</span><span class="o">.</span><span class="n">print_top_words</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">vocab_file</span><span class="p">,</span> <span class="n">display_result</span><span class="o">=</span><span class="s1">&#39;screen&#39;</span><span class="p">)</span>
+
+<span class="c1"># inference for new documents</span>
+<span class="n">vocab_file</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">vocab_file</span>
+<span class="n">new_corpus</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">load_new_documents</span><span class="p">(</span><span class="s1">&#39;data/ap_infer_raw.txt&#39;</span><span class="p">,</span> <span class="n">vocab_file</span><span class="o">=</span><span class="n">vocab_file</span><span class="p">)</span>
+<span class="n">topic_proportions</span> <span class="o">=</span> <span class="n">onl_ope</span><span class="o">.</span><span class="n">infer_new_docs</span><span class="p">(</span><span class="n">new_corpus</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Topics:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">topic</span> <span class="mi">0</span><span class="p">:</span> <span class="n">water</span><span class="p">,</span> <span class="n">environmental</span><span class="p">,</span> <span class="n">people</span><span class="p">,</span> <span class="n">trust</span><span class="p">,</span> <span class="n">earth</span><span class="p">,</span> <span class="n">pollution</span><span class="p">,</span> <span class="n">taxes</span><span class="p">,</span> <span class="n">claims</span><span class="p">,</span> <span class="n">air</span><span class="p">,</span> <span class="n">boat</span><span class="p">,</span>
+<span class="n">topic</span> <span class="mi">1</span><span class="p">:</span> <span class="n">year</span><span class="p">,</span> <span class="n">people</span><span class="p">,</span> <span class="n">years</span><span class="p">,</span> <span class="n">mrs</span><span class="p">,</span> <span class="n">police</span><span class="p">,</span> <span class="n">time</span><span class="p">,</span> <span class="n">day</span><span class="p">,</span> <span class="n">family</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">women</span><span class="p">,</span>
+<span class="n">topic</span> <span class="mi">2</span><span class="p">:</span> <span class="n">percent</span><span class="p">,</span> <span class="n">year</span><span class="p">,</span> <span class="n">company</span><span class="p">,</span> <span class="n">department</span><span class="p">,</span> <span class="n">million</span><span class="p">,</span> <span class="n">plant</span><span class="p">,</span> <span class="n">health</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">report</span><span class="p">,</span> <span class="n">study</span><span class="p">,</span>
+<span class="n">topic</span> <span class="mi">3</span><span class="p">:</span> <span class="n">police</span><span class="p">,</span> <span class="n">government</span><span class="p">,</span> <span class="n">people</span><span class="p">,</span> <span class="n">military</span><span class="p">,</span> <span class="n">iraq</span><span class="p">,</span> <span class="n">army</span><span class="p">,</span> <span class="n">killed</span><span class="p">,</span> <span class="n">officials</span><span class="p">,</span> <span class="n">israel</span><span class="p">,</span> <span class="n">war</span><span class="p">,</span>
+<span class="n">topic</span> <span class="mi">4</span><span class="p">:</span> <span class="n">cent</span><span class="p">,</span> <span class="n">cents</span><span class="p">,</span> <span class="n">weather</span><span class="p">,</span> <span class="n">lower</span><span class="p">,</span> <span class="n">temperatures</span><span class="p">,</span> <span class="n">bushel</span><span class="p">,</span> <span class="n">snow</span><span class="p">,</span> <span class="n">inches</span><span class="p">,</span> <span class="n">coast</span><span class="p">,</span> <span class="n">central</span><span class="p">,</span>
+<span class="n">topic</span> <span class="mi">5</span><span class="p">:</span> <span class="n">billion</span><span class="p">,</span> <span class="n">deficit</span><span class="p">,</span> <span class="n">housing</span><span class="p">,</span> <span class="n">japan</span><span class="p">,</span> <span class="n">japanese</span><span class="p">,</span> <span class="n">trade</span><span class="p">,</span> <span class="n">fair</span><span class="p">,</span> <span class="n">cuba</span><span class="p">,</span> <span class="n">imports</span><span class="p">,</span> <span class="n">exports</span><span class="p">,</span>
+<span class="n">topic</span> <span class="mi">6</span><span class="p">:</span> <span class="n">cbs</span><span class="p">,</span> <span class="n">abc</span><span class="p">,</span> <span class="n">williams</span><span class="p">,</span> <span class="n">miles</span><span class="p">,</span> <span class="n">area</span><span class="p">,</span> <span class="n">earthquake</span><span class="p">,</span> <span class="n">quake</span><span class="p">,</span> <span class="n">homeless</span><span class="p">,</span> <span class="n">pope</span><span class="p">,</span> <span class="n">john</span><span class="p">,</span>
+<span class="n">topic</span> <span class="mi">7</span><span class="p">:</span> <span class="n">bush</span><span class="p">,</span> <span class="n">president</span><span class="p">,</span> <span class="n">dukakis</span><span class="p">,</span> <span class="n">states</span><span class="p">,</span> <span class="n">reagan</span><span class="p">,</span> <span class="n">congress</span><span class="p">,</span> <span class="n">campaign</span><span class="p">,</span> <span class="n">house</span><span class="p">,</span> <span class="n">united</span><span class="p">,</span> <span class="n">south</span><span class="p">,</span>
+<span class="n">topic</span> <span class="mi">8</span><span class="p">:</span> <span class="n">campaign</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">northern</span><span class="p">,</span> <span class="n">mexico</span><span class="p">,</span> <span class="n">republican</span><span class="p">,</span> <span class="n">police</span><span class="p">,</span> <span class="n">county</span><span class="p">,</span> <span class="n">alabama</span><span class="p">,</span> <span class="n">cuomo</span><span class="p">,</span> <span class="n">governor</span><span class="p">,</span>
+<span class="n">topic</span> <span class="mi">9</span><span class="p">:</span> <span class="n">trade</span><span class="p">,</span> <span class="n">takeshita</span><span class="p">,</span> <span class="n">deconcini</span><span class="p">,</span> <span class="n">oil</span><span class="p">,</span> <span class="n">pension</span><span class="p">,</span> <span class="n">committee</span><span class="p">,</span> <span class="n">keating</span><span class="p">,</span> <span class="n">fernandez</span><span class="p">,</span> <span class="n">lawsuit</span><span class="p">,</span> <span class="n">illness</span><span class="p">,</span>
+<span class="n">topic</span> <span class="mi">10</span><span class="p">:</span> <span class="n">court</span><span class="p">,</span> <span class="n">case</span><span class="p">,</span> <span class="n">attorney</span><span class="p">,</span> <span class="n">trial</span><span class="p">,</span> <span class="n">judge</span><span class="p">,</span> <span class="n">federal</span><span class="p">,</span> <span class="n">charges</span><span class="p">,</span> <span class="n">law</span><span class="p">,</span> <span class="n">justice</span><span class="p">,</span> <span class="n">jury</span><span class="p">,</span>
+<span class="n">topic</span> <span class="mi">11</span><span class="p">:</span> <span class="n">party</span><span class="p">,</span> <span class="n">government</span><span class="p">,</span> <span class="n">political</span><span class="p">,</span> <span class="n">workers</span><span class="p">,</span> <span class="n">national</span><span class="p">,</span> <span class="n">labor</span><span class="p">,</span> <span class="n">opposition</span><span class="p">,</span> <span class="n">people</span><span class="p">,</span> <span class="n">elections</span><span class="p">,</span> <span class="n">country</span><span class="p">,</span>
+<span class="n">topic</span> <span class="mi">12</span><span class="p">:</span> <span class="n">million</span><span class="p">,</span> <span class="n">tax</span><span class="p">,</span> <span class="n">sales</span><span class="p">,</span> <span class="n">income</span><span class="p">,</span> <span class="n">year</span><span class="p">,</span> <span class="n">cash</span><span class="p">,</span> <span class="n">estate</span><span class="p">,</span> <span class="n">assets</span><span class="p">,</span> <span class="n">money</span><span class="p">,</span> <span class="n">billion</span><span class="p">,</span>
+<span class="n">topic</span> <span class="mi">13</span><span class="p">:</span> <span class="n">school</span><span class="p">,</span> <span class="n">movie</span><span class="p">,</span> <span class="n">film</span><span class="p">,</span> <span class="n">board</span><span class="p">,</span> <span class="n">parents</span><span class="p">,</span> <span class="n">ban</span><span class="p">,</span> <span class="n">mca</span><span class="p">,</span> <span class="n">theater</span><span class="p">,</span> <span class="n">roberts</span><span class="p">,</span> <span class="n">fees</span><span class="p">,</span>
+<span class="n">topic</span> <span class="mi">14</span><span class="p">:</span> <span class="n">students</span><span class="p">,</span> <span class="n">computer</span><span class="p">,</span> <span class="n">farmers</span><span class="p">,</span> <span class="n">teachers</span><span class="p">,</span> <span class="n">smoking</span><span class="p">,</span> <span class="n">schools</span><span class="p">,</span> <span class="n">student</span><span class="p">,</span> <span class="n">stolen</span><span class="p">,</span> <span class="n">kasparov</span><span class="p">,</span> <span class="n">faculty</span><span class="p">,</span>
+<span class="n">topic</span> <span class="mi">15</span><span class="p">:</span> <span class="n">dollar</span><span class="p">,</span> <span class="n">yen</span><span class="p">,</span> <span class="n">late</span><span class="p">,</span> <span class="n">gold</span><span class="p">,</span> <span class="n">london</span><span class="p">,</span> <span class="n">bid</span><span class="p">,</span> <span class="n">ounce</span><span class="p">,</span> <span class="n">bank</span><span class="p">,</span> <span class="n">thursday</span><span class="p">,</span> <span class="n">dealers</span><span class="p">,</span>
+<span class="n">topic</span> <span class="mi">16</span><span class="p">:</span> <span class="n">percent</span><span class="p">,</span> <span class="n">market</span><span class="p">,</span> <span class="n">year</span><span class="p">,</span> <span class="n">stock</span><span class="p">,</span> <span class="n">million</span><span class="p">,</span> <span class="n">prices</span><span class="p">,</span> <span class="n">billion</span><span class="p">,</span> <span class="n">rose</span><span class="p">,</span> <span class="n">exchange</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span>
+<span class="n">topic</span> <span class="mi">17</span><span class="p">:</span> <span class="n">soviet</span><span class="p">,</span> <span class="n">gorbachev</span><span class="p">,</span> <span class="n">united</span><span class="p">,</span> <span class="n">union</span><span class="p">,</span> <span class="n">president</span><span class="p">,</span> <span class="n">officials</span><span class="p">,</span> <span class="n">west</span><span class="p">,</span> <span class="n">year</span><span class="p">,</span> <span class="n">germany</span><span class="p">,</span> <span class="n">east</span><span class="p">,</span>
+<span class="n">topic</span> <span class="mi">18</span><span class="p">:</span> <span class="n">bill</span><span class="p">,</span> <span class="n">senate</span><span class="p">,</span> <span class="n">house</span><span class="p">,</span> <span class="n">kennedy</span><span class="p">,</span> <span class="n">sen</span><span class="p">,</span> <span class="n">rep</span><span class="p">,</span> <span class="n">measure</span><span class="p">,</span> <span class="n">humphrey</span><span class="p">,</span> <span class="n">director</span><span class="p">,</span> <span class="n">thompson</span><span class="p">,</span>
+<span class="n">topic</span> <span class="mi">19</span><span class="p">:</span> <span class="n">meese</span><span class="p">,</span> <span class="n">museum</span><span class="p">,</span> <span class="n">disney</span><span class="p">,</span> <span class="n">school</span><span class="p">,</span> <span class="n">city</span><span class="p">,</span> <span class="n">board</span><span class="p">,</span> <span class="n">art</span><span class="p">,</span> <span class="n">smith</span><span class="p">,</span> <span class="n">buildings</span><span class="p">,</span> <span class="n">memorial</span><span class="p">,</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">tf format</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tmlib.lda</span> <span class="k">import</span> <span class="n">OnlineOPE</span>
+<span class="kn">from</span> <span class="nn">tmlib.datasets</span> <span class="k">import</span> <span class="n">DataSet</span>
+
+<span class="c1"># data preparation</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">DataSet</span><span class="p">(</span><span class="n">data_path</span><span class="o">=</span><span class="s1">&#39;data/ap_train.txt&#39;</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">passes</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">shuffle_every</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">vocab_file</span><span class="o">=</span><span class="s1">&#39;data/vocab.txt&#39;</span><span class="p">)</span>
+<span class="c1"># learning</span>
+<span class="n">onl_ope</span> <span class="o">=</span> <span class="n">OnlineOPE</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">,</span> <span class="n">num_topics</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">onl_vb</span><span class="o">.</span><span class="n">learn_model</span><span class="p">()</span>
+<span class="c1"># save model (beta or lambda)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">save_model</span><span class="p">(</span><span class="s1">&#39;topic_distribution.npy&#39;</span><span class="p">)</span>
+<span class="c1"># display top 10 words of each topic</span>
+<span class="n">model</span><span class="o">.</span><span class="n">print_top_words</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">vocab_file</span><span class="p">,</span> <span class="n">display_result</span><span class="o">=</span><span class="s1">&#39;screen&#39;</span><span class="p">)</span>
+
+<span class="c1"># inference for new documents</span>
+<span class="n">new_corpus</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">load_new_documents</span><span class="p">(</span><span class="s1">&#39;data/ap_infer.txt&#39;</span><span class="p">)</span>
+<span class="n">topic_proportions</span> <span class="o">=</span> <span class="n">onl_ope</span><span class="o">.</span><span class="n">infer_new_docs</span><span class="p">(</span><span class="n">new_corpus</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Topics:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">topic</span> <span class="mi">0</span><span class="p">:</span> <span class="n">two</span><span class="p">,</span> <span class="n">new</span><span class="p">,</span> <span class="n">people</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">years</span><span class="p">,</span> <span class="n">first</span><span class="p">,</span> <span class="n">officials</span><span class="p">,</span> <span class="n">time</span><span class="p">,</span> <span class="n">fire</span><span class="p">,</span> <span class="n">day</span><span class="p">,</span>
+<span class="n">topic</span> <span class="mi">1</span><span class="p">:</span> <span class="n">israel</span><span class="p">,</span> <span class="n">minister</span><span class="p">,</span> <span class="n">prime</span><span class="p">,</span> <span class="n">vietnam</span><span class="p">,</span> <span class="n">thatcher</span><span class="p">,</span> <span class="n">party</span><span class="p">,</span> <span class="n">opec</span><span class="p">,</span> <span class="n">ministers</span><span class="p">,</span> <span class="n">demjanjuk</span><span class="p">,</span> <span class="n">labor</span><span class="p">,</span>
+<span class="n">topic</span> <span class="mi">2</span><span class="p">:</span> <span class="n">million</span><span class="p">,</span> <span class="n">percent</span><span class="p">,</span> <span class="n">futures</span><span class="p">,</span> <span class="n">year</span><span class="p">,</span> <span class="n">market</span><span class="p">,</span> <span class="n">bank</span><span class="p">,</span> <span class="n">analysts</span><span class="p">,</span> <span class="n">new</span><span class="p">,</span> <span class="n">cbs</span><span class="p">,</span> <span class="n">nbc</span><span class="p">,</span>
+<span class="n">topic</span> <span class="mi">3</span><span class="p">:</span> <span class="n">dukakis</span><span class="p">,</span> <span class="n">jackson</span><span class="p">,</span> <span class="n">democratic</span><span class="p">,</span> <span class="n">presidential</span><span class="p">,</span> <span class="n">campaign</span><span class="p">,</span> <span class="n">candidates</span><span class="p">,</span> <span class="n">candidate</span><span class="p">,</span> <span class="n">vote</span><span class="p">,</span> <span class="n">voters</span><span class="p">,</span> <span class="n">delegates</span><span class="p">,</span>
+<span class="n">topic</span> <span class="mi">4</span><span class="p">:</span> <span class="n">million</span><span class="p">,</span> <span class="n">company</span><span class="p">,</span> <span class="n">new</span><span class="p">,</span> <span class="n">billion</span><span class="p">,</span> <span class="n">inc</span><span class="p">,</span> <span class="n">corp</span><span class="p">,</span> <span class="n">board</span><span class="p">,</span> <span class="n">year</span><span class="p">,</span> <span class="n">court</span><span class="p">,</span> <span class="n">federal</span><span class="p">,</span>
+<span class="n">topic</span> <span class="mi">5</span><span class="p">:</span> <span class="n">bush</span><span class="p">,</span> <span class="n">united</span><span class="p">,</span> <span class="n">states</span><span class="p">,</span> <span class="n">president</span><span class="p">,</span> <span class="n">trade</span><span class="p">,</span> <span class="n">billion</span><span class="p">,</span> <span class="n">house</span><span class="p">,</span> <span class="n">congress</span><span class="p">,</span> <span class="n">new</span><span class="p">,</span> <span class="n">budget</span><span class="p">,</span>
+<span class="n">topic</span> <span class="mi">6</span><span class="p">:</span> <span class="n">stock</span><span class="p">,</span> <span class="n">market</span><span class="p">,</span> <span class="n">dollar</span><span class="p">,</span> <span class="n">trading</span><span class="p">,</span> <span class="n">exchange</span><span class="p">,</span> <span class="n">yen</span><span class="p">,</span> <span class="n">prices</span><span class="p">,</span> <span class="n">late</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">rose</span><span class="p">,</span>
+<span class="n">topic</span> <span class="mi">7</span><span class="p">:</span> <span class="n">korean</span><span class="p">,</span> <span class="n">korea</span><span class="p">,</span> <span class="n">city</span><span class="p">,</span> <span class="n">village</span><span class="p">,</span> <span class="n">police</span><span class="p">,</span> <span class="n">north</span><span class="p">,</span> <span class="n">st</span><span class="p">,</span> <span class="n">traffic</span><span class="p">,</span> <span class="n">koreas</span><span class="p">,</span> <span class="n">citys</span><span class="p">,</span>
+<span class="n">topic</span> <span class="mi">8</span><span class="p">:</span> <span class="n">police</span><span class="p">,</span> <span class="n">people</span><span class="p">,</span> <span class="n">killed</span><span class="p">,</span> <span class="n">two</span><span class="p">,</span> <span class="n">government</span><span class="p">,</span> <span class="n">army</span><span class="p">,</span> <span class="n">military</span><span class="p">,</span> <span class="n">officials</span><span class="p">,</span> <span class="n">three</span><span class="p">,</span> <span class="n">city</span><span class="p">,</span>
+<span class="n">topic</span> <span class="mi">9</span><span class="p">:</span> <span class="n">south</span><span class="p">,</span> <span class="n">africa</span><span class="p">,</span> <span class="n">african</span><span class="p">,</span> <span class="n">black</span><span class="p">,</span> <span class="n">elections</span><span class="p">,</span> <span class="n">party</span><span class="p">,</span> <span class="n">national</span><span class="p">,</span> <span class="n">war</span><span class="p">,</span> <span class="n">mandela</span><span class="p">,</span> <span class="n">blacks</span><span class="p">,</span>
+<span class="n">topic</span> <span class="mi">10</span><span class="p">:</span> <span class="n">states</span><span class="p">,</span> <span class="n">united</span><span class="p">,</span> <span class="n">nicaragua</span><span class="p">,</span> <span class="n">noriega</span><span class="p">,</span> <span class="n">drug</span><span class="p">,</span> <span class="n">contras</span><span class="p">,</span> <span class="n">court</span><span class="p">,</span> <span class="n">coup</span><span class="p">,</span> <span class="n">humphrey</span><span class="p">,</span> <span class="n">manila</span><span class="p">,</span>
+<span class="n">topic</span> <span class="mi">11</span><span class="p">:</span> <span class="n">reagan</span><span class="p">,</span> <span class="n">china</span><span class="p">,</span> <span class="n">nuclear</span><span class="p">,</span> <span class="n">study</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">prisoners</span><span class="p">,</span> <span class="n">fitzwater</span><span class="p">,</span> <span class="n">researchers</span><span class="p">,</span> <span class="n">games</span><span class="p">,</span> <span class="n">animals</span><span class="p">,</span>
+<span class="n">topic</span> <span class="mi">12</span><span class="p">:</span> <span class="n">i</span><span class="p">,</span> <span class="n">new</span><span class="p">,</span> <span class="n">people</span><span class="p">,</span> <span class="n">years</span><span class="p">,</span> <span class="n">percent</span><span class="p">,</span> <span class="n">year</span><span class="p">,</span> <span class="n">last</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">time</span><span class="p">,</span> <span class="n">two</span><span class="p">,</span>
+<span class="n">topic</span> <span class="mi">13</span><span class="p">:</span> <span class="n">trial</span><span class="p">,</span> <span class="n">case</span><span class="p">,</span> <span class="n">prison</span><span class="p">,</span> <span class="n">charges</span><span class="p">,</span> <span class="n">convicted</span><span class="p">,</span> <span class="n">jury</span><span class="p">,</span> <span class="n">attorney</span><span class="p">,</span> <span class="n">guilty</span><span class="p">,</span> <span class="n">sentence</span><span class="p">,</span> <span class="n">prosecutors</span><span class="p">,</span>
+<span class="n">topic</span> <span class="mi">14</span><span class="p">:</span> <span class="n">rain</span><span class="p">,</span> <span class="n">northern</span><span class="p">,</span> <span class="n">texas</span><span class="p">,</span> <span class="n">inches</span><span class="p">,</span> <span class="n">california</span><span class="p">,</span> <span class="n">central</span><span class="p">,</span> <span class="n">damage</span><span class="p">,</span> <span class="n">santa</span><span class="p">,</span> <span class="n">hospital</span><span class="p">,</span> <span class="n">valley</span><span class="p">,</span>
+<span class="n">topic</span> <span class="mi">15</span><span class="p">:</span> <span class="n">soviet</span><span class="p">,</span> <span class="n">government</span><span class="p">,</span> <span class="n">gorbachev</span><span class="p">,</span> <span class="n">union</span><span class="p">,</span> <span class="n">party</span><span class="p">,</span> <span class="n">president</span><span class="p">,</span> <span class="n">political</span><span class="p">,</span> <span class="n">two</span><span class="p">,</span> <span class="n">news</span><span class="p">,</span> <span class="n">people</span><span class="p">,</span>
+<span class="n">topic</span> <span class="mi">16</span><span class="p">:</span> <span class="n">service</span><span class="p">,</span> <span class="n">offer</span><span class="p">,</span> <span class="n">court</span><span class="p">,</span> <span class="n">companies</span><span class="p">,</span> <span class="n">firm</span><span class="p">,</span> <span class="n">ruling</span><span class="p">,</span> <span class="n">information</span><span class="p">,</span> <span class="n">appeals</span><span class="p">,</span> <span class="n">operations</span><span class="p">,</span> <span class="n">services</span><span class="p">,</span>
+<span class="n">topic</span> <span class="mi">17</span><span class="p">:</span> <span class="n">water</span><span class="p">,</span> <span class="n">care</span><span class="p">,</span> <span class="n">homeless</span><span class="p">,</span> <span class="n">environmental</span><span class="p">,</span> <span class="n">pollution</span><span class="p">,</span> <span class="n">fair</span><span class="p">,</span> <span class="n">species</span><span class="p">,</span> <span class="n">air</span><span class="p">,</span> <span class="n">disaster</span><span class="p">,</span> <span class="n">farm</span><span class="p">,</span>
+<span class="n">topic</span> <span class="mi">18</span><span class="p">:</span> <span class="n">percent</span><span class="p">,</span> <span class="n">year</span><span class="p">,</span> <span class="n">cents</span><span class="p">,</span> <span class="n">oil</span><span class="p">,</span> <span class="n">prices</span><span class="p">,</span> <span class="n">west</span><span class="p">,</span> <span class="n">german</span><span class="p">,</span> <span class="n">rate</span><span class="p">,</span> <span class="n">sales</span><span class="p">,</span> <span class="n">price</span><span class="p">,</span>
+<span class="n">topic</span> <span class="mi">19</span><span class="p">:</span> <span class="n">air</span><span class="p">,</span> <span class="n">plane</span><span class="p">,</span> <span class="n">flight</span><span class="p">,</span> <span class="n">two</span><span class="p">,</span> <span class="n">iraq</span><span class="p">,</span> <span class="n">soviet</span><span class="p">,</span> <span class="n">force</span><span class="p">,</span> <span class="n">kuwait</span><span class="p">,</span> <span class="n">airport</span><span class="p">,</span> <span class="n">iraqi</span><span class="p">,</span>
+</pre></div>
+</div>
+</li>
+</ul>
 </div>
 
 
@@ -393,7 +518,7 @@ The sq format of corpus above will be:</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="list_api.html" class="btn btn-neutral float-right" title="Module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="lda_model.html" class="btn btn-neutral float-right" title="LDA Model" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="index.html" class="btn btn-neutral" title="Welcome to topicmodel-lib’s documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>

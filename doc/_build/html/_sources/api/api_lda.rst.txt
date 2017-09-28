@@ -1336,3 +1336,6 @@ Methods
   
   see class LdaLearning
 
+.. [1] D. Mimno, M. D. Hoffman, and D. M. Blei, “Sparse stochastic inference for latent dirichlet allocation,” in Proceedings of the 29th Annual International Conference on Machine Learning, 2012.
+.. [2] K. Than and T. B. Ho, “Fully sparse topic models,” in Machine Learning and Knowledge Discovery in Databases, ser. Lecture Notes in Computer Science, P. Flach, T. De Bie, and N. Cristianini, Eds. Springer, 2012, vol. 7523, pp. 490–505.
+

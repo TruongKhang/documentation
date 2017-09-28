@@ -1,0 +1,288 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>3. How to save or load model &mdash; topicmodel-lib 0.3.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="topicmodel-lib 0.3.1 documentation" href="../index.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> topicmodel-lib
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.3.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../quick_start.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quick_start.html#corpus">Corpus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quick_start.html#guide-to-learn-model">Guide to learn model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quick_start.html#inference-for-new-documents">Inference for new documents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quick_start.html#example">Example</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../lda_model.html">LDA Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="online_vb.html">Online VB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="online_cvb0.html">Online CVB0</a></li>
+<li class="toctree-l1"><a class="reference internal" href="online_cgs.html">Online CGS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="online_fw.html">Online FW</a></li>
+<li class="toctree-l1"><a class="reference internal" href="online_ope.html">Online OPE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="streaming_vb.html">Streaming VB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="streaming_fw.html">Streaming FW</a></li>
+<li class="toctree-l1"><a class="reference internal" href="streaming_ope.html">Streaming OPE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ml_cgs.html">ML-CGS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ml_fw.html">ML-FW</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ml_ope.html">ML-OPE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../datasets.html">tmlib.datasets</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">topicmodel-lib</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>3. How to save or load model</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/methods/load_save_model.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="how-to-save-or-load-model">
+<h1>3. How to save or load model<a class="headerlink" href="#how-to-save-or-load-model" title="Permalink to this headline">¶</a></h1>
+<p>..Contents:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">---------------------------------------------</span>
+</pre></div>
+</div>
+<div class="section" id="save-model-or">
+<h2>Save model (<span class="math">\(\lambda\)</span> or <span class="math">\(\beta\)</span>)<a class="headerlink" href="#save-model-or" title="Permalink to this headline">¶</a></h2>
+<p>After learning model <strong>obj_model</strong> as above. We can save this result as follow:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">obj_model</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">file_name</span><span class="p">,</span> <span class="n">file_type</span><span class="o">=</span><span class="s1">&#39;text&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The result model is saved in file named <em>file_name</em> with format file is text. The default format is binary file if we remove the file_type parameter.</p>
+<p>Moreover, we can save the model and some statistics like the study time, topic mixtures <span class="math">\(\theta\)</span>, the sparsity of document <a href="#id2"><span class="problematic" id="id3"><span id="id1"></span>[8]_</span></a> in the running process of the algorithm so that we can have necessary comparison and assessment. For example with VB method:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">obj_onlvb</span> <span class="o">=</span> <span class="n">OnlineVB</span><span class="p">(</span><span class="n">training_data</span><span class="p">,</span> <span class="n">save_model_every</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">compute_sparsity_every</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">save_statistic</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">save_top_words_every</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">num_top_words</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">model_folder</span><span class="o">=</span><span class="s1">&#39;model_vb&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This means after 2 iterations, the model, time of E-step, M-step and document sparsity is saved into files. All of this files is in the folder ‘model_vb’ named by user.</p>
+<div class="section" id="load-model-from-a-file">
+<h3>Load model from a file<a class="headerlink" href="#load-model-from-a-file" title="Permalink to this headline">¶</a></h3>
+<p>Assume that <span class="math">\(\lambda\)</span> or <span class="math">\(\beta\)</span> is saved in a file has path <em>model_file_path</em>. Loading is supported with 2 type of file: text (.txt) and binary (.npy).</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tmlib.lda.ldamodel</span> <span class="k">import</span> <span class="n">LdaModel</span>
+
+<span class="n">obj_model</span> <span class="o">=</span> <span class="n">LdaModel</span><span class="p">(</span><span class="n">num_terms</span><span class="p">,</span> <span class="n">num_topics</span><span class="p">)</span>
+<span class="n">obj_model</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">model_file_path</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The num_terms and num_topics are 2 parameters which are determined by user. For example, if we combine this section with tutorial learning, we can set</p>
+<blockquote>
+<div>num_terms = training_data.get_num_terms()
+num_topics = obj_onlvb.num_topics      # for example with Online-VB method</div></blockquote>
+</div>
+<div class="section" id="save-top-words-of-topics">
+<h3>Save top words of topics<a class="headerlink" href="#save-top-words-of-topics" title="Permalink to this headline">¶</a></h3>
+<p>Display to the screen</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1"># print 10 topics, top 20 words which have the highest probability will be displayed in each topic</span>
+<span class="n">obj_model</span><span class="o">.</span><span class="n">print_top_words</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="n">vocab_file_path</span><span class="p">,</span> <span class="n">show_topics</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Save into a file</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">obj_model</span><span class="o">.</span><span class="n">print_top_words</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="n">vocab_file_path</span><span class="p">,</span> <span class="n">show_topics</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">result_file</span><span class="o">=</span><span class="s1">&#39;topics.txt&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, DSLab.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.3.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

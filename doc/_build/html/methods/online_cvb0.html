@@ -1,0 +1,426 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Online CVB0 &mdash; topicmodel-lib 0.3.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="topicmodel-lib 0.3.1 documentation" href="../index.html"/>
+        <link rel="next" title="Online CGS" href="online_cgs.html"/>
+        <link rel="prev" title="Online VB" href="online_vb.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> topicmodel-lib
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.3.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../quick_start.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quick_start.html#corpus">Corpus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quick_start.html#guide-to-learn-model">Guide to learn model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quick_start.html#inference-for-new-documents">Inference for new documents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quick_start.html#example">Example</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../lda_model.html">LDA Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="online_vb.html">Online VB</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Online CVB0</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#class-onlinecvb0">class OnlineCVB0</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#parameters">Parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#attributes">Attributes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#methods">Methods</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#example">Example</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="online_cgs.html">Online CGS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="online_fw.html">Online FW</a></li>
+<li class="toctree-l1"><a class="reference internal" href="online_ope.html">Online OPE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="streaming_vb.html">Streaming VB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="streaming_fw.html">Streaming FW</a></li>
+<li class="toctree-l1"><a class="reference internal" href="streaming_ope.html">Streaming OPE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ml_cgs.html">ML-CGS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ml_fw.html">ML-FW</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ml_ope.html">ML-OPE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../datasets.html">tmlib.datasets</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">topicmodel-lib</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>Online CVB0</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/methods/online_cvb0.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="online-cvb0">
+<h1>Online CVB0<a class="headerlink" href="#online-cvb0" title="Permalink to this headline">¶</a></h1>
+<p>CVB0 <a class="footnote-reference" href="#id5" id="id1">[2]</a> is derived from CVB <a class="footnote-reference" href="#id4" id="id2">[1]</a> (Collapsed Variational Bayes), it’s an improved version of CVB. Similar to VB, it applies the variational inference to estimate the latent variables. But instead of estimating both <span class="math">\(\theta\)</span> and <strong>z</strong>, CVB0 actually only estimates the topic assignment <strong>z</strong> . The approximation of distribution <strong>P</strong> (<strong>z</strong>, <span class="math">\(\theta\)</span>, <span class="math">\(\beta\)</span> | C) as follow:</p>
+<div class="math">
+\[Q(z, \theta, \beta) = Q(\theta, \beta | z, \gamma, \lambda) * \prod_{d \in C} Q(z_d | \phi_d)\]</div>
+<p>Online CVB0 <a class="footnote-reference" href="#id6" id="id3">[3]</a> is an online version of CVB0. It’ll infer to the variational parameter <span class="math">\(\phi\)</span> and update the global variable by a stochastic algorithm. The global variable here is a statistic <span class="math">\(N^{\beta}\)</span> (<cite>topic statistic</cite>) updated from <span class="math">\(\phi\)</span>. This statistic plays a similar role with <span class="math">\(\lambda\)</span> in VB and we can estimate topics from this statistic. To estimate the topic proportions, Online CVB0 also used the other statistic is <span class="math">\(N^{\theta}\)</span> called <cite>document statistic</cite>, and it also is updated from <span class="math">\(\phi\)</span> in a stochastic way.</p>
+<div class="section" id="class-onlinecvb0">
+<h2>class OnlineCVB0<a class="headerlink" href="#class-onlinecvb0" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">tmlib</span><span class="o">.</span><span class="n">lda</span><span class="o">.</span><span class="n">OnlineCVB0</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">num_topics</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">eta</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">tau_phi</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">kappa_phi</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span> <span class="n">s_phi</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">tau_theta</span><span class="o">=</span><span class="mf">10.0</span><span class="p">,</span> <span class="n">kappa_theta</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span> <span class="n">s_theta</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">burn_in</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span> <span class="n">lda_model</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="section" id="parameters">
+<h3>Parameters<a class="headerlink" href="#parameters" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p class="first"><strong>data</strong>: object <code class="docutils literal"><span class="pre">DataSet</span></code></p>
+<p>object used for loading mini-batches data to analyze</p>
+</li>
+<li><p class="first"><strong>num_topics</strong>: int, default: 100</p>
+<p>number of topics of model.</p>
+</li>
+<li><p class="first"><strong>alpha</strong>: float, default: 0.01</p>
+<p>hyperparameter of model LDA that affect sparsity of topic proportions <span class="math">\(\theta\)</span></p>
+</li>
+<li><p class="first"><strong>eta</strong> (<span class="math">\(\eta\)</span>): float, default: 0.01</p>
+<p>hyperparameter of model LDA that affect sparsity of topics <span class="math">\(\beta\)</span></p>
+</li>
+<li><p class="first"><strong>tau_phi</strong> : float, default: 1.0</p>
+<p>In the update global variable step, a parameter used is step-size <span class="math">\(\rho\)</span> (it is similar to the learning rate in gradient descent optimization). The step-size changes after each training iteration t</p>
+<div class="math">
+\[\rho_t = s * (t + \tau_0)^{-\kappa}\]</div>
+<p>The learning parameters s, <span class="math">\(\tau_0\)</span> and <span class="math">\(\kappa\)</span> can be changed manually and called the step-size schedule. But there exist some constrain: <span class="math">\(\tau_0 \geq 0\)</span> and <span class="math">\(\kappa \in (0.5, 1]\)</span>.</p>
+<p>The step-size schedule (s_phi, tau_phi, kappa_phi) is used for update <span class="math">\(N^{\beta}\)</span> and (s_theta, tau_theta, kappa_theta) used for update <span class="math">\(N^{\theta}\)</span>.</p>
+</li>
+<li><p class="first"><strong>kappa_phi</strong> : float, default: 0.9</p>
+</li>
+<li><p class="first"><strong>s_phi</strong>: float, default: 1.0</p>
+</li>
+<li><p class="first"><strong>tau_theta</strong>: float, default: 10.0</p>
+</li>
+<li><p class="first"><strong>kappa_theta</strong>: float, default: 0.9</p>
+</li>
+<li><p class="first"><strong>s_theta</strong>: float, default: 1.0</p>
+</li>
+<li><p class="first"><strong>burn_in</strong>: int, default: 25</p>
+<p>Online CVB0 needs to perform a small number of extra passes per document to learn the document statistics before updating the topic statistics. And here, the parameter burn-in is number of passes we use</p>
+</li>
+<li><p class="first"><strong>lda_model</strong>: object of class LdaModel, default: None.</p>
+<p>If this is None value, a new object <code class="docutils literal"><span class="pre">LdaModel</span></code> will be created. If not, it will be the model learned previously</p>
+</li>
+</ul>
+</div>
+<div class="section" id="attributes">
+<h3>Attributes<a class="headerlink" href="#attributes" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p class="first"><strong>data</strong>: object <code class="docutils literal"><span class="pre">DataSet</span></code></p>
+</li>
+<li><p class="first"><strong>num_terms</strong>: int,</p>
+<p>size of the vocabulary set of the training corpus</p>
+</li>
+<li><p class="first"><strong>num_topics</strong>: int,</p>
+</li>
+<li><p class="first"><strong>alpha</strong>: float,</p>
+</li>
+<li><p class="first"><strong>eta</strong> (<span class="math">\(\eta\)</span>): float,</p>
+</li>
+<li><p class="first"><strong>tau_phi</strong>: float,</p>
+</li>
+<li><p class="first"><strong>kappa_phi</strong>: float,</p>
+</li>
+<li><p class="first"><strong>s_phi</strong>: float,</p>
+</li>
+<li><p class="first"><strong>tau_theta</strong>: float,</p>
+</li>
+<li><p class="first"><strong>kappa_theta</strong>: float,</p>
+</li>
+<li><p class="first"><strong>s_theta</strong>: float,</p>
+</li>
+<li><p class="first"><strong>burn_in</strong>: int,</p>
+</li>
+<li><p class="first"><strong>lda_model</strong>: object of class LdaModel</p>
+</li>
+</ul>
+</div>
+<div class="section" id="methods">
+<h3>Methods<a class="headerlink" href="#methods" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p class="first">__init__ (<em>data=None, num_topics=100, alpha=0.01, eta=0.01, tau_phi=1.0, kappa_phi=0.9, s_phi=1.0, tau_theta=10.0, kappa_theta=0.9, s_theta=1.0, burn_in=25, lda_model=None</em>)</p>
+</li>
+<li><p class="first"><strong>static_online</strong> (<em>wordtks, lengths</em>)</p>
+<p>Execute the Online CVB0. 2 parameters <em>wordtks</em>, <em>lengths</em> represent for term-sequence data of mini-batch. It is the value of 2 attribute <strong>word_ids_tks</strong> and <strong>cts_lens</strong> in class <a class="reference external" href="../datasets.rst">Corpus</a></p>
+<p><strong>Return</strong>: tuple (time of E-step, time of M-step, N_theta).</p>
+</li>
+<li><p class="first"><strong>learn_model</strong> (<em>save_model_every=0, compute_sparsity_every=0, save_statistic=False, save_top_words_every=0, num_top_words=10, model_folder=None, save_topic_proportions=None</em>)</p>
+<p>This used for learning model and to save model, statistics of model.</p>
+<p><strong>Parameters</strong>:</p>
+<blockquote>
+<div><ul class="simple">
+<li><strong>save_model_every</strong>: int, default: 0. If it is set to 2, it means at iterators: 0, 2, 4, 6, …, model will is save into a file. If setting default, model won’t be saved.</li>
+<li><strong>compute_sparsity_every</strong>: int, default: 0. Compute sparsity and store in attribute <strong>statistics</strong>. The word “every” here means as same as <strong>save_model_every</strong></li>
+<li><strong>save_statistic</strong>: boolean, default: False. Saving statistics or not. The statistics here is the time of E-step, time of M-step, sparsity of document in corpus</li>
+<li><strong>save_top_words_every</strong>: int, default: 0. Used for saving top words of topics (highest probability). Number words displayed is <strong>num_top_words</strong> parameter.</li>
+<li><strong>num_top_words</strong>: int, default: 20. By default, the number of words displayed is 10.</li>
+<li><strong>model_folder</strong>: string, default: None. The place which model file, statistics file are saved.</li>
+<li><strong>save_topic_proportions</strong>: string, default: None. This used to save topic proportions <span class="math">\(\theta\)</span> of each document in training corpus. The value of it is path of file <code class="docutils literal"><span class="pre">.h5</span></code></li>
+</ul>
+</div></blockquote>
+<p><strong>Return</strong>: the learned model (object of class LdaModel)</p>
+</li>
+<li><p class="first"><strong>infer_new_docs</strong> (<em>new_corpus</em>)</p>
+<p>This used to do inference for new documents. <strong>new_corpus</strong> is object <code class="docutils literal"><span class="pre">Corpus</span></code>. This method return the document statistics <span class="math">\(\bm{N}^{\theta}\)</span> in new corpus</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="example">
+<h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tmlib.lda</span> <span class="k">import</span> <span class="n">OnlineCVB0</span>
+<span class="kn">from</span> <span class="nn">tmlib.datasets</span> <span class="k">import</span> <span class="n">DataSet</span>
+
+<span class="c1"># data preparation</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">DataSet</span><span class="p">(</span><span class="n">data_path</span><span class="o">=</span><span class="s1">&#39;data/ap_train_raw.txt&#39;</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">passes</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">shuffle_every</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="c1"># learning and save the model, statistics in folder &#39;models-online-cvb0&#39;</span>
+<span class="n">onl_cvb0</span> <span class="o">=</span> <span class="n">OnlineCVB0</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">,</span> <span class="n">num_topics</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">onl_cvb0</span><span class="o">.</span><span class="n">learn_model</span><span class="p">(</span><span class="n">save_model_every</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">compute_sparsity_every</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">save_statistic</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">save_top_words_every</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">model_folder</span><span class="o">=</span><span class="s1">&#39;models-online-cvb0&#39;</span><span class="p">)</span>
+
+
+<span class="c1"># inference for new documents</span>
+<span class="n">vocab_file</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">vocab_file</span>
+<span class="c1"># create object ``Corpus`` to store new documents</span>
+<span class="n">new_corpus</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">load_new_documents</span><span class="p">(</span><span class="s1">&#39;data/ap_infer_raw.txt&#39;</span><span class="p">,</span> <span class="n">vocab_file</span><span class="o">=</span><span class="n">vocab_file</span><span class="p">)</span>
+<span class="n">N_theta</span> <span class="o">=</span> <span class="n">onl_cvb0</span><span class="o">.</span><span class="n">infer_new_docs</span><span class="p">(</span><span class="n">new_corpus</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+<table class="docutils footnote" frame="void" id="id4" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id2">[1]</a></td><td><ol class="first last upperalpha simple" start="25">
+<li>Teh, D. Newman, and M. Welling, “A collapsed variational bayesian inference algorithm for latent dirichlet allocation,” in Advances in Neural Information Processing Systems, vol. 19, 2007, p.1353.</li>
+</ol>
+</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id5" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[2]</a></td><td><ol class="first last upperalpha simple">
+<li>Asuncion, M. Welling, P. Smyth, and Y. Teh, “On smoothing and inference for topic models,” in Proceedings of the Twenty-Fifth Conference on Uncertainty in Artificial Intelligence, 2009, pp. 27–34</li>
+</ol>
+</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id6" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id3">[3]</a></td><td><ol class="first last upperalpha simple" start="10">
+<li>Foulds, L. Boyles, C. DuBois, P. Smyth, and M. Welling, “Stochastic collapsed variational bayesian inference for latent dirichlet allocation,” in Proceedings of the 19th ACM SIGKDD International Conference on Knowledge Discovery and Data Mining. ACM, 2013, pp. 446–454.</li>
+</ol>
+</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="online_cgs.html" class="btn btn-neutral float-right" title="Online CGS" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="online_vb.html" class="btn btn-neutral" title="Online VB" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, DSLab.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.3.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

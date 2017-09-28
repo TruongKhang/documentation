@@ -1,0 +1,415 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>LDA Model &mdash; topicmodel-lib 0.3.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="topicmodel-lib 0.3.1 documentation" href="index.html"/>
+        <link rel="next" title="Online VB" href="methods/online_vb.html"/>
+        <link rel="prev" title="Introduction" href="quick_start.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> topicmodel-lib
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.3.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="quick_start.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quick_start.html#corpus">Corpus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quick_start.html#guide-to-learn-model">Guide to learn model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quick_start.html#inference-for-new-documents">Inference for new documents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quick_start.html#example">Example</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">LDA Model</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#class-ldamodel">class LdaModel</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#parameters">Parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#attributes">Attributes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#methods">Methods</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#example">Example</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="methods/online_vb.html">Online VB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="methods/online_cvb0.html">Online CVB0</a></li>
+<li class="toctree-l1"><a class="reference internal" href="methods/online_cgs.html">Online CGS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="methods/online_fw.html">Online FW</a></li>
+<li class="toctree-l1"><a class="reference internal" href="methods/online_ope.html">Online OPE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="methods/streaming_vb.html">Streaming VB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="methods/streaming_fw.html">Streaming FW</a></li>
+<li class="toctree-l1"><a class="reference internal" href="methods/streaming_ope.html">Streaming OPE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="methods/ml_cgs.html">ML-CGS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="methods/ml_fw.html">ML-FW</a></li>
+<li class="toctree-l1"><a class="reference internal" href="methods/ml_ope.html">ML-OPE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="datasets.html">tmlib.datasets</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">topicmodel-lib</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>LDA Model</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/lda_model.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="lda-model">
+<h1>LDA Model<a class="headerlink" href="#lda-model" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="class-ldamodel">
+<h2>class LdaModel<a class="headerlink" href="#class-ldamodel" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">tmlib</span><span class="o">.</span><span class="n">lda</span><span class="o">.</span><span class="n">LdaModel</span><span class="p">(</span><span class="n">num_terms</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">num_topics</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">random_type</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This class provides some function to help you manipulate model (<span class="math">\(\lambda\)</span> or <span class="math">\(\beta\)</span>): you can save model, load model or display words of topics…</p>
+<div class="section" id="parameters">
+<h3>Parameters<a class="headerlink" href="#parameters" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p class="first"><strong>num_terms</strong>: int, default: None</p>
+<p>number of words in vocabulary file</p>
+</li>
+<li><p class="first"><strong>num_topics</strong>: int, default: None</p>
+<p>number of topics</p>
+</li>
+<li><p class="first"><strong>random_type</strong>: int, default: 0</p>
+<p>Initialize randomly array of <span class="math">\(\lambda\)</span> (or <span class="math">\(\beta\)</span>) (size num_topics x num_terms). If random_type = 0, model is initialized with uniform distribution. Otherwise, initialized with gamma distribution</p>
+</li>
+</ul>
+</div>
+<div class="section" id="attributes">
+<h3>Attributes<a class="headerlink" href="#attributes" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p class="first"><strong>num_terms</strong>: int</p>
+</li>
+<li><p class="first"><strong>num_topics</strong>: int</p>
+</li>
+<li><p class="first"><strong>model</strong>: array 2 dimentions (num_topics x num_terms)</p>
+<p><span class="math">\(\lambda\)</span> or <span class="math">\(\beta\)</span>. Depend on the learning method: <span class="math">\(\lambda\)</span> in case Online VB, Online CVB0, Online CGS, Streaming VB and <span class="math">\(\beta\)</span> for Online OPE, Online FW, Streaming OPE, Streaming FW, ML-CGS, ML-OPE, ML-FW</p>
+</li>
+<li><p class="first"><strong>presence_score</strong>: a measure allow us to rank the topics. If a topic has the high value of presence_score, it means that corpus is related to that topic very much</p>
+</li>
+</ul>
+</div>
+<div class="section" id="methods">
+<h3>Methods<a class="headerlink" href="#methods" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p class="first">__init__(<em>num_terms=None, num_topics=None, random_type=0</em>)</p>
+</li>
+<li><p class="first"><strong>normalize</strong> ()</p>
+<p>Used for estimating <span class="math">\(\beta\)</span> from <span class="math">\(\lambda\)</span>. This function is usually used for regularized methods ML-CGS, ML-FW, ML-OPE</p>
+</li>
+<li><p class="first"><strong>print_top_words</strong> (self, num_words, vocab_file, show_topics=None, display_result=None, type=’word’, distribution=False)</p>
+<p>Display words of topics on the screen or save into file</p>
+<ul>
+<li><p class="first"><strong>Parameters</strong>:</p>
+<ul>
+<li><p class="first"><strong>num_words</strong>: int,</p>
+<p>number of words of each topic is displayed</p>
+</li>
+<li><p class="first"><strong>vocab_file</strong>: string,</p>
+<p>path of file vocabulary</p>
+</li>
+<li><p class="first"><strong>show_topics</strong>: int, default: None</p>
+<p>number of topics is displayed. By default, all of topics are displayed</p>
+</li>
+<li><p class="first"><strong>display_result</strong>: string, default: None</p>
+<p>path of file to save words into, or ‘screen’ if you want to display topics on the screen. By default, if display_result=None, nothing happen and the method return the result as list python</p>
+</li>
+<li><p class="first"><strong>type</strong>: string, default: ‘word’</p>
+<p>You can print index of word in the vocabulary file by set type=’index’. If type=’word’ by default, the result returned is words (type string)</p>
+</li>
+<li><p class="first"><strong>distribution</strong>:</p>
+<p>If you only want to display words, then distribution=False. But you can display words along with term distribution of it by set distribution = True</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p class="first"><strong>load_model</strong> (path_file)</p>
+<p>loading the learned model (<span class="math">\(\lambda\)</span> or <span class="math">\(\beta\)</span>) from file named <em>path_file</em></p>
+</li>
+<li><p class="first"><strong>save_model</strong> (path_file, file_type=’binary’)</p>
+<p>saving model into a file named path_file. By default, the type of file is binary. We can change type of file to text by set file_type=’txt’</p>
+</li>
+<li><p class="first"><strong>save</strong> (path_file)</p>
+<p>you can save the object by using this function. All attributes of object LdaModel are saved in path_file and after that, you can restore object by using <strong>load</strong> function</p>
+</li>
+<li><p class="first"><strong>load</strong> (path_file)</p>
+<p>load the attributes from path_file to restore object LdaModel.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="example">
+<h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tmlib.lda</span> <span class="k">import</span> <span class="n">OnlineOPE</span>
+<span class="kn">from</span> <span class="nn">tmlib.datasets</span> <span class="k">import</span> <span class="n">DataSet</span>
+
+<span class="c1"># data preparation</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">DataSet</span><span class="p">(</span><span class="n">data_path</span><span class="o">=</span><span class="s1">&#39;data/ap_train.txt&#39;</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">passes</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">shuffle_every</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">vocab_file</span><span class="o">=</span><span class="s1">&#39;data/vocab.txt&#39;</span><span class="p">)</span>
+<span class="c1"># learning</span>
+<span class="n">onl_ope</span> <span class="o">=</span> <span class="n">OnlineOPE</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">,</span> <span class="n">num_topics</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">onl_vb</span><span class="o">.</span><span class="n">learn_model</span><span class="p">()</span>
+<span class="c1"># save model (beta or lambda)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">save_model</span><span class="p">(</span><span class="s1">&#39;topic_distribution.npy&#39;</span><span class="p">)</span>
+<span class="c1"># display top 10 words of each topic</span>
+<span class="n">model</span><span class="o">.</span><span class="n">print_top_words</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">vocab_file</span><span class="p">,</span> <span class="n">display_result</span><span class="o">=</span><span class="s1">&#39;screen&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Topics:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">topic</span> <span class="mi">0</span><span class="p">:</span> <span class="n">two</span><span class="p">,</span> <span class="n">new</span><span class="p">,</span> <span class="n">people</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">years</span><span class="p">,</span> <span class="n">first</span><span class="p">,</span> <span class="n">officials</span><span class="p">,</span> <span class="n">time</span><span class="p">,</span> <span class="n">fire</span><span class="p">,</span> <span class="n">day</span><span class="p">,</span>
+<span class="n">topic</span> <span class="mi">1</span><span class="p">:</span> <span class="n">israel</span><span class="p">,</span> <span class="n">minister</span><span class="p">,</span> <span class="n">prime</span><span class="p">,</span> <span class="n">vietnam</span><span class="p">,</span> <span class="n">thatcher</span><span class="p">,</span> <span class="n">party</span><span class="p">,</span> <span class="n">opec</span><span class="p">,</span> <span class="n">ministers</span><span class="p">,</span> <span class="n">demjanjuk</span><span class="p">,</span> <span class="n">labor</span><span class="p">,</span>
+<span class="n">topic</span> <span class="mi">2</span><span class="p">:</span> <span class="n">million</span><span class="p">,</span> <span class="n">percent</span><span class="p">,</span> <span class="n">futures</span><span class="p">,</span> <span class="n">year</span><span class="p">,</span> <span class="n">market</span><span class="p">,</span> <span class="n">bank</span><span class="p">,</span> <span class="n">analysts</span><span class="p">,</span> <span class="n">new</span><span class="p">,</span> <span class="n">cbs</span><span class="p">,</span> <span class="n">nbc</span><span class="p">,</span>
+<span class="n">topic</span> <span class="mi">3</span><span class="p">:</span> <span class="n">dukakis</span><span class="p">,</span> <span class="n">jackson</span><span class="p">,</span> <span class="n">democratic</span><span class="p">,</span> <span class="n">presidential</span><span class="p">,</span> <span class="n">campaign</span><span class="p">,</span> <span class="n">candidates</span><span class="p">,</span> <span class="n">candidate</span><span class="p">,</span> <span class="n">vote</span><span class="p">,</span> <span class="n">voters</span><span class="p">,</span> <span class="n">delegates</span><span class="p">,</span>
+<span class="n">topic</span> <span class="mi">4</span><span class="p">:</span> <span class="n">million</span><span class="p">,</span> <span class="n">company</span><span class="p">,</span> <span class="n">new</span><span class="p">,</span> <span class="n">billion</span><span class="p">,</span> <span class="n">inc</span><span class="p">,</span> <span class="n">corp</span><span class="p">,</span> <span class="n">board</span><span class="p">,</span> <span class="n">year</span><span class="p">,</span> <span class="n">court</span><span class="p">,</span> <span class="n">federal</span><span class="p">,</span>
+<span class="n">topic</span> <span class="mi">5</span><span class="p">:</span> <span class="n">bush</span><span class="p">,</span> <span class="n">united</span><span class="p">,</span> <span class="n">states</span><span class="p">,</span> <span class="n">president</span><span class="p">,</span> <span class="n">trade</span><span class="p">,</span> <span class="n">billion</span><span class="p">,</span> <span class="n">house</span><span class="p">,</span> <span class="n">congress</span><span class="p">,</span> <span class="n">new</span><span class="p">,</span> <span class="n">budget</span><span class="p">,</span>
+<span class="n">topic</span> <span class="mi">6</span><span class="p">:</span> <span class="n">stock</span><span class="p">,</span> <span class="n">market</span><span class="p">,</span> <span class="n">dollar</span><span class="p">,</span> <span class="n">trading</span><span class="p">,</span> <span class="n">exchange</span><span class="p">,</span> <span class="n">yen</span><span class="p">,</span> <span class="n">prices</span><span class="p">,</span> <span class="n">late</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">rose</span><span class="p">,</span>
+<span class="n">topic</span> <span class="mi">7</span><span class="p">:</span> <span class="n">korean</span><span class="p">,</span> <span class="n">korea</span><span class="p">,</span> <span class="n">city</span><span class="p">,</span> <span class="n">village</span><span class="p">,</span> <span class="n">police</span><span class="p">,</span> <span class="n">north</span><span class="p">,</span> <span class="n">st</span><span class="p">,</span> <span class="n">traffic</span><span class="p">,</span> <span class="n">koreas</span><span class="p">,</span> <span class="n">citys</span><span class="p">,</span>
+<span class="n">topic</span> <span class="mi">8</span><span class="p">:</span> <span class="n">police</span><span class="p">,</span> <span class="n">people</span><span class="p">,</span> <span class="n">killed</span><span class="p">,</span> <span class="n">two</span><span class="p">,</span> <span class="n">government</span><span class="p">,</span> <span class="n">army</span><span class="p">,</span> <span class="n">military</span><span class="p">,</span> <span class="n">officials</span><span class="p">,</span> <span class="n">three</span><span class="p">,</span> <span class="n">city</span><span class="p">,</span>
+<span class="n">topic</span> <span class="mi">9</span><span class="p">:</span> <span class="n">south</span><span class="p">,</span> <span class="n">africa</span><span class="p">,</span> <span class="n">african</span><span class="p">,</span> <span class="n">black</span><span class="p">,</span> <span class="n">elections</span><span class="p">,</span> <span class="n">party</span><span class="p">,</span> <span class="n">national</span><span class="p">,</span> <span class="n">war</span><span class="p">,</span> <span class="n">mandela</span><span class="p">,</span> <span class="n">blacks</span><span class="p">,</span>
+<span class="n">topic</span> <span class="mi">10</span><span class="p">:</span> <span class="n">states</span><span class="p">,</span> <span class="n">united</span><span class="p">,</span> <span class="n">nicaragua</span><span class="p">,</span> <span class="n">noriega</span><span class="p">,</span> <span class="n">drug</span><span class="p">,</span> <span class="n">contras</span><span class="p">,</span> <span class="n">court</span><span class="p">,</span> <span class="n">coup</span><span class="p">,</span> <span class="n">humphrey</span><span class="p">,</span> <span class="n">manila</span><span class="p">,</span>
+<span class="n">topic</span> <span class="mi">11</span><span class="p">:</span> <span class="n">reagan</span><span class="p">,</span> <span class="n">china</span><span class="p">,</span> <span class="n">nuclear</span><span class="p">,</span> <span class="n">study</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">prisoners</span><span class="p">,</span> <span class="n">fitzwater</span><span class="p">,</span> <span class="n">researchers</span><span class="p">,</span> <span class="n">games</span><span class="p">,</span> <span class="n">animals</span><span class="p">,</span>
+<span class="n">topic</span> <span class="mi">12</span><span class="p">:</span> <span class="n">i</span><span class="p">,</span> <span class="n">new</span><span class="p">,</span> <span class="n">people</span><span class="p">,</span> <span class="n">years</span><span class="p">,</span> <span class="n">percent</span><span class="p">,</span> <span class="n">year</span><span class="p">,</span> <span class="n">last</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">time</span><span class="p">,</span> <span class="n">two</span><span class="p">,</span>
+<span class="n">topic</span> <span class="mi">13</span><span class="p">:</span> <span class="n">trial</span><span class="p">,</span> <span class="n">case</span><span class="p">,</span> <span class="n">prison</span><span class="p">,</span> <span class="n">charges</span><span class="p">,</span> <span class="n">convicted</span><span class="p">,</span> <span class="n">jury</span><span class="p">,</span> <span class="n">attorney</span><span class="p">,</span> <span class="n">guilty</span><span class="p">,</span> <span class="n">sentence</span><span class="p">,</span> <span class="n">prosecutors</span><span class="p">,</span>
+<span class="n">topic</span> <span class="mi">14</span><span class="p">:</span> <span class="n">rain</span><span class="p">,</span> <span class="n">northern</span><span class="p">,</span> <span class="n">texas</span><span class="p">,</span> <span class="n">inches</span><span class="p">,</span> <span class="n">california</span><span class="p">,</span> <span class="n">central</span><span class="p">,</span> <span class="n">damage</span><span class="p">,</span> <span class="n">santa</span><span class="p">,</span> <span class="n">hospital</span><span class="p">,</span> <span class="n">valley</span><span class="p">,</span>
+<span class="n">topic</span> <span class="mi">15</span><span class="p">:</span> <span class="n">soviet</span><span class="p">,</span> <span class="n">government</span><span class="p">,</span> <span class="n">gorbachev</span><span class="p">,</span> <span class="n">union</span><span class="p">,</span> <span class="n">party</span><span class="p">,</span> <span class="n">president</span><span class="p">,</span> <span class="n">political</span><span class="p">,</span> <span class="n">two</span><span class="p">,</span> <span class="n">news</span><span class="p">,</span> <span class="n">people</span><span class="p">,</span>
+<span class="n">topic</span> <span class="mi">16</span><span class="p">:</span> <span class="n">service</span><span class="p">,</span> <span class="n">offer</span><span class="p">,</span> <span class="n">court</span><span class="p">,</span> <span class="n">companies</span><span class="p">,</span> <span class="n">firm</span><span class="p">,</span> <span class="n">ruling</span><span class="p">,</span> <span class="n">information</span><span class="p">,</span> <span class="n">appeals</span><span class="p">,</span> <span class="n">operations</span><span class="p">,</span> <span class="n">services</span><span class="p">,</span>
+<span class="n">topic</span> <span class="mi">17</span><span class="p">:</span> <span class="n">water</span><span class="p">,</span> <span class="n">care</span><span class="p">,</span> <span class="n">homeless</span><span class="p">,</span> <span class="n">environmental</span><span class="p">,</span> <span class="n">pollution</span><span class="p">,</span> <span class="n">fair</span><span class="p">,</span> <span class="n">species</span><span class="p">,</span> <span class="n">air</span><span class="p">,</span> <span class="n">disaster</span><span class="p">,</span> <span class="n">farm</span><span class="p">,</span>
+<span class="n">topic</span> <span class="mi">18</span><span class="p">:</span> <span class="n">percent</span><span class="p">,</span> <span class="n">year</span><span class="p">,</span> <span class="n">cents</span><span class="p">,</span> <span class="n">oil</span><span class="p">,</span> <span class="n">prices</span><span class="p">,</span> <span class="n">west</span><span class="p">,</span> <span class="n">german</span><span class="p">,</span> <span class="n">rate</span><span class="p">,</span> <span class="n">sales</span><span class="p">,</span> <span class="n">price</span><span class="p">,</span>
+<span class="n">topic</span> <span class="mi">19</span><span class="p">:</span> <span class="n">air</span><span class="p">,</span> <span class="n">plane</span><span class="p">,</span> <span class="n">flight</span><span class="p">,</span> <span class="n">two</span><span class="p">,</span> <span class="n">iraq</span><span class="p">,</span> <span class="n">soviet</span><span class="p">,</span> <span class="n">force</span><span class="p">,</span> <span class="n">kuwait</span><span class="p">,</span> <span class="n">airport</span><span class="p">,</span> <span class="n">iraqi</span><span class="p">,</span>
+</pre></div>
+</div>
+<p>If you change the last statement to:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="n">print_top_words</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">vocab_file</span><span class="p">,</span> <span class="n">display_result</span><span class="o">=</span><span class="s1">&#39;screen&#39;</span><span class="p">,</span> <span class="n">distribution</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">topic</span> <span class="mi">0</span><span class="p">:</span> <span class="p">(</span><span class="n">two</span> <span class="mf">1006.872532</span><span class="p">),</span> <span class="p">(</span><span class="n">new</span> <span class="mf">997.382525</span><span class="p">),</span> <span class="p">(</span><span class="n">people</span> <span class="mf">957.472761</span><span class="p">),</span> <span class="p">(</span><span class="n">i</span> <span class="mf">847.205429</span><span class="p">),</span> <span class="p">(</span><span class="n">years</span> <span class="mf">793.221432</span><span class="p">),</span>
+<span class="n">topic</span> <span class="mi">1</span><span class="p">:</span> <span class="p">(</span><span class="n">israel</span> <span class="mf">280.810816</span><span class="p">),</span> <span class="p">(</span><span class="n">minister</span> <span class="mf">264.384617</span><span class="p">),</span> <span class="p">(</span><span class="n">prime</span> <span class="mf">236.849663</span><span class="p">),</span> <span class="p">(</span><span class="n">vietnam</span> <span class="mf">227.907314</span><span class="p">),</span> <span class="p">(</span><span class="n">thatcher</span> <span class="mf">184.359115</span><span class="p">),</span>
+<span class="n">topic</span> <span class="mi">2</span><span class="p">:</span> <span class="p">(</span><span class="n">million</span> <span class="mf">990.763364</span><span class="p">),</span> <span class="p">(</span><span class="n">percent</span> <span class="mf">990.581342</span><span class="p">),</span> <span class="p">(</span><span class="n">futures</span> <span class="mf">676.483861</span><span class="p">),</span> <span class="p">(</span><span class="n">year</span> <span class="mf">554.327385</span><span class="p">),</span> <span class="p">(</span><span class="n">market</span> <span class="mf">487.330349</span><span class="p">),</span>
+<span class="n">topic</span> <span class="mi">3</span><span class="p">:</span> <span class="p">(</span><span class="n">dukakis</span> <span class="mf">1443.205724</span><span class="p">),</span> <span class="p">(</span><span class="n">jackson</span> <span class="mf">961.280235</span><span class="p">),</span> <span class="p">(</span><span class="n">democratic</span> <span class="mf">666.250053</span><span class="p">),</span> <span class="p">(</span><span class="n">presidential</span> <span class="mf">530.063395</span><span class="p">),</span> <span class="p">(</span><span class="n">campaign</span> <span class="mf">374.716751</span><span class="p">),</span>
+<span class="n">topic</span> <span class="mi">4</span><span class="p">:</span> <span class="p">(</span><span class="n">million</span> <span class="mf">2094.650569</span><span class="p">),</span> <span class="p">(</span><span class="n">company</span> <span class="mf">1817.952267</span><span class="p">),</span> <span class="p">(</span><span class="n">new</span> <span class="mf">1233.623336</span><span class="p">),</span> <span class="p">(</span><span class="n">billion</span> <span class="mf">1064.094612</span><span class="p">),</span> <span class="p">(</span><span class="n">inc</span> <span class="mf">940.197448</span><span class="p">),</span>
+<span class="n">topic</span> <span class="mi">5</span><span class="p">:</span> <span class="p">(</span><span class="n">bush</span> <span class="mf">3039.197872</span><span class="p">),</span> <span class="p">(</span><span class="n">united</span> <span class="mf">2500.479748</span><span class="p">),</span> <span class="p">(</span><span class="n">states</span> <span class="mf">2209.172288</span><span class="p">),</span> <span class="p">(</span><span class="n">president</span> <span class="mf">2184.088408</span><span class="p">),</span> <span class="p">(</span><span class="n">trade</span> <span class="mf">1752.369137</span><span class="p">),</span>
+<span class="n">topic</span> <span class="mi">6</span><span class="p">:</span> <span class="p">(</span><span class="n">stock</span> <span class="mf">1781.654725</span><span class="p">),</span> <span class="p">(</span><span class="n">market</span> <span class="mf">1612.880852</span><span class="p">),</span> <span class="p">(</span><span class="n">dollar</span> <span class="mf">1321.883897</span><span class="p">),</span> <span class="p">(</span><span class="n">trading</span> <span class="mf">1136.304384</span><span class="p">),</span> <span class="p">(</span><span class="n">exchange</span> <span class="mf">984.091480</span><span class="p">),</span>
+<span class="n">topic</span> <span class="mi">7</span><span class="p">:</span> <span class="p">(</span><span class="n">korean</span> <span class="mf">315.153683</span><span class="p">),</span> <span class="p">(</span><span class="n">korea</span> <span class="mf">250.382257</span><span class="p">),</span> <span class="p">(</span><span class="n">city</span> <span class="mf">236.793215</span><span class="p">),</span> <span class="p">(</span><span class="n">village</span> <span class="mf">198.821685</span><span class="p">),</span> <span class="p">(</span><span class="n">police</span> <span class="mf">151.618394</span><span class="p">),</span>
+<span class="n">topic</span> <span class="mi">8</span><span class="p">:</span> <span class="p">(</span><span class="n">police</span> <span class="mf">4616.893623</span><span class="p">),</span> <span class="p">(</span><span class="n">people</span> <span class="mf">2455.625615</span><span class="p">),</span> <span class="p">(</span><span class="n">killed</span> <span class="mf">1695.193209</span><span class="p">),</span> <span class="p">(</span><span class="n">two</span> <span class="mf">1638.251890</span><span class="p">),</span> <span class="p">(</span><span class="n">government</span> <span class="mf">1423.613710</span><span class="p">),</span>
+<span class="n">topic</span> <span class="mi">9</span><span class="p">:</span> <span class="p">(</span><span class="n">south</span> <span class="mf">1367.724403</span><span class="p">),</span> <span class="p">(</span><span class="n">africa</span> <span class="mf">749.935889</span><span class="p">),</span> <span class="p">(</span><span class="n">african</span> <span class="mf">713.020710</span><span class="p">),</span> <span class="p">(</span><span class="n">black</span> <span class="mf">693.012008</span><span class="p">),</span> <span class="p">(</span><span class="n">elections</span> <span class="mf">511.215701</span><span class="p">),</span>
+<span class="n">topic</span> <span class="mi">10</span><span class="p">:</span> <span class="p">(</span><span class="n">states</span> <span class="mf">472.340775</span><span class="p">),</span> <span class="p">(</span><span class="n">united</span> <span class="mf">281.539123</span><span class="p">),</span> <span class="p">(</span><span class="n">nicaragua</span> <span class="mf">261.313058</span><span class="p">),</span> <span class="p">(</span><span class="n">noriega</span> <span class="mf">209.555378</span><span class="p">),</span> <span class="p">(</span><span class="n">drug</span> <span class="mf">192.748472</span><span class="p">),</span>
+<span class="n">topic</span> <span class="mi">11</span><span class="p">:</span> <span class="p">(</span><span class="n">reagan</span> <span class="mf">379.215621</span><span class="p">),</span> <span class="p">(</span><span class="n">china</span> <span class="mf">323.023153</span><span class="p">),</span> <span class="p">(</span><span class="n">nuclear</span> <span class="mf">283.032322</span><span class="p">),</span> <span class="p">(</span><span class="n">study</span> <span class="mf">275.714702</span><span class="p">),</span> <span class="p">(</span><span class="n">b</span> <span class="mf">244.181802</span><span class="p">),</span>
+<span class="n">topic</span> <span class="mi">12</span><span class="p">:</span> <span class="p">(</span><span class="n">i</span> <span class="mf">6295.795578</span><span class="p">),</span> <span class="p">(</span><span class="n">new</span> <span class="mf">3049.691470</span><span class="p">),</span> <span class="p">(</span><span class="n">people</span> <span class="mf">2959.973828</span><span class="p">),</span> <span class="p">(</span><span class="n">years</span> <span class="mf">2682.041759</span><span class="p">),</span> <span class="p">(</span><span class="n">percent</span> <span class="mf">2517.415288</span><span class="p">),</span>
+<span class="n">topic</span> <span class="mi">13</span><span class="p">:</span> <span class="p">(</span><span class="n">trial</span> <span class="mf">937.304453</span><span class="p">),</span> <span class="p">(</span><span class="n">case</span> <span class="mf">623.345300</span><span class="p">),</span> <span class="p">(</span><span class="n">prison</span> <span class="mf">602.181133</span><span class="p">),</span> <span class="p">(</span><span class="n">charges</span> <span class="mf">586.927118</span><span class="p">),</span> <span class="p">(</span><span class="n">convicted</span> <span class="mf">564.307367</span><span class="p">),</span>
+<span class="n">topic</span> <span class="mi">14</span><span class="p">:</span> <span class="p">(</span><span class="n">rain</span> <span class="mf">348.371840</span><span class="p">),</span> <span class="p">(</span><span class="n">northern</span> <span class="mf">346.465730</span><span class="p">),</span> <span class="p">(</span><span class="n">texas</span> <span class="mf">323.902501</span><span class="p">),</span> <span class="p">(</span><span class="n">inches</span> <span class="mf">321.175532</span><span class="p">),</span> <span class="p">(</span><span class="n">california</span> <span class="mf">297.998834</span><span class="p">),</span>
+<span class="n">topic</span> <span class="mi">15</span><span class="p">:</span> <span class="p">(</span><span class="n">soviet</span> <span class="mf">3327.753735</span><span class="p">),</span> <span class="p">(</span><span class="n">government</span> <span class="mf">1527.465015</span><span class="p">),</span> <span class="p">(</span><span class="n">gorbachev</span> <span class="mf">1422.083698</span><span class="p">),</span> <span class="p">(</span><span class="n">union</span> <span class="mf">1335.393499</span><span class="p">),</span> <span class="p">(</span><span class="n">party</span> <span class="mf">1296.856500</span><span class="p">),</span>
+<span class="n">topic</span> <span class="mi">16</span><span class="p">:</span> <span class="p">(</span><span class="n">service</span> <span class="mf">540.989098</span><span class="p">),</span> <span class="p">(</span><span class="n">offer</span> <span class="mf">479.423750</span><span class="p">),</span> <span class="p">(</span><span class="n">court</span> <span class="mf">448.157831</span><span class="p">),</span> <span class="p">(</span><span class="n">companies</span> <span class="mf">325.420266</span><span class="p">),</span> <span class="p">(</span><span class="n">firm</span> <span class="mf">258.895112</span><span class="p">),</span>
+<span class="n">topic</span> <span class="mi">17</span><span class="p">:</span> <span class="p">(</span><span class="n">water</span> <span class="mf">470.181853</span><span class="p">),</span> <span class="p">(</span><span class="n">care</span> <span class="mf">214.000670</span><span class="p">),</span> <span class="p">(</span><span class="n">homeless</span> <span class="mf">211.299046</span><span class="p">),</span> <span class="p">(</span><span class="n">environmental</span> <span class="mf">189.202329</span><span class="p">),</span> <span class="p">(</span><span class="n">pollution</span> <span class="mf">186.071190</span><span class="p">),</span>
+<span class="n">topic</span> <span class="mi">18</span><span class="p">:</span> <span class="p">(</span><span class="n">percent</span> <span class="mf">4348.697399</span><span class="p">),</span> <span class="p">(</span><span class="n">year</span> <span class="mf">1170.209529</span><span class="p">),</span> <span class="p">(</span><span class="n">cents</span> <span class="mf">1135.822631</span><span class="p">),</span> <span class="p">(</span><span class="n">oil</span> <span class="mf">1093.987126</span><span class="p">),</span> <span class="p">(</span><span class="n">prices</span> <span class="mf">934.051475</span><span class="p">),</span>
+<span class="n">topic</span> <span class="mi">19</span><span class="p">:</span> <span class="p">(</span><span class="n">air</span> <span class="mf">1054.797512</span><span class="p">),</span> <span class="p">(</span><span class="n">plane</span> <span class="mf">793.580865</span><span class="p">),</span> <span class="p">(</span><span class="n">flight</span> <span class="mf">762.382746</span><span class="p">),</span> <span class="p">(</span><span class="n">two</span> <span class="mf">597.540968</span><span class="p">),</span> <span class="p">(</span><span class="n">iraq</span> <span class="mf">563.872035</span><span class="p">),</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="methods/online_vb.html" class="btn btn-neutral float-right" title="Online VB" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="quick_start.html" class="btn btn-neutral" title="Introduction" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, DSLab.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.3.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
