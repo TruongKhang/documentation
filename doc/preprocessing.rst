@@ -11,7 +11,7 @@ File raw text also need a specific format type so that we can recognize it. The 
 - Each document is represented as follow
 
 .. image:: ./images/format.PNG
-.. _quick start: ./quick_start.rst
+.. _quick start: ./quick_start.html
    
 Please refer [1]_ to know more detail about preprocessing technique
 
