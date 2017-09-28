@@ -143,4 +143,11 @@ The project is licensed under the MIT license.
    methods/ml_fw
    methods/ml_ope
    
+.. toctree::
+   :maxdepth: 2
+   :caption: Other features
+   
+   preprocessing
+   visualization
+   
 
