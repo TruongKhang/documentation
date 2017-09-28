@@ -1,6 +1,6 @@
-========================
-tmlib datasets
-========================
+==============
+tmlib.datasets
+==============
 
 This module includes some classes and utility functions which help us work with the dataset
 

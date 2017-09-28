@@ -141,6 +141,5 @@ The project is licensed under the MIT license.
    methods/streaming_ope
    methods/ml_cgs
    methods/ml_fw
-   methods/ml_ope
    
 
