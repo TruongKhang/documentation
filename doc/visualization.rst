@@ -30,9 +30,9 @@ This function will visualize the topics, some documents in a GUI App. And this f
 
   File vocabulary of training corpus
   
-=======
+-------
 Example
-=======
+-------
 
 We'll demo with AP corpus. First, you need to learn model from this corpus using Online-OPE. Because you have to save topic proportions - this takes a long time. So, we need a fast learning algorithm
 
@@ -69,7 +69,7 @@ After you click on topic {years, people, years}
 
 Click on the document with short content 'Do all things get cheaper by dozen_even...'
 
-.. image: ./images/visualize3.JPG
+.. image:: ./images/visualize3.JPG
 
   
 .. [1] Visualizing Topic Models. Allison J.B. Chaney and David M. Blei. Department of Computer Science. Princeton University, Princeton, NJ USA.
