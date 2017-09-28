@@ -130,6 +130,7 @@ The project is licensed under the MIT license.
    :caption: API
 
    lda_model
+   datasets
    methods/online_vb
    methods/online_cvb0
    methods/online_cgs
@@ -141,5 +142,5 @@ The project is licensed under the MIT license.
    methods/ml_cgs
    methods/ml_fw
    methods/ml_ope
-   datasets
+   
 
