@@ -142,6 +142,4 @@ The project is licensed under the MIT license.
    methods/ml_fw
    methods/ml_ope
    datasets
-   preprocessing
-   visualization
 
